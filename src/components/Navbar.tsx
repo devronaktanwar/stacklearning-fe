@@ -18,7 +18,7 @@ const Navbar:FC<lNavbarProps> = () => {
                     <li><Link to={'/job-board'}>Jobs</Link></li>
                 </ul>
             </div>
-            <div className='flex gap-6 text-sm font-medium'>
+            <div className='md:flex gap-6 text-sm font-medium hidden '>
                 <button className='border px-4 py-2 border-primaryNew rounded' >Login</button>
                 <button className='border border-primaryNew px-4 py-2 bg-primaryNew rounded text-white'>Sign Up</button>
             </div>

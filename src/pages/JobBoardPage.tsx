@@ -14,7 +14,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("https://stacklearning.in/api/all-jobs");
+        const response = await fetch("https://stacklearning-be.onrender.com/api/all-jobs");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -58,7 +58,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
         </div>
-        <div className="md:w-[80%] m-auto flex gap-4 flex-col md:flex-row ">
+        <div className="md:w-[80%] m-auto flex gap-4 flex-col md:flex-row w-[95%]">
           <div className="flex flex-1 flex-col gap-y-4">
             {filteredJobs.map((job, index) => (
               <JobCard
