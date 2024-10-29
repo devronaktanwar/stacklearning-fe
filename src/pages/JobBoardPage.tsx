@@ -40,8 +40,8 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   console.log(filteredJobs);
   return (
     <JobFilterProvider>
-      <div className="">
-        <div className="sticky top-24 pt-4 pb-2 bg-[#fbfbfb]">
+      <div className="relative">
+        <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
           <div className="relative w-[80%] m-auto mb-4 flex gap-2 items-center">
             <Input
               type="text"

@@ -48,7 +48,7 @@ const JobCard: FC<JobCardProps> = ({
     <div className="p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
-          <div className="border h-10 w-12 rounded-full overflow-hidden md:h-14 md:w-14">
+          <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14">
             <img
               src={image}
               alt="Company logo"
