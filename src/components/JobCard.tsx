@@ -15,32 +15,53 @@ import {
 interface JobCardProps {
   jobTitle: string;
   companyName: string;
+  jobDescriptionText: string;
+  image: string;
+  tagsArray: string[];
+  date: string;
+  location: string;
+  jobType: string; // Added if jobType is required
+  experienceRequired: string; // Added if experienceRequired is required
+  jobDescriptionHtml: string; // Added if jobDescriptionHtml is required
+  link: string;
 }
 
-const JobCard: FC<JobCardProps> = ({ jobData }) => {
+const JobCard: FC<JobCardProps> = ({
+  jobTitle,
+  companyName,
+  jobDescriptionText,
+  image,
+  tagsArray,
+  date,
+  location,
+  jobType,
+  experienceRequired,
+  jobDescriptionHtml,
+  link,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const fullDescription =
-    jobData.jobDescriptionText.length > 350
-      ? jobData.jobDescriptionText.substring(0, 350) + "....."
-      : jobData.jobDescriptionText;
+    jobDescriptionText.length > 350
+      ? jobDescriptionText.substring(0, 350) + "....."
+      : jobDescriptionText;
   return (
     <div className="p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
         <div className="flex items-center gap-4">
           <div className="border h-16 w-16 rounded-full overflow-hidden">
             <img
-              src={jobData?.image}
+              src={image}
               alt="Company logo"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="flex flex-col">
-            <h2 className="text-base font-semibold">{jobData?.jobTitle}</h2>
+            <h2 className="text-base font-semibold">{jobTitle}</h2>
             <p className="text-sm text-gray-500 font-medium">
-              {jobData?.companyName}
+              {companyName}
             </p>
             <div className="flex gap-2 text-[10px] mt-1">
-              {jobData?.tagsArray.map((tag, index) => {
+              {tagsArray.map((tag: string, index: number) => {
                 return (
                   <p key={index} className="border py-1 px-2 rounded-full">
                     {tag}
@@ -51,8 +72,8 @@ const JobCard: FC<JobCardProps> = ({ jobData }) => {
           </div>
         </div>
         <div className="flex flex-col gap-2 items-end">
-          <p className="text-sm text-gray-500">{jobData?.date}</p>
-          <p className="text-sm text-gray-500">{jobData?.location}</p>
+          <p className="text-sm text-gray-500">{date}</p>
+          <p className="text-sm text-gray-500">{location}</p>
         </div>
       </div>
       <div>
@@ -87,10 +108,10 @@ const JobCard: FC<JobCardProps> = ({ jobData }) => {
                     </div>
                     <div>
                       <h2 className="text-base font-semibold">
-                        {jobData?.jobTitle}
+                        {jobTitle}
                       </h2>
                       <p className="text-sm text-gray-500 font-medium">
-                        {jobData?.companyName}
+                        {companyName}
                       </p>
                     </div>
                   </div>
@@ -99,20 +120,20 @@ const JobCard: FC<JobCardProps> = ({ jobData }) => {
                   <div className="flex flex-col gap-1">
                     <div className="flex gap-1">
                       <h2 className="font-medium text-sm">Job Type - </h2>
-                      <p>{jobData?.jobType}</p>
+                      <p>{jobType}</p>
                     </div>
                     <div className="flex gap-1">
                       <h2 className="font-medium">Experience Required - </h2>
-                      <p>{jobData?.experienceRequired}</p>
+                      <p>{experienceRequired}</p>
                     </div>
                     <div className="flex gap-1">
                       <h2 className="font-medium">Location - </h2>
-                      <p>{jobData?.location}</p>
+                      <p>{location}</p>
                     </div>
                     <p
                       className="text-xs"
                       dangerouslySetInnerHTML={{
-                        __html: jobData?.jobDescriptionHtml,
+                        __html: jobDescriptionHtml,
                       }}
                     />
                   </div>
@@ -122,7 +143,7 @@ const JobCard: FC<JobCardProps> = ({ jobData }) => {
                 <div className="flex justify-center w-full">
                   <a
                     className="px-3 py-2 rounded text-sm font-semibold flex items-center gap-1 bg-primaryNew text-white cursor-pointer"
-                    href={jobData?.link}
+                    href={link}
                   >
                     Apply
                     <CiLocationArrow1 />
@@ -133,7 +154,7 @@ const JobCard: FC<JobCardProps> = ({ jobData }) => {
           </Dialog>
           <a
             className="px-3 py-2 rounded text-sm font-semibold flex items-center gap-1 bg-primaryNew text-white cursor-pointer"
-            href={jobData?.link}
+            href={link}
           >
             Apply
             <CiLocationArrow1 />
