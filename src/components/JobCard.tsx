@@ -95,7 +95,7 @@ const JobCard: FC<JobCardProps> = ({
                 View JD <IoBookOutline />
               </button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[520px]">
+            <DialogContent className="w-[90%] sm:max-w-[520px]">
               <DialogHeader>
                 <DialogTitle>
                   <div className="flex items-center gap-4">
@@ -131,7 +131,7 @@ const JobCard: FC<JobCardProps> = ({
                       <p>{location}</p>
                     </div>
                     <p
-                      className="text-xs"
+                      className="text-[10px] sm:text-xs text-start"
                       dangerouslySetInnerHTML={{
                         __html: jobDescriptionHtml,
                       }}

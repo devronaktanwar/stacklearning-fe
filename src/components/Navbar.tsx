@@ -8,11 +8,11 @@ interface lNavbarProps{
 const Navbar:FC<lNavbarProps> = () => {
   return (
     <div className='border-b sticky top-0 bg-white z-50'>
-        <nav className='w-[80%] m-auto flex justify-between items-center'>
-            <div className='w-24'>
+        <nav className='w-[90%] m-auto flex justify-between items-center'>
+            <div className='w-16 sm:w-24'>
                 <img src={logo} alt="logo" className='w-full'/>
             </div>
-            <div>
+            <div className=''>
                 <ul className='flex gap-8 text-base font-medium'>
                     <li><Link to={'/'}>Home</Link></li>
                     <li><Link to={'/job-board'}>Jobs</Link></li>
