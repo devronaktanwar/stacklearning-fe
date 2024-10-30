@@ -14,7 +14,11 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch("https://stacklearning-be.onrender.com/api/all-jobs");
+        const response = await fetch("https://stacklearning-be.onrender.com/api/all-jobs",{
+          headers: {
+            authkey:"8e92ab9c92b24b5fb5b6afaf92b7ef12"
+          }
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
