@@ -47,11 +47,11 @@ const JobCard: FC<JobCardProps> = ({
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
         <div className="flex items-start gap-3">
-          <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14">
+          <div className="border h-12 w-14 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
             <img
               src={image}
               alt="Company logo"
-              className="w-12 h-12 object-cover md:h-14 md:w-14"
+              className="h-full w-full object-cover md:h-14 md:w-14 "
             />
           </div>
           <div className="flex flex-col max-w-[350px] w-full">
@@ -71,8 +71,8 @@ const JobCard: FC<JobCardProps> = ({
           </div>
         </div>
         <div className="flex flex-col gap-2 items-end">
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end">{date}</p>
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end">{location}</p>
+          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">{date}</p>
+          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">{location}</p>
         </div>
       </div>
       <div>
