@@ -46,18 +46,18 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     <JobFilterProvider>
       <div className="relative">
         <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
-          <div className="relative w-[80%] m-auto mb-4 flex gap-2 items-center">
+          <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex gap-2 items-center">
             <Input
               type="text"
               placeholder="Search for Company, Roles"
-              className="max-w-md w-full py-5 pl-10"
+              className="max-w-md w-full py-5 pl-10 rounded-xl"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <div>
-              <button className="px-3 py-[9px] rounded text-sm font-semibold bg-primaryNew text-white flex items-center gap-1">
+              {/* <button className="px-3 py-[9px] rounded text-sm font-semibold bg-primaryNew text-white flex items-center gap-1">
                 Search
-              </button>
+              </button> */}
             </div>
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>

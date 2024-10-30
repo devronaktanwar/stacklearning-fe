@@ -44,17 +44,17 @@ const JobCard: FC<JobCardProps> = ({
       ? jobDescriptionText.substring(0, 350) + "....."
       : jobDescriptionText;
   return (
-    <div className="p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
+    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-start gap-3">
           <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14">
             <img
               src={image}
               alt="Company logo"
-              className="w-full h-full object-cover"
+              className="w-12 h-12 object-cover md:h-14 md:w-14"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col max-w-[200px]">
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">{jobTitle}</h2>
             <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
               {companyName}
@@ -71,7 +71,7 @@ const JobCard: FC<JobCardProps> = ({
           </div>
         </div>
         <div className="flex flex-col gap-2 items-end">
-          <p className="text-[10px] sm:text-sm text-gray-500">{date}</p>
+          <p className="text-[10px] sm:text-sm text-gray-500 text-end">{date}</p>
           <p className="text-[10px] sm:text-sm text-gray-500 text-end">{location}</p>
         </div>
       </div>
