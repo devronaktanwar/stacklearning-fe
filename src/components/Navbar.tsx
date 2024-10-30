@@ -31,7 +31,12 @@ const Navbar: FC<NavbarProps> = () => {
             <HiOutlineMenuAlt1 />
           </button>
           <div className="absolute right-8">
-            {isMobileMenuOpen && <MobileNav />}
+            {isMobileMenuOpen && (
+              <MobileNav
+                isMobileMenuOpen={isMobileMenuOpen}
+                setIsMobileMenuOpen={setIsMobileMenuOpen}
+              />
+            )}
           </div>
         </div>
 
@@ -47,21 +52,45 @@ const Navbar: FC<NavbarProps> = () => {
     </div>
   );
 };
-
-const MobileNav = () => {
-    const navigate=useNavigate();
+interface lMobileNavProps {
+  setIsMobileMenuOpen: (val: boolean) => void;
+  isMobileMenuOpen: boolean;
+}
+const MobileNav: FC<lMobileNavProps> = ({
+  setIsMobileMenuOpen,
+  isMobileMenuOpen,
+}) => {
+  const navigate = useNavigate();
   return (
     <div className="border px-5 py-2 text-sm bg-white rounded-xl">
       <div className="flex flex-col">
-        <div className="flex items-center gap-4 border-b pb-2" onClick={()=>navigate('/')}>
+        <div
+          className="flex items-center gap-4 border-b pb-2"
+          onClick={() => {
+            navigate("/");
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+          }}
+        >
           <GrHomeRounded />
           <p>Home</p>
         </div>
-        <div className="flex items-center gap-4 pt-2 border-b pb-2" onClick={()=>navigate('/job-board')}>
+        <div
+          className="flex items-center gap-4 pt-2 border-b pb-2"
+          onClick={() => {
+            navigate("/job-board");
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+          }}
+        >
           <PiBagSimpleBold />
           <p>Jobs</p>
         </div>
-        <div className="flex items-center gap-4 pt-2" onClick={()=>navigate('/login')}>
+        <div
+          className="flex items-center gap-4 pt-2"
+          onClick={() => {
+            navigate("/login");
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+          }}
+        >
           <IoMdLogIn />
           <p>Login</p>
         </div>
