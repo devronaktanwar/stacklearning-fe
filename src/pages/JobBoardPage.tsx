@@ -81,7 +81,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
               />
             ))}
           </div>
-          <div className="basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
+          <div className="hidden md:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
             <FilterAndSort />
           </div>
         </div>

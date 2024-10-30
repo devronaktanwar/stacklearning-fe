@@ -54,7 +54,7 @@ const JobCard: FC<JobCardProps> = ({
               className="w-12 h-12 object-cover md:h-14 md:w-14"
             />
           </div>
-          <div className="flex flex-col max-w-[200px]">
+          <div className="flex flex-col max-w-[350px] w-full">
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">{jobTitle}</h2>
             <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
               {companyName}
