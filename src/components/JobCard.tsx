@@ -106,10 +106,10 @@ const JobCard: FC<JobCardProps> = ({
                       />
                     </div>
                     <div className="flex flex-col items-start">
-                      <h2 className="text-base font-semibold">
+                      <h2 className="text-sm sm:text-base font-semibold text-start">
                         {jobTitle}
                       </h2>
-                      <p className="text-sm text-gray-500 font-medium">
+                      <p className="text-xs sm:text-sm text-gray-500 font-medium">
                         {companyName}
                       </p>
                     </div>
