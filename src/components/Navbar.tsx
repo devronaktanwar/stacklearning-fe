@@ -52,15 +52,15 @@ const MobileNav = () => {
   return (
     <div className="border px-5 py-2 text-sm bg-white rounded-xl">
       <div className="flex flex-col">
-        <div className="flex items-center gap-4 border-b pb-1">
+        <div className="flex items-center gap-4 border-b pb-2">
           <GrHomeRounded />
           <p>Home</p>
         </div>
-        <div className="flex items-center gap-4 pt-1 border-b pb-1">
+        <div className="flex items-center gap-4 pt-2 border-b pb-2">
           <PiBagSimpleBold />
           <p>Jobs</p>
         </div>
-        <div className="flex items-center gap-4 pt-1">
+        <div className="flex items-center gap-4 pt-2">
           <IoMdLogIn />
           <p>Login</p>
         </div>
