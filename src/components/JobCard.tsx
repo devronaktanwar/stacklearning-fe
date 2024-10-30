@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { IoBookOutline } from "react-icons/io5";
 import { CiLocationArrow1 } from "react-icons/ci";
-import img from "../assets/logo.png";
 import {
   Dialog,
   DialogContent,
@@ -56,14 +55,14 @@ const JobCard: FC<JobCardProps> = ({
             />
           </div>
           <div className="flex flex-col">
-            <h2 className="text-sm font-semibold text-nowrap sm:text-base">{jobTitle}</h2>
+            <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">{jobTitle}</h2>
             <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
               {companyName}
             </p>
             <div className="flex gap-2 text-[10px] mt-1">
               {tagsArray.map((tag: string, index: number) => {
                 return (
-                  <p key={index} className="border py-1 px-2 rounded-full text-[8px] sm:text-sm">
+                  <p key={index} className="border py-1 px-2 rounded-full text-[8px] sm:text-xs">
                     {tag}
                   </p>
                 );
@@ -101,12 +100,12 @@ const JobCard: FC<JobCardProps> = ({
                   <div className="flex items-center gap-4">
                     <div className="border h-16 w-16 rounded-full overflow-hidden">
                       <img
-                        src={img}
+                        src={image}
                         alt="Company logo"
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div>
+                    <div className="flex flex-col items-start">
                       <h2 className="text-base font-semibold">
                         {jobTitle}
                       </h2>

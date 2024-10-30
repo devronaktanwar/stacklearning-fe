@@ -8,7 +8,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			primaryNew: '#25a983',
+				primaryNew: '#25a983',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
