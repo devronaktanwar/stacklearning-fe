@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { GrHomeRounded } from "react-icons/gr";
 import { PiBagSimpleBold } from "react-icons/pi";
@@ -49,18 +49,19 @@ const Navbar: FC<NavbarProps> = () => {
 };
 
 const MobileNav = () => {
+    const navigate=useNavigate();
   return (
     <div className="border px-5 py-2 text-sm bg-white rounded-xl">
       <div className="flex flex-col">
-        <div className="flex items-center gap-4 border-b pb-2">
+        <div className="flex items-center gap-4 border-b pb-2" onClick={()=>navigate('/')}>
           <GrHomeRounded />
           <p>Home</p>
         </div>
-        <div className="flex items-center gap-4 pt-2 border-b pb-2">
+        <div className="flex items-center gap-4 pt-2 border-b pb-2" onClick={()=>navigate('/job-board')}>
           <PiBagSimpleBold />
           <p>Jobs</p>
         </div>
-        <div className="flex items-center gap-4 pt-2">
+        <div className="flex items-center gap-4 pt-2" onClick={()=>navigate('/login')}>
           <IoMdLogIn />
           <p>Login</p>
         </div>
