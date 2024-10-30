@@ -95,7 +95,7 @@ const JobCard: FC<JobCardProps> = ({
                 View JD <IoBookOutline />
               </button>
             </DialogTrigger>
-            <DialogContent className="w-[90%] sm:max-w-[520px]">
+            <DialogContent className="w-[95%] sm:max-w-[520px] rounded">
               <DialogHeader>
                 <DialogTitle>
                   <div className="flex items-center gap-4">
