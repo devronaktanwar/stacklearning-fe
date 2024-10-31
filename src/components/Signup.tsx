@@ -215,45 +215,45 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
     }
   };
 
-  const handleVerifyOtp = async () => {
-    setLoading(true);
-    const userInputOtp = otp.join("");
-    try {
-      const { data } = await axios.post(
-        "http://localhost:3000/api/verify-otp",
-        { userInputOtp },
-        { withCredentials: true }
-      );
+  // const handleVerifyOtp = async () => {
+  //   setLoading(true);
+  //   const userInputOtp = otp.join("");
+  //   try {
+  //     const { data } = await axios.post(
+  //       "http://localhost:3000/api/verify-otp",
+  //       { userInputOtp },
+  //       { withCredentials: true }
+  //     );
 
-      if (data.isSuccess) {
-        try {
-          const response = await axios.post(
-            "http://localhost:3000/api/signup",
-            {
-              name,
-              email,
-              password,
-            }
-          );
-          if (response.data.isSuccess) {
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("name", response.data.user.name);
-            navigate("/");
-            window.location.reload();
-          } else {
-          }
-        } catch {
-          alert("Signup failed.");
-        }
-        setTimeout(() => navigate("/"), 3000);
-      } else {
-      }
-    } catch {
-      alert("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     if (data.isSuccess) {
+  //       try {
+  //         const response = await axios.post(
+  //           "http://localhost:3000/api/signup",
+  //           {
+  //             name,
+  //             email,
+  //             password,
+  //           }
+  //         );
+  //         if (response.data.isSuccess) {
+  //           localStorage.setItem("token", response.data.token);
+  //           localStorage.setItem("name", response.data.user.name);
+  //           navigate("/");
+  //           window.location.reload();
+  //         } else {
+  //         }
+  //       } catch {
+  //         alert("Signup failed.");
+  //       }
+  //       setTimeout(() => navigate("/"), 3000);
+  //     } else {
+  //     }
+  //   } catch {
+  //     alert("Something went wrong");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleResendOtp = () => {
     console.log("Resend OTP");
