@@ -12,8 +12,10 @@ import axios from "axios";
 import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Toast from "./Toast";
 
 const Signup = () => {
+  const[showToast,setShowToast]=useState(false)
   const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
   const [emailId, setEmail] = useState("");
@@ -22,7 +24,9 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
+  const [message, setMessage] = useState("Signed up successfully");
+  const[isSuccess,setIsSucces]=useState(false);
+  const navigate = useNavigate();
   const validateForm = () => {
     let isValid = true;
 
@@ -64,10 +68,22 @@ const Signup = () => {
       );
 
       if (data.isSuccess) {
-        console.log("signup successfull")
-        navigate('/');
+        console.log("data---",data)
+        setShowToast(true)
+        setMessage("Signed up successfully");
+        setIsSucces(true)
+        setTimeout(()=>{
+          setShowToast(false)
+        },3000)
+        // navigate("/");
       } else {
-        alert("Signup failed. Please try again.");
+        console.log("data---",data)
+        setShowToast(true)
+        setMessage("Signed up failed");
+        setIsSucces(false)
+        setTimeout(()=>{
+          setShowToast(false)
+        },3000)
       }
     } catch {
     } finally {
@@ -104,6 +120,7 @@ const Signup = () => {
                   id="email"
                   placeholder="abc@gmail.com"
                   value={emailId}
+                  type="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 {emailError && (
@@ -155,6 +172,7 @@ const Signup = () => {
       {currentStep === 2 && (
         <OtpModal email={emailId} name={name} password={password} />
       )}
+      {showToast && <Toast isSuccess={isSuccess} message={message} />}
     </div>
   );
 };

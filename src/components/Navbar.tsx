@@ -9,6 +9,7 @@ import { IoMdLogIn } from "react-icons/io";
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
+  const navigate=useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -41,10 +42,10 @@ const Navbar: FC<NavbarProps> = () => {
         </div>
 
         <div className="hidden md:flex gap-6 text-sm font-medium">
-          <button className="border px-4 py-2 border-primaryNew rounded">
+          <button className="border px-4 py-2 border-primaryNew rounded" onClick={()=>navigate('/login')}>
             Login
           </button>
-          <button className="border border-primaryNew px-4 py-2 bg-primaryNew rounded text-white">
+          <button className="border border-primaryNew px-4 py-2 bg-primaryNew rounded text-white" onClick={()=>navigate('/signup')}>
             Sign Up
           </button>
         </div>
