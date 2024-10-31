@@ -15,7 +15,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Toast from "./Toast";
 
 const Signup = () => {
-  const[showToast,setShowToast]=useState(false)
+  const [showToast, setShowToast] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
   const [emailId, setEmail] = useState("");
@@ -25,7 +25,7 @@ const Signup = () => {
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("Signed up successfully");
-  const[isSuccess,setIsSucces]=useState(false);
+  const [isSuccess, setIsSucces] = useState(false);
   const navigate = useNavigate();
   const validateForm = () => {
     let isValid = true;
@@ -68,24 +68,23 @@ const Signup = () => {
       );
 
       if (data.isSuccess) {
-        console.log("data---",data)
-        setShowToast(true)
+        setShowToast(true);
         setMessage("Signed up successfully");
-        setIsSucces(true)
-        setTimeout(()=>{
-          setShowToast(false)
-        },3000)
-        // navigate("/");
-      } else {
-        console.log("data---",data)
-        setShowToast(true)
-        setMessage("Signed up failed");
-        setIsSucces(false)
-        setTimeout(()=>{
-          setShowToast(false)
-        },3000)
+        setIsSucces(true);
+        setTimeout(() => {
+          setShowToast(false);
+          navigate("/");
+        }, 3000);
+
       }
-    } catch {
+    } catch (error: any) {
+      console.error("An error occurred during sign-up:", error);
+      setShowToast(true);
+      setMessage(error.response.data.message);
+      setIsSucces(false);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } finally {
       setLoading(false);
     }
