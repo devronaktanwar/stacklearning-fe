@@ -13,7 +13,6 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
@@ -23,6 +22,7 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate=useNavigate();
   const validateForm = () => {
     let isValid = true;
 
@@ -54,13 +54,18 @@ const Signup = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/send-verification-otp",
-        { emailId },
-        { withCredentials: true }
+        "https://stacklearning-be.onrender.com/api/signup",
+        { emailAddress: emailId, fullName: name, passWord: password },
+        {
+          headers: {
+            authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
+          },
+        }
       );
 
       if (data.isSuccess) {
-        setCurrentStep(2);
+        console.log("signup successfull")
+        navigate('/');
       } else {
         alert("Signup failed. Please try again.");
       }
