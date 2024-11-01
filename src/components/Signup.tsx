@@ -24,7 +24,7 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("Signed up successfully");
+  const [message, setMessage] = useState("");
   const [isSuccess, setIsSucces] = useState(false);
   const navigate = useNavigate();
   const validateForm = () => {

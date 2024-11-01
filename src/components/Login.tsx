@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; 
 import { Button } from "./ui/button";
+import Toast from "./Toast";
 
 
 const Login = () => {
@@ -22,6 +23,9 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSucces] = useState(false);
 
   const validateForm = () => {
     let isValid = true;
@@ -51,7 +55,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://stacklearning-be.onrender.com/api/login", {
+      const response = await axios.post("http://localhost:3000/api/login", {
         emailAddress:email,
         passWord:password,
       });
@@ -59,12 +63,24 @@ const Login = () => {
       if (response.data.isSuccess) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("name", response.data.user.fullName);
-        navigate("/");
-        window.location.reload();
+        setShowToast(true);
+        setMessage("Logged in successfully");
+        setIsSucces(true);
+        setTimeout(() => {
+          setShowToast(false);
+          navigate("/");
+          window.location.reload()
+        }, 1000);
       } else {
       }
-    } catch (err) {
-      console.log("Error:",err)
+    } catch (error:any) {
+      console.error("An error occurred during sign-up:", error);
+      setShowToast(true);
+      setMessage(error.response.data.message);
+      setIsSucces(false);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -128,6 +144,7 @@ const Login = () => {
           </div>
         </CardFooter>
       </Card>
+      {showToast && <Toast isSuccess={isSuccess} message={message} />}
     </div>
   );
 };
