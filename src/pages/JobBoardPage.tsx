@@ -4,28 +4,36 @@ import { Input } from "@/components/ui/input";
 import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { JobFilterProvider, useJobFilter } from "@/context/JobFilterContext";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { selectedJobLocation, selectedDomain } = useJobFilter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchJobs = async () => {
       try {
-        const response = await fetch("https://stacklearning-be.onrender.com/api/all-jobs",{
-          headers: {
-            authkey:"8e92ab9c92b24b5fb5b6afaf92b7ef12"
+        const response = await fetch(
+          "https://stacklearning-be.onrender.com/api/all-jobs",
+          {
+            headers: {
+              authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
+            },
           }
-        });
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        setLoading(false);
         setJobs(data);
       } catch (err) {
       } finally {
+        setLoading(false);
       }
     };
 
@@ -42,6 +50,10 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   );
 
   console.log(filteredJobs);
+  if (loading)
+    return <div className="flex justify-center items-center w-full h-[40vh]">
+      <AiOutlineLoading3Quarters size={28} className="animate-spin text-primaryNew" />
+    </div>;
   return (
     <JobFilterProvider>
       <div className="relative">

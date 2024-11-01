@@ -42,9 +42,6 @@ const Login = () => {
 
     return isValid;
   };
-  // useEffect(()=>{
-  //   validateForm()
-  // })
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
@@ -54,19 +51,20 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
-        email,
-        password,
+      const response = await axios.post("https://stacklearning-be.onrender.com/api/login", {
+        emailAddress:email,
+        passWord:password,
       });
 
       if (response.data.isSuccess) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("name", response.data.user.name);
+        localStorage.setItem("name", response.data.user.fullName);
         navigate("/");
         window.location.reload();
       } else {
       }
     } catch (err) {
+      console.log("Error:",err)
     } finally {
       setLoading(false);
     }
