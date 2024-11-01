@@ -58,7 +58,7 @@ const Signup = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/signup",
+        "https://stacklearning-be.onrender.com/api/signup",
         { emailAddress: emailId, fullName: name, passWord: password },
         {
           headers: {
