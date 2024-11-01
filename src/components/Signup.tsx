@@ -9,14 +9,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
-import { FC, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Toast from "./Toast";
 
 const Signup = () => {
   const [showToast, setShowToast] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
+  // const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
   const [emailId, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -92,7 +92,7 @@ const Signup = () => {
 
   return (
     <div className="pt-16">
-      {currentStep === 1 && (
+      {/* {currentStep === 1 && ( */}
         <Card className="w-[90%] sm:w-[400px] m-auto">
           <CardHeader>
             <CardTitle className="text-center text-2xl">Sign Up</CardTitle>
@@ -167,7 +167,7 @@ const Signup = () => {
             </div>
           </CardFooter>
         </Card>
-      )}
+      {/* )} */}
       {/* {currentStep === 2 && (
         <OtpModal email={emailId} name={name} password={password} />
       )} */}
