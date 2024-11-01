@@ -58,7 +58,7 @@ const Signup = () => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        "https://stacklearning-be.onrender.com/api/signup",
+        "http://localhost:3000/api/signup",
         { emailAddress: emailId, fullName: name, passWord: password },
         {
           headers: {
@@ -68,13 +68,16 @@ const Signup = () => {
       );
 
       if (data.isSuccess) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", data.user.fullName);
         setShowToast(true);
         setMessage("Signed up successfully");
         setIsSucces(true);
         setTimeout(() => {
           setShowToast(false);
           navigate("/");
-        }, 3000);
+          window.location.reload()
+        }, 1000);
 
       }
     } catch (error: any) {
