@@ -62,6 +62,9 @@ const Login = () => {
         passWord:password,
       });
 
+      if(response.status===400){
+        console.log("status is 400")
+      }
       if (response.data.isSuccess) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("name", response.data.user.fullName);
@@ -78,7 +81,7 @@ const Login = () => {
     } catch (error:any) {
       console.error("An error occurred during sign-up:", error);
       setShowToast(true);
-      setMessage("Something went wrong");
+      setMessage(error.response.data.message);
       setIsSucces(false);
       setTimeout(() => {
         setShowToast(false);
