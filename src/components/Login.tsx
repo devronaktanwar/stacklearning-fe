@@ -15,6 +15,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button } from "./ui/button";
 import Toast from "./Toast";
 
+const url='https://stacklearning-be.onrender.com/api/login';
+// const url="http://localhost:3000/api/login"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -55,7 +57,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/login", {
+      const response = await axios.post(url, {
         emailAddress:email,
         passWord:password,
       });
@@ -76,7 +78,7 @@ const Login = () => {
     } catch (error:any) {
       console.error("An error occurred during sign-up:", error);
       setShowToast(true);
-      setMessage(error.response.data.message);
+      setMessage("Something went wrong");
       setIsSucces(false);
       setTimeout(() => {
         setShowToast(false);
