@@ -12,7 +12,7 @@ import axios from "axios";
 import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-// import Toast from "./Toast";
+import Toast from "./Toast";
 
 const Signup = () => {
   // const [showToast, setShowToast] = useState(false);
