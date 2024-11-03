@@ -15,7 +15,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Toast from "./Toast";
 
 const Signup = () => {
-  const [showToast, setShowToast] = useState(false);
+  // const [showToast, setShowToast] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
   const [emailId, setEmail] = useState("");
@@ -24,9 +24,9 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isSuccess, setIsSucces] = useState(false);
-  const navigate = useNavigate();
+  // const [message, setMessage] = useState("");
+  // const [isSuccess, setIsSucces] = useState(false);
+  // const navigate = useNavigate();
   const validateForm = () => {
     let isValid = true;
 
@@ -194,7 +194,7 @@ const Signup = () => {
       {currentStep === 2 && (
         <OtpModal email={emailId} name={name} password={password} />
       )}
-      {showToast && <Toast isSuccess={isSuccess} message={message} />}
+      {/* {showToast && <Toast isSuccess={isSuccess} message={message} />} */}
     </div>
   );
 };
