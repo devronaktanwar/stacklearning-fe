@@ -54,12 +54,12 @@ const JobCard: FC<JobCardProps> = ({
               className="h-full w-full object-cover md:h-14 md:w-14 "
             />
           </div>
-          <div className="flex flex-col max-w-[350px] w-full">
+          <div className="flex flex-col max-w-[300px] sm:max-w-full w-full ">
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">{jobTitle}</h2>
             <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
               {companyName}
             </p>
-            <div className="flex gap-2 text-[10px] mt-1">
+            <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
               {tagsArray.map((tag: string, index: number) => {
                 return (
                   <p key={index} className="border py-1 px-2 rounded-full text-[8px] sm:text-xs">
