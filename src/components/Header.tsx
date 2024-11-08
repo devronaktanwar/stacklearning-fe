@@ -9,7 +9,7 @@ const categoriesData = [
 const Header = () => {
   return (
     <div className="py-36">
-      <div className="w-[80%] m-auto">
+      <div className="w-[95%] md:w-[80%] m-auto">
         <div className="flex flex-col items-center gap-4 justify-center">
           <h1 className="text-3xl sm:text-[44px] font-bold text-center">
             Discover{" "}
