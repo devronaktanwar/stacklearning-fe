@@ -5,6 +5,8 @@ import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { JobFilterProvider, useJobFilter } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { HiSortDescending } from "react-icons/hi";
+
 import {
   Select,
   SelectContent,
@@ -23,8 +25,6 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [selectedDate, setSelectedDate] = useState("Any Time");
   const [loading, setLoading] = useState(false);
 
-  console.log("job location-", selectedJobLocation);
-  console.log("selected domain-", selectedDomain);
   useEffect(() => {
     setLoading(true);
     const fetchJobs = async () => {
@@ -111,10 +111,10 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="w-[130px]">
+            <div className="">
               <Select onValueChange={(value) => setSelectedDate(value)}>
                 <SelectTrigger className="w-full bg-primaryNew text-white py-[18px]">
-                  <SelectValue placeholder="Date Posted" />
+                  <SelectValue placeholder=<HiSortDescending/> />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
