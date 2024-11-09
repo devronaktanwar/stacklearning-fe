@@ -7,17 +7,17 @@ import Signup from "./components/Signup";
 import HomePage from "./pages/HomePage";
 const App = () => {
   return (
-    <JobFilterProvider>
-      <div>
-        <Navbar />
+    <div>
+      <Navbar />
+      <JobFilterProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/job-board" element={<JobBoardPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
-      </div>
-    </JobFilterProvider>
+      </JobFilterProvider>
+    </div>
   );
 };
 

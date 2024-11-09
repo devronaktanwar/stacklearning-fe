@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
-import { JobFilterProvider } from "@/context/JobFilterContext";
+import { useJobFilter } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import FilterDrawer from "@/components/FilterDrawer";
@@ -12,8 +12,7 @@ interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  // const { selectedJobLocation, selectedDomain } = useJobFilter();
-  // const [selectedDate, setSelectedDate] = useState("Any Time");
+  const { selectedJobLocation, selectedPeriod ,selectedDomain} = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -42,36 +41,38 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     fetchJobs();
   }, []);
 
-  // const isDateWithinRange = (date: string, range: string): boolean => {
-  //   const jobDate = new Date(date);
-  //   const today = new Date();
-  //   if (range === "Today") {
-  //     return (
-  //       jobDate.getDate() === today.getDate() &&
-  //       jobDate.getMonth() === today.getMonth() &&
-  //       jobDate.getFullYear() === today.getFullYear()
-  //     );
-  //   } else if (range === "Last Week") {
-  //     const oneWeekAgo = new Date(today);
-  //     oneWeekAgo.setDate(today.getDate() - 7);
-  //     return jobDate >= oneWeekAgo && jobDate <= today;
-  //   } else if (range === "Last Month") {
-  //     const oneMonthAgo = new Date(today);
-  //     oneMonthAgo.setMonth(today.getMonth() - 1);
-  //     return jobDate >= oneMonthAgo && jobDate <= today;
-  //   }
-  //   return true;
-  // };
+  const isDateWithinRange = (date: string, range: string): boolean => {
+    const jobDate = new Date(date);
+    const today = new Date();
+    if (range === "today") {
+      return (
+        jobDate.getDate() === today.getDate() &&
+        jobDate.getMonth() === today.getMonth() &&
+        jobDate.getFullYear() === today.getFullYear()
+      );
+    } else if (range === "lastWeek") {
+      const oneWeekAgo = new Date(today);
+      oneWeekAgo.setDate(today.getDate() - 7);
+      return jobDate >= oneWeekAgo && jobDate <= today;
+    } else if (range === "lastMonth") {
+      const oneMonthAgo = new Date(today);
+      oneMonthAgo.setMonth(today.getMonth() - 1);
+      return jobDate >= oneMonthAgo && jobDate <= today;
+    }
+    return true;
+  };
 
   const filteredJobs = jobs.filter(
     (job) =>
       [job.jobTitle, job.companyName].some((field) =>
         field.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    // &&
-    // (selectedJobLocation === "Any" || job.location === selectedJobLocation) &&
-    // (selectedDomain === "Any" || job.domain === selectedDomain) &&
-    // isDateWithinRange(job.date, selectedDate)
+      ) &&
+      (selectedJobLocation === "Any" ||
+        job?.jobLocation === selectedJobLocation) &&
+      isDateWithinRange(job.date, selectedPeriod)
+      &&
+      (selectedDomain === "Any" ||
+        job?.domain === selectedDomain) 
   );
 
   if (loading)
@@ -89,56 +90,52 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   }
 
   return (
-    <JobFilterProvider>
-      <div className="relative">
-        <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
-          <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
-            <div className="sm:max-w-md w-[90%]">
-              <Input
-                type="text"
-                placeholder="Search for Company, Roles"
-                className="w-full py-5 pl-10 rounded-xl"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-            <div className="md:hidden">
-              <FilterDrawer />
-            </div>
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+    <div className="relative">
+      <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
+        <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
+          <div className="sm:max-w-md w-[90%]">
+            <Input
+              type="text"
+              placeholder="Search for Company, Roles"
+              className="w-full py-5 pl-10 rounded-xl"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
-        </div>
-        <div className="md:w-[80%] m-auto flex gap-4 flex-col md:flex-row w-[95%]">
-          <div className="flex flex-1 flex-col gap-y-4">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job, index) => (
-                <JobCard
-                  key={index}
-                  jobTitle={job.jobTitle}
-                  companyName={job.companyName}
-                  jobDescriptionText={job.jobDescriptionText}
-                  image={job.image}
-                  tagsArray={job.tagsArray}
-                  date={job.date}
-                  location={job.location}
-                  jobType={job.jobType}
-                  experienceRequired={job.experienceRequired}
-                  jobDescriptionHtml={job.jobDescriptionHtml}
-                  link={job.link}
-                />
-              ))
-            ) : (
-              <div className="text-center text-gray-500 py-10">
-                No jobs found
-              </div>
-            )}
+          <div className="md:hidden">
+            <FilterDrawer />
           </div>
-          <div className="hidden md:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
-            <FilterAndSort />
-          </div>
+          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
       </div>
-    </JobFilterProvider>
+      <div className="md:w-[80%] m-auto flex gap-4 flex-col md:flex-row w-[95%]">
+        <div className="flex flex-1 flex-col gap-y-4">
+          {filteredJobs.length > 0 ? (
+            filteredJobs.map((job, index) => (
+              <JobCard
+                key={index}
+                jobTitle={job.jobTitle}
+                companyName={job.companyName}
+                jobDescriptionText={job.jobDescriptionText}
+                image={job.image}
+                tagsArray={job.tagsArray}
+                date={job.date}
+                location={job.location}
+                jobType={job.jobType}
+                experienceRequired={job.experienceRequired}
+                jobDescriptionHtml={job.jobDescriptionHtml}
+                link={job.link}
+              />
+            ))
+          ) : (
+            <div className="text-center text-gray-500 py-10">No jobs found</div>
+          )}
+        </div>
+        <div className="hidden md:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
+          <FilterAndSort />
+        </div>
+      </div>
+    </div>
   );
 };
 

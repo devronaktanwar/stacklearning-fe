@@ -68,3 +68,17 @@
     background: #fbfbfb;
   }
 }
+
+.custom-checkbox[data-state="checked"] {
+  background-color: #317562; 
+  border-color: #317562;
+}
+
+.custom-checkbox[data-state="checked"] svg {
+  color: white; 
+}
+
+.custom-checkbox[data-state="unchecked"] {
+  background-color: transparent;
+  border-color: #e5e5e5; 
+}

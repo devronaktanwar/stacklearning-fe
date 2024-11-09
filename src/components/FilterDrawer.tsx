@@ -16,7 +16,19 @@ import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
 
 const FilterDrawer = () => {
-    const { selectedJobLocation, setSelectedJobLocation } = useJobFilter();
+  const {
+    selectedJobLocation,
+    setSelectedJobLocation,
+    selectedPeriod,
+    setSelectedPeriod,
+    selectedDomain,
+    setSelectedDomain,
+  } = useJobFilter();
+
+  const handlePeriodChange = (period: string) => {
+    setSelectedPeriod(period);
+  };
+
   return (
     <div>
       <Drawer>
@@ -26,7 +38,7 @@ const FilterDrawer = () => {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Filter by</DrawerTitle>
-            <DrawerDescription className="">
+            <DrawerDescription>
               <div className="mt-3">
                 <h2 className="text-left text-sm font-semibold mb-3">
                   Date Posted
@@ -34,21 +46,67 @@ const FilterDrawer = () => {
                 <div className="flex flex-col gap-3 text-xs">
                   <div className="flex justify-between items-center">
                     <p>Any time</p>
-                    <Checkbox />
+                    <Checkbox
+                      checked={selectedPeriod === "any"}
+                      onCheckedChange={() => handlePeriodChange("any")}
+                    />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Today</p>
-                    <Checkbox />
+                    <Checkbox
+                      checked={selectedPeriod === "today"}
+                      onCheckedChange={() => handlePeriodChange("today")}
+                    />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Last week</p>
-                    <Checkbox />
+                    <Checkbox
+                      checked={selectedPeriod === "lastWeek"}
+                      onCheckedChange={() => handlePeriodChange("lastWeek")}
+                    />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Last month</p>
-                    <Checkbox />
+                    <Checkbox
+                      checked={selectedPeriod === "lastMonth"}
+                      onCheckedChange={() => handlePeriodChange("lastMonth")}
+                    />
                   </div>
                 </div>
+              </div>
+              <div className="mt-3">
+                <h2 className="text-left text-sm font-semibold mb-3">Domain</h2>
+                <ToggleGroup
+                  type="single"
+                  value={selectedDomain}
+                  onValueChange={setSelectedDomain}
+                  className="flex justify-start"
+                >
+                  <ToggleGroupItem
+                    value="Any"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Any
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Data Science"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Data Science
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Android"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Android
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Web"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Web
+                  </ToggleGroupItem>
+                </ToggleGroup>
               </div>
               <div className="mt-3">
                 <h2 className="text-left text-sm font-semibold mb-3">
@@ -58,7 +116,9 @@ const FilterDrawer = () => {
                   type="single"
                   className="flex justify-start"
                   value={selectedJobLocation}
-                  onValueChange={setSelectedJobLocation}
+                  onValueChange={(value) => {
+                    if (value) setSelectedJobLocation(value);
+                  }}
                 >
                   <ToggleGroupItem
                     value="Any"
@@ -89,7 +149,11 @@ const FilterDrawer = () => {
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            <Button className="bg-primaryNew hover:bg-[#317562]">Apply Filters</Button>
+          <DrawerClose>
+            <Button className="bg-primaryNew hover:bg-[#317562] w-full">
+              Apply Filters
+            </Button>
+            </DrawerClose>
             <DrawerClose className="absolute top-3 right-3">
               <MdOutlineCancel />
             </DrawerClose>
