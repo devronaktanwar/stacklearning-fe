@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
-import { JobFilterProvider, useJobFilter } from "@/context/JobFilterContext";
+import { JobFilterProvider } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import FilterDrawer from "@/components/FilterDrawer";
@@ -12,7 +12,7 @@ interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { selectedJobLocation, selectedDomain } = useJobFilter();
+  // const { selectedJobLocation, selectedDomain } = useJobFilter();
   // const [selectedDate, setSelectedDate] = useState("Any Time");
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -42,26 +42,26 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     fetchJobs();
   }, []);
 
-  const isDateWithinRange = (date: string, range: string): boolean => {
-    const jobDate = new Date(date);
-    const today = new Date();
-    if (range === "Today") {
-      return (
-        jobDate.getDate() === today.getDate() &&
-        jobDate.getMonth() === today.getMonth() &&
-        jobDate.getFullYear() === today.getFullYear()
-      );
-    } else if (range === "Last Week") {
-      const oneWeekAgo = new Date(today);
-      oneWeekAgo.setDate(today.getDate() - 7);
-      return jobDate >= oneWeekAgo && jobDate <= today;
-    } else if (range === "Last Month") {
-      const oneMonthAgo = new Date(today);
-      oneMonthAgo.setMonth(today.getMonth() - 1);
-      return jobDate >= oneMonthAgo && jobDate <= today;
-    }
-    return true;
-  };
+  // const isDateWithinRange = (date: string, range: string): boolean => {
+  //   const jobDate = new Date(date);
+  //   const today = new Date();
+  //   if (range === "Today") {
+  //     return (
+  //       jobDate.getDate() === today.getDate() &&
+  //       jobDate.getMonth() === today.getMonth() &&
+  //       jobDate.getFullYear() === today.getFullYear()
+  //     );
+  //   } else if (range === "Last Week") {
+  //     const oneWeekAgo = new Date(today);
+  //     oneWeekAgo.setDate(today.getDate() - 7);
+  //     return jobDate >= oneWeekAgo && jobDate <= today;
+  //   } else if (range === "Last Month") {
+  //     const oneMonthAgo = new Date(today);
+  //     oneMonthAgo.setMonth(today.getMonth() - 1);
+  //     return jobDate >= oneMonthAgo && jobDate <= today;
+  //   }
+  //   return true;
+  // };
 
   const filteredJobs = jobs.filter(
     (job) =>
