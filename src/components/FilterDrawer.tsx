@@ -32,8 +32,8 @@ const FilterDrawer = () => {
   return (
     <div>
       <Drawer>
-        <DrawerTrigger className="p-1 bg-primaryNew text-white rounded">
-          <RiFilter3Fill />
+        <DrawerTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2">
+          Filter <RiFilter3Fill />
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
