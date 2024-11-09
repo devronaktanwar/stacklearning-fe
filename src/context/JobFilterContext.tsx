@@ -7,6 +7,8 @@ interface JobFilterContextType {
   setSelectedDomain: (domain: string) => void;
   selectedPeriod: string;
   setSelectedPeriod: (period: string) => void;
+  selectedJobType: string;
+  setselectedJobType: (jobtype: string) => void;
 }
 
 
@@ -28,9 +30,9 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedJobLocation, setSelectedJobLocation] = useState("Any");
   const [selectedDomain, setSelectedDomain] = useState("Any");
   const [selectedPeriod, setSelectedPeriod] = useState("any");
-
+  const [selectedJobType, setselectedJobType] = useState("Any");
   return (
-    <JobFilterContext.Provider value={{ selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain,selectedPeriod,setSelectedPeriod }}>
+    <JobFilterContext.Provider value={{ selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain,selectedPeriod,setSelectedPeriod ,selectedJobType,setselectedJobType}}>
       {children}
     </JobFilterContext.Provider>
   );

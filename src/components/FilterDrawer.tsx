@@ -23,6 +23,8 @@ const FilterDrawer = () => {
     setSelectedPeriod,
     selectedDomain,
     setSelectedDomain,
+    selectedJobType,
+    setselectedJobType
   } = useJobFilter();
 
   const handlePeriodChange = (period: string) => {
@@ -143,6 +145,45 @@ const FilterDrawer = () => {
                     className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
                   >
                     Hybrid
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+              <div className="mt-3">
+                <h2 className="text-left text-sm font-semibold mb-3">
+                  Job Type
+                </h2>
+                <ToggleGroup
+                  type="single"
+                  className="flex justify-start"
+                  value={selectedJobType}
+                  onValueChange={(value) => {
+                    if (value) setselectedJobType(value);
+                    console.log("inside --",value)
+                  }}
+                >
+                  <ToggleGroupItem
+                    value="Any"
+                    className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Any
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Full Time"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Full Time
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Part Time"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Part Time
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="Contract"
+                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                  >
+                    Contract
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>
