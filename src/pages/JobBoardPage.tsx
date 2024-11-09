@@ -13,9 +13,8 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const { selectedJobLocation, selectedDomain } = useJobFilter();
-  const [selectedDate, setSelectedDate] = useState("Any Time");
+  // const [selectedDate, setSelectedDate] = useState("Any Time");
   const [loading, setLoading] = useState(false);
-  setSelectedDate("Any Time");
   useEffect(() => {
     setLoading(true);
     const fetchJobs = async () => {
@@ -68,10 +67,11 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     (job) =>
       [job.jobTitle, job.companyName].some((field) =>
         field.toLowerCase().includes(searchQuery.toLowerCase())
-      ) &&
-      (selectedJobLocation === "Any" || job.location === selectedJobLocation) &&
-      (selectedDomain === "Any" || job.domain === selectedDomain) &&
-      isDateWithinRange(job.date, selectedDate)
+      )
+    // &&
+    // (selectedJobLocation === "Any" || job.location === selectedJobLocation) &&
+    // (selectedDomain === "Any" || job.domain === selectedDomain) &&
+    // isDateWithinRange(job.date, selectedDate)
   );
 
   if (loading)
