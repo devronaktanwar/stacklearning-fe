@@ -5,17 +5,8 @@ import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { JobFilterProvider, useJobFilter } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { HiSortDescending } from "react-icons/hi";
 
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import FilterDrawer from "@/components/FilterDrawer";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
@@ -24,7 +15,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   const { selectedJobLocation, selectedDomain } = useJobFilter();
   const [selectedDate, setSelectedDate] = useState("Any Time");
   const [loading, setLoading] = useState(false);
-
+  setSelectedDate("Any Time");
   useEffect(() => {
     setLoading(true);
     const fetchJobs = async () => {
@@ -102,7 +93,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       <div className="relative">
         <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
           <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
-            <div className="sm:max-w-md w-full">
+            <div className="sm:max-w-md w-[90%]">
               <Input
                 type="text"
                 placeholder="Search for Company, Roles"
@@ -111,21 +102,8 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="">
-              <Select onValueChange={(value) => setSelectedDate(value)}>
-                <SelectTrigger className="w-full bg-primaryNew text-white py-[18px]">
-                  <SelectValue placeholder=<HiSortDescending/> />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Date Posted</SelectLabel>
-                    <SelectItem value="Any Time">Any Time</SelectItem>
-                    <SelectItem value="Today">Today</SelectItem>
-                    <SelectItem value="Last Week">Last Week</SelectItem>
-                    <SelectItem value="Last Month">Last Month</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+            <div className="md:hidden">
+              <FilterDrawer />
             </div>
             <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
