@@ -14,6 +14,15 @@ import { Checkbox } from "./ui/checkbox";
 import { MdOutlineCancel } from "react-icons/md";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 const FilterDrawer = () => {
   const {
@@ -24,12 +33,22 @@ const FilterDrawer = () => {
     selectedDomain,
     setSelectedDomain,
     selectedJobType,
-    setselectedJobType
+    setselectedJobType,
+    selectedLocation,
+    setSelectedLocation,
   } = useJobFilter();
 
   const handlePeriodChange = (period: string) => {
     setSelectedPeriod(period);
   };
+  const locations = [
+    { value: "any", label: "Any" },
+    { value: "jaipur,rajasthan", label: "Jaipur, Rajasthan" },
+    { value: "mumbai,maharashtra", label: "Mumbai, Maharashtra" },
+    { value: "delhi,delhi", label: "Delhi, Delhi" },
+    { value: "bengaluru,karnataka", label: "Bengaluru, Karnataka" },
+    { value: "chennai,tamilnadu", label: "Chennai, Tamil Nadu" },
+  ];
 
   return (
     <div>
@@ -75,6 +94,29 @@ const FilterDrawer = () => {
                     />
                   </div>
                 </div>
+              </div>
+              <div className="mt-3">
+                <h2 className="text-left text-sm font-semibold mb-3">
+                  Location
+                </h2>
+                <Select
+                  value={selectedLocation}
+                  onValueChange={(value) => setSelectedLocation(value)}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Location</SelectLabel>
+                      {locations.map((location) => (
+                        <SelectItem key={location.value} value={location.label}>
+                          {location.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="mt-3">
                 <h2 className="text-left text-sm font-semibold mb-3">Domain</h2>
@@ -158,7 +200,7 @@ const FilterDrawer = () => {
                   value={selectedJobType}
                   onValueChange={(value) => {
                     if (value) setselectedJobType(value);
-                    console.log("inside --",value)
+                    console.log("inside --", value);
                   }}
                 >
                   <ToggleGroupItem
@@ -190,10 +232,10 @@ const FilterDrawer = () => {
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-          <DrawerClose>
-            <Button className="bg-primaryNew hover:bg-[#317562] w-full">
-              Apply Filters
-            </Button>
+            <DrawerClose>
+              <Button className="bg-primaryNew hover:bg-[#317562] w-full">
+                Apply Filters
+              </Button>
             </DrawerClose>
             <DrawerClose className="absolute top-3 right-3">
               <MdOutlineCancel />

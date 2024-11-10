@@ -3,6 +3,8 @@ import { createContext, useContext, useState, FC, ReactNode } from "react";
 interface JobFilterContextType {
   selectedJobLocation: string;
   setSelectedJobLocation: (location: string) => void;
+  selectedLocation: string;
+  setSelectedLocation: (location: string) => void;
   selectedDomain: string;
   setSelectedDomain: (domain: string) => void;
   selectedPeriod: string;
@@ -28,11 +30,12 @@ interface JobFilterProviderProps {
 
 export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedJobLocation, setSelectedJobLocation] = useState("Any");
+  const [selectedLocation, setSelectedLocation] = useState("Any");
   const [selectedDomain, setSelectedDomain] = useState("Any");
   const [selectedPeriod, setSelectedPeriod] = useState("any");
   const [selectedJobType, setselectedJobType] = useState("Any");
   return (
-    <JobFilterContext.Provider value={{ selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain,selectedPeriod,setSelectedPeriod ,selectedJobType,setselectedJobType}}>
+    <JobFilterContext.Provider value={{ selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain,selectedPeriod,setSelectedPeriod ,selectedJobType,setselectedJobType,selectedLocation,setSelectedLocation}}>
       {children}
     </JobFilterContext.Provider>
   );

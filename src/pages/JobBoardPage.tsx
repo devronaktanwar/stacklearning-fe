@@ -12,7 +12,7 @@ interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { selectedJobLocation, selectedPeriod ,selectedDomain,selectedJobType} = useJobFilter();
+  const { selectedJobLocation, selectedPeriod ,selectedDomain,selectedJobType,selectedLocation} = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -76,8 +76,10 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
         &&
         (selectedJobType === "Any" ||
           job?.jobType === selectedJobType) 
+          &&
+          (selectedLocation === "Any" ||
+            job?.location === selectedLocation) 
   );
-console.log("jobsbsbs---",filteredJobs)
   if (loading)
     return (
       <div className="flex justify-center items-center w-full h-[40vh]">

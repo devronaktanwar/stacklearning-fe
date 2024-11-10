@@ -14,25 +14,45 @@ import { useJobFilter } from "@/context/JobFilterContext";
 
 interface lFilterAndSortProps {}
 const FilterAndSort: FC<lFilterAndSortProps> = () => {
-  const { selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain } = useJobFilter();
+  const {
+    selectedJobLocation,
+    setSelectedJobLocation,
+    selectedDomain,
+    setSelectedDomain,
+    selectedJobType,
+    setselectedJobType,
+    selectedLocation,
+    setSelectedLocation,
+  } = useJobFilter();
+  const locations = [
+    { value: "any", label: "Any" },
+    { value: "jaipur,rajasthan", label: "Jaipur, Rajasthan" },
+    { value: "mumbai,maharashtra", label: "Mumbai, Maharashtra" },
+    { value: "delhi,delhi", label: "Delhi, Delhi" },
+    { value: "bengaluru,karnataka", label: "Bengaluru, Karnataka" },
+    { value: "chennai,tamilnadu", label: "Chennai, Tamil Nadu" },
+  ];
   return (
     <div>
       <h2 className="text-base font-semibold pb-2">Filter</h2>
       <div className="flex flex-col gap-3">
         <div className="w-full flex flex-col gap-2">
           <Label htmlFor="location">Location</Label>
-          <Select>
+          <Select
+            value={selectedLocation}
+            onValueChange={(value) => setSelectedLocation(value)}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Location" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Location</SelectLabel>
-                <SelectItem value="apple">Jaipur, Rajasthan</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-                <SelectItem value="blueberry">Blueberry</SelectItem>
-                <SelectItem value="grapes">Grapes</SelectItem>
-                <SelectItem value="pineapple">Pineapple</SelectItem>
+                {locations.map((location) => (
+                  <SelectItem key={location.value} value={location.label}>
+                    {location.label}
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -102,6 +122,42 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
             >
               Web
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+        <div className="flex flex-col justify-start items-start gap-3">
+          <Label>Job Type</Label>
+          <ToggleGroup
+            type="single"
+            className="flex justify-start"
+            value={selectedJobType}
+            onValueChange={(value) => {
+              if (value) setselectedJobType(value);
+            }}
+          >
+            <ToggleGroupItem
+              value="Any"
+              className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+            >
+              Any
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="Full Time"
+              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+            >
+              Full Time
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="Part Time"
+              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+            >
+              Part Time
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="Contract"
+              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+            >
+              Contract
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
