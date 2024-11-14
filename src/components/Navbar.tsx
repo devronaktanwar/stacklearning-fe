@@ -20,7 +20,6 @@ const Navbar: FC<NavbarProps> = () => {
       setUser(userData);
     }
   }, []);
-  console.log("username---", user);
   return (
     <div className="border-b sticky top-0 bg-white z-50">
       <nav className="w-[85%] m-auto flex justify-between items-center py-4 z-50 relative">

@@ -8,10 +8,10 @@ const categoriesData = [
 ];
 const Header = () => {
   return (
-    <div className="py-36">
+    <div className="md:py-36 py-28">
       <div className="w-[95%] md:w-[80%] m-auto">
         <div className="flex flex-col items-center gap-4 justify-center">
-          <h1 className="text-3xl sm:text-[44px] font-bold text-center">
+          <h1 className="leading-snug text-2xl sm:text-[44px] font-bold text-center">
             Discover{" "}
             <span className="sm:text-[48px] text-primaryNew">Opportunities</span>{" "}
             to Advance Your Career
@@ -22,9 +22,9 @@ const Header = () => {
           </p>
 
           <div className="flex justify-center gap-2 sm:gap-6 items-center text-[8px] sm:text-xs">
-            {categoriesData.map((data) => {
+            {categoriesData.map((data,index ) => {
               return (
-                <p className="text-white bg-gradient-to-r from-primaryNew to-green-300 px-2 py-1 rounded text-nowrap">
+                <p key={index} className="text-white bg-gradient-to-r from-primaryNew to-green-300 sm:p-2 rounded text-nowrap p-1">
                   {data}
                 </p>
               );

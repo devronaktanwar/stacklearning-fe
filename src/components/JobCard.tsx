@@ -1,6 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { IoBookOutline } from "react-icons/io5";
 import { CiLocationArrow1 } from "react-icons/ci";
+import { HiOutlineBookmark } from "react-icons/hi2";
+import toast, { Toaster } from "react-hot-toast";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +12,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useSavedJobs } from "@/context/SavedJobsContext";
+import axios from "axios";
 
-interface JobCardProps {
+export interface JobCardProps {
   jobTitle: string;
   companyName: string;
   jobDescriptionText: string;
@@ -19,10 +23,11 @@ interface JobCardProps {
   tagsArray: string[];
   date: string;
   location: string;
-  jobType: string; 
-  experienceRequired: string; 
-  jobDescriptionHtml: string; 
+  jobType: string;
+  experienceRequired: string;
+  jobDescriptionHtml: string;
   link: string;
+  jobId: string;
 }
 
 const JobCard: FC<JobCardProps> = ({
@@ -37,42 +42,96 @@ const JobCard: FC<JobCardProps> = ({
   experienceRequired,
   jobDescriptionHtml,
   link,
+  jobId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const fullDescription =
     jobDescriptionText.length > 350
       ? jobDescriptionText.substring(0, 350) + "....."
       : jobDescriptionText;
+  const {  saveJob } = useSavedJobs();
+  const [savedJobsData, setSaveJobsData] = useState<string[]>([]);
+  const fetchSavedJobs = async () => {
+    try {
+      const response = await axios.get(
+        "https://stacklearning-be.onrender.com/api/jobs/saved/ronaktanwar0508@gmail.com"
+      );
+      setSaveJobsData(response.data.savedJobs);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    fetchSavedJobs();
+  }, [saveJob]);
+  const isSaved = savedJobsData.includes(jobId);
+  const handleJobSave = (jobId: string) => {
+    if (savedJobsData.includes(jobId)) {
+      toast.error("Already saved", {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+          fontSize:"13px"
+        },
+      });
+      return;
+    }
+    saveJob(jobId);
+    toast.success("Job saved successfully", {
+      duration: 2000,
+      style: {
+        borderRadius: "8px",
+        background: "#333",
+        color: "#fff",
+        padding: "6px 10px",
+      },
+    });
+  };
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
+      <Toaster position="bottom-center"/>
       <div className="flex justify-between">
         <div className="flex items-start gap-3">
-          <div className="border h-12 w-14 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
+          <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
             <img
               src={image}
               alt="Company logo"
               className="h-full w-full object-cover md:h-14 md:w-14 "
             />
           </div>
-          <div className="flex flex-col max-w-[300px] sm:max-w-full w-full ">
-            <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">{jobTitle}</h2>
+          <div className="flex flex-col flex-1">
+            <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">
+              {jobTitle}
+            </h2>
             <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
               {companyName}
             </p>
-            <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
-              {tagsArray.map((tag: string, index: number) => {
-                return (
-                  <p key={index} className="border py-1 px-2 rounded-full text-[8px] sm:text-xs">
-                    {tag}
-                  </p>
-                );
-              })}
-            </div>
           </div>
         </div>
         <div className="flex flex-col gap-2 items-end">
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">{date}</p>
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">{location}</p>
+          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">
+            {date}
+          </p>
+          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">
+            {location}
+          </p>
+        </div>
+      </div>
+      <div>
+        <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
+          {tagsArray.map((tag: string, index: number) => {
+            return (
+              <p
+                key={index}
+                className="border py-1 px-2 rounded-full text-[8px] sm:text-xs"
+              >
+                {tag}
+              </p>
+            );
+          })}
         </div>
       </div>
       <div>
@@ -86,7 +145,13 @@ const JobCard: FC<JobCardProps> = ({
           />
         </p>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
+        <div className="cursor-pointer" onClick={() => handleJobSave(jobId)}>
+          <HiOutlineBookmark
+            size={24}
+            className={isSaved ? "text-primaryNew" : "text-black"}
+          />
+        </div>
         <div className="flex gap-4">
           <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>

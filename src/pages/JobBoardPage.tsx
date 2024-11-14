@@ -130,6 +130,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 experienceRequired={job.experienceRequired}
                 jobDescriptionHtml={job.jobDescriptionHtml}
                 link={job.link}
+                jobId={job.jobId}
               />
             ))
           ) : (

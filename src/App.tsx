@@ -5,17 +5,22 @@ import JobBoardPage from "./pages/JobBoardPage";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import HomePage from "./pages/HomePage";
+import { SavedJobsProvider } from "./context/SavedJobsContext";
 const App = () => {
   return (
     <div>
       <Navbar />
       <JobFilterProvider>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/job-board" element={<JobBoardPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <SavedJobsProvider emailAddress={"ronaktanwar0508@gmail.com"}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            <Route path="/job-board" element={<JobBoardPage />} />
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </SavedJobsProvider>
       </JobFilterProvider>
     </div>
   );
