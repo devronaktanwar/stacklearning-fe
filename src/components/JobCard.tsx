@@ -49,7 +49,7 @@ const JobCard: FC<JobCardProps> = ({
     jobDescriptionText.length > 350
       ? jobDescriptionText.substring(0, 350) + "....."
       : jobDescriptionText;
-  const {  saveJob } = useSavedJobs();
+  const { saveJob } = useSavedJobs();
   const [savedJobsData, setSaveJobsData] = useState<string[]>([]);
   const fetchSavedJobs = async () => {
     try {
@@ -74,7 +74,7 @@ const JobCard: FC<JobCardProps> = ({
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize:"13px"
+          fontSize: "13px",
         },
       });
       return;
@@ -92,7 +92,7 @@ const JobCard: FC<JobCardProps> = ({
   };
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
-      <Toaster position="bottom-center"/>
+      <Toaster position="bottom-center" />
       <div className="flex justify-between">
         <div className="flex items-start gap-3">
           <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
@@ -163,14 +163,14 @@ const JobCard: FC<JobCardProps> = ({
               <DialogHeader>
                 <DialogTitle>
                   <div className="flex items-center gap-4">
-                    <div className="border h-16 w-16 rounded-full overflow-hidden">
+                    <div className="border h-12 w-12 md:h-16 md:w-16 rounded-full overflow-hidden">
                       <img
                         src={image}
                         alt="Company logo"
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start flex-1">
                       <h2 className="text-sm sm:text-base font-semibold text-start">
                         {jobTitle}
                       </h2>
@@ -182,24 +182,27 @@ const JobCard: FC<JobCardProps> = ({
                 </DialogTitle>
                 <DialogDescription>
                   <div className="flex flex-col gap-1">
-                    <div className="flex gap-1">
-                      <h2 className="font-medium text-sm">Job Type - </h2>
+                    <div className="flex gap-1 items-center text-xs">
+                      <h2 className="font-medium">Job Type - </h2>
                       <p>{jobType}</p>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 items-center text-xs">
                       <h2 className="font-medium">Experience Required - </h2>
                       <p>{experienceRequired}</p>
                     </div>
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 items-center text-xs">
                       <h2 className="font-medium">Location - </h2>
                       <p>{location}</p>
                     </div>
-                    <p
-                      className="text-[10px] sm:text-xs text-start"
-                      dangerouslySetInnerHTML={{
-                        __html: jobDescriptionHtml,
-                      }}
-                    />
+                    <div className="mt-2">
+                      <h2 className="text-xs sm:text-sm font-semibold text-start">Job Description</h2>
+                      <p
+                        className="text-[10px] sm:text-xs text-start"
+                        dangerouslySetInnerHTML={{
+                          __html: jobDescriptionHtml,
+                        }}
+                      />
+                    </div>
                   </div>
                 </DialogDescription>
               </DialogHeader>

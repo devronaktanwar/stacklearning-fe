@@ -5,14 +5,20 @@ import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { useJobFilter } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
 import FilterDrawer from "@/components/FilterDrawer";
+import SavedJobsDrawer from "@/components/SavedJobsDrawer";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { selectedJobLocation, selectedPeriod ,selectedDomain,selectedJobType,selectedLocation} = useJobFilter();
+  const {
+    selectedJobLocation,
+    selectedPeriod,
+    selectedDomain,
+    selectedJobType,
+    selectedLocation,
+  } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -69,16 +75,10 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       ) &&
       (selectedJobLocation === "Any" ||
         job?.jobLocation === selectedJobLocation) &&
-      isDateWithinRange(job.date, selectedPeriod)
-      &&
-      (selectedDomain === "Any" ||
-        job?.domain === selectedDomain) 
-        &&
-        (selectedJobType === "Any" ||
-          job?.jobType === selectedJobType) 
-          &&
-          (selectedLocation === "Any" ||
-            job?.location === selectedLocation) 
+      isDateWithinRange(job.date, selectedPeriod) &&
+      (selectedDomain === "Any" || job?.domain === selectedDomain) &&
+      (selectedJobType === "Any" || job?.jobType === selectedJobType) &&
+      (selectedLocation === "Any" || job?.location === selectedLocation)
   );
   if (loading)
     return (
@@ -98,7 +98,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     <div className="relative">
       <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
         <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
-          <div className="sm:max-w-md w-[90%]">
+          <div className="sm:max-w-md w-[90%] flex items-center gap-6">
             <Input
               type="text"
               placeholder="Search for Company, Roles"
@@ -106,6 +106,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <SavedJobsDrawer />
           </div>
           <div className="md:hidden">
             <FilterDrawer />
