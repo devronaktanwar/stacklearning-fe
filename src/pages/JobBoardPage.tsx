@@ -99,14 +99,18 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
         <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
           <div className="sm:max-w-md w-[90%] flex items-center gap-6">
-            <Input
-              type="text"
-              placeholder="Search for Company, Roles"
-              className="w-full py-5 pl-10 rounded-xl"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <SavedJobsDrawer />
+            <div className="flex-1">
+              <Input
+                type="text"
+                placeholder="Search for Company, Roles"
+                className="w-full py-5 pl-10 rounded-xl"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div>
+              <SavedJobsDrawer />
+            </div>
           </div>
           <div className="md:hidden">
             <FilterDrawer />

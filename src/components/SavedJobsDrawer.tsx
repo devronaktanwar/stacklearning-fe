@@ -7,24 +7,30 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { HiOutlineBookmark } from "react-icons/hi";
-import { Button } from "./ui/button";
 import JobCard from "./JobCard";
 
 const SavedJobsDrawer = () => {
   return (
     <div>
       <Sheet>
-        <SheetTrigger><Button><HiOutlineBookmark/>Saved</Button></SheetTrigger>
+        <SheetTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2">
+          <HiOutlineBookmark />Saved
+        </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle><div className="flex items-center gap-2 text-lg"><HiOutlineBookmark/>Saved Jobs</div></SheetTitle>
+            <SheetTitle>
+              <div className="flex items-center gap-2 text-lg">
+                <HiOutlineBookmark />
+                Saved Jobs
+              </div>
+            </SheetTitle>
             <SheetDescription>
-            <JobCard
+              <JobCard
                 jobTitle={"jobTitle"}
                 companyName={"companyName"}
                 jobDescriptionText={""}
                 image={"image"}
-                tagsArray={["HTML","CSS"]}
+                tagsArray={["HTML", "CSS"]}
                 date="date"
                 location={"location"}
                 jobType={"jobType"}
