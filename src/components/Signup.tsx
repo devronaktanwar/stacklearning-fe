@@ -12,6 +12,7 @@ import axios from "axios";
 import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import toast, { Toaster } from "react-hot-toast";
 // import Toast from "./Toast";
 
 const Signup = () => {
@@ -67,9 +68,20 @@ const Signup = () => {
           headers: {
             authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
           },
+          withCredentials: true,
         }
       );
+
       if (data.isSuccess) {
+        toast.success("OTP sent successfully", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
         setCurrentStep(2);
       }
       console.log("data", data);
@@ -115,6 +127,7 @@ const Signup = () => {
 
   return (
     <div className="pt-16">
+      <Toaster position="bottom-center" />
       {currentStep === 1 && (
         <Card className="w-[90%] sm:w-[400px] m-auto">
           <CardHeader>
@@ -249,6 +262,15 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
       );
 
       if (data.isSuccess) {
+        toast.success("OTP verified successfully", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
         try {
           const response = await axios.post(
             "https://stacklearning-be.onrender.com/api/signup",
@@ -260,6 +282,15 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
             }
           );
           if (response.data.isSuccess) {
+            toast.success("Signed up successfully", {
+              duration: 2000,
+              style: {
+                borderRadius: "8px",
+                background: "#333",
+                color: "#fff",
+                padding: "6px 10px",
+              },
+            });
             localStorage.setItem("token", data.token);
             localStorage.setItem("name", data.user.fullName);
             setTimeout(() => {
@@ -272,9 +303,27 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
         }
         setTimeout(() => navigate("/"), 3000);
       } else {
+        toast.error("Invalid OTP", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
       }
     } catch {
       alert("Something went wrong");
+      toast.error("something went wrong", {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -287,6 +336,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
 
   return (
     <Card className="w-[90%] sm:w-[400px] m-auto">
+      <Toaster position="bottom-center" />
       <CardHeader>
         <CardTitle className="text-center text-xl sm:text-2xl">
           OTP Verification
