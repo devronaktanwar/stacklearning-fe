@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useSavedJobs } from "@/context/SavedJobsContext";
 import axios from "axios";
 
 export interface JobCardProps {
@@ -45,51 +44,81 @@ const JobCard: FC<JobCardProps> = ({
   jobId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [savedJobsData, setSavedJobsData] = useState<
+    { jobId: string }[]
+  >([]);
+
   const fullDescription =
     jobDescriptionText.length > 350
       ? jobDescriptionText.substring(0, 350) + "....."
       : jobDescriptionText;
-  const { saveJob } = useSavedJobs();
-  const [savedJobsData, setSaveJobsData] = useState<string[]>([]);
+
   const fetchSavedJobs = async () => {
     try {
       const response = await axios.get(
-        "https://stacklearning-be.onrender.com/api/jobs/saved/ronaktanwar0508@gmail.com"
+        "https://stacklearning-be.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
       );
-      setSaveJobsData(response.data.savedJobs);
+      setSavedJobsData(response.data.savedJobs);
+      console.log("-----",savedJobsData)
     } catch (err) {
-      console.log(err);
+      console.log("Error fetching saved jobs:", err);
     }
   };
+
   useEffect(() => {
     fetchSavedJobs();
-  }, [saveJob]);
-  const isSaved = savedJobsData.includes(jobId);
-  const handleJobSave = (jobId: string) => {
-    if (savedJobsData.includes(jobId)) {
-      toast.error("Already saved", {
+  }, []);
+
+  const handleJobSave = async (jobId: string) => {
+    try {
+      if (savedJobsData.some((savedJob) => savedJob.jobId === jobId)) {
+        toast.error("Job is already saved.", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
+        return;
+      }
+
+      const response = await axios.post("https://stacklearning-be.onrender.com/api/jobs/save", {
+        userId: "6a27d6240a148d3e960d91d3", 
+        jobId,
+      });
+
+      if (response.status === 200) {
+        setSavedJobsData((prev) => [...prev, { jobId }]);
+        toast.success("Job saved successfully!", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
+      } else {
+        throw new Error("Failed to save the job.");
+      }
+    } catch (err) {
+      console.error("Error saving job:", err);
+      toast.error("An error occurred while saving the job.", {
         duration: 2000,
         style: {
           borderRadius: "8px",
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize: "13px",
         },
       });
-      return;
     }
-    saveJob(jobId);
-    toast.success("Job saved successfully", {
-      duration: 2000,
-      style: {
-        borderRadius: "8px",
-        background: "#333",
-        color: "#fff",
-        padding: "6px 10px",
-      },
-    });
   };
+
+  const isSaved = savedJobsData.some((savedJob) => savedJob.jobId === jobId);
+
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <Toaster position="bottom-center" />
@@ -102,7 +131,7 @@ const JobCard: FC<JobCardProps> = ({
               className="h-full w-full object-cover md:h-14 md:w-14 "
             />
           </div>
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 justify-start items-start">
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">
               {jobTitle}
             </h2>
@@ -122,20 +151,17 @@ const JobCard: FC<JobCardProps> = ({
       </div>
       <div>
         <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
-          {tagsArray.map((tag: string, index: number) => {
-            return (
-              <p
-                key={index}
-                className="border py-1 px-2 rounded-full text-[8px] sm:text-xs"
-              >
-                {tag}
-              </p>
-            );
-          })}
+          {tagsArray.map((tag, index) => (
+            <p
+              key={index}
+              className="border py-1 px-2 rounded-full text-[8px] sm:text-xs"
+            >
+              {tag}
+            </p>
+          ))}
         </div>
       </div>
       <div>
-        <p className="text-xs sm:text-sm font-medium">Job Description</p>
         <p className="text-[10px] sm:text-sm text-gray-400">
           <p
             className=""
@@ -149,7 +175,7 @@ const JobCard: FC<JobCardProps> = ({
         <div className="cursor-pointer" onClick={() => handleJobSave(jobId)}>
           <HiOutlineBookmark
             size={24}
-            className={isSaved ? "text-primaryNew" : "text-black"}
+            className={isSaved ? "text-green-500" : "text-black"}
           />
         </div>
         <div className="flex gap-4">
@@ -195,7 +221,9 @@ const JobCard: FC<JobCardProps> = ({
                       <p>{location}</p>
                     </div>
                     <div className="mt-2">
-                      <h2 className="text-xs sm:text-sm font-semibold text-start">Job Description</h2>
+                      <h2 className="text-xs sm:text-sm font-semibold text-start">
+                        Job Description
+                      </h2>
                       <p
                         className="text-[10px] sm:text-xs text-start"
                         dangerouslySetInnerHTML={{
