@@ -60,7 +60,7 @@ const Signup = () => {
 
     try {
       const { data } = await axios.post(
-        "https://stacklearning-be.onrender.com/api/send-otp",
+        "http://localhost:3000/api/send-otp",
         {
           emailAddress: emailId,
         },
@@ -256,7 +256,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
     const userInputOtp = otp.join("");
     try {
       const { data } = await axios.post(
-        "https://stacklearning-be.onrender.com/api/verify-otp",
+        "http://localhost:3000/api/verify-otp",
         { userInputOtp },
         { withCredentials: true }
       );
@@ -270,10 +270,10 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
             color: "#fff",
             padding: "6px 10px",
           },
-        });
+        })
         try {
           const response = await axios.post(
-            "https://stacklearning-be.onrender.com/api/signup",
+            "http://localhost:3000/api/signup",
             { emailAddress: email, fullName: name, passWord: password },
             {
               headers: {
@@ -290,7 +290,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
                 color: "#fff",
                 padding: "6px 10px",
               },
-            });
+            })
             localStorage.setItem("token", data.token);
             localStorage.setItem("name", data.user.fullName);
             setTimeout(() => {
@@ -303,27 +303,10 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
         }
         setTimeout(() => navigate("/"), 3000);
       } else {
-        toast.error("Invalid OTP", {
-          duration: 2000,
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-            padding: "6px 10px",
-          },
-        });
+        toast.error("Invalid OTP")
       }
     } catch {
       alert("Something went wrong");
-      toast.error("something went wrong", {
-        duration: 2000,
-        style: {
-          borderRadius: "8px",
-          background: "#333",
-          color: "#fff",
-          padding: "6px 10px",
-        },
-      });
     } finally {
       setLoading(false);
     }
