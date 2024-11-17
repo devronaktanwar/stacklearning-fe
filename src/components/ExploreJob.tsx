@@ -32,7 +32,7 @@ const ExploreJob = () => {
               <div className="w-full">
                 <img src={city.image} alt={city.name} className="w-full" />
               </div>
-              <h2 className="font-semibold">{city.name}</h2>
+              <h2 className="font-semibold text-sm sm:text-base">{city.name}</h2>
             </div>
           ))}
         </div>
