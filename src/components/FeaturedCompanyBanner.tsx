@@ -27,7 +27,7 @@ const FeaturedCompanyBanner = () => {
           {featuredCompanies.map((company, index) => (
             <div
               key={index}
-              className="p-4 w-[150px] sm:w-[200px] flex flex-col gap-3 items-center border rounded-lg"
+              className="p-4 w-[150px] sm:w-[200px] flex flex-col gap-3 items-center border rounded-lg cursor-pointer hover:scale-105 transition hover:shadow-lg"
             >
               <img src={company.image} alt={company.name} className="w-3/4 sm:w-28" />
               <h2 className="font-semibold text-sm sm:text-base text-nowrap text-center">{company.name}</h2>

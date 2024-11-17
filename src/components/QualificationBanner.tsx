@@ -23,7 +23,7 @@ const QualificationBanner = () => {
           {qualifications.map((qualification, index) => (
             <div
               key={index}
-              className="w-[250px] border px-4 py-6 rounded-lg flex flex-col gap-2"
+              className="w-[250px] border px-4 py-6 rounded-lg flex flex-col gap-2 cursor-pointer hover:scale-105 transition hover:shadow-lg"
             >
               <div>
                 <img src={qualification.icon} alt={qualification.title} />
