@@ -23,7 +23,7 @@ const FeaturedCompanyBanner = () => {
           Featured companies hiring now
         </h2>
         <Design/>
-        <div className="flex justify-center sm:gap-8 mt-12 flex-wrap gap-2">
+        <div className="flex justify-center sm:gap-8 sm:mt-12 flex-wrap gap-2 mt-6">
           {featuredCompanies.map((company, index) => (
             <div
               key={index}
