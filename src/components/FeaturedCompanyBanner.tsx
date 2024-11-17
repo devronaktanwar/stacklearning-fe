@@ -1,14 +1,18 @@
 import { FaArrowRightLong } from 'react-icons/fa6';
 import blinkit from '../assets/blinkit.svg';
+import uc from '../assets/urban-company.svg';
+import blusmart from '../assets/bluesmart.svg';
+import zomato from '../assets/zomato.svg';
+import uber from '../assets/uber.svg';
 import { Button } from './ui/button';
+import Design from './Design';
 
-// Array of featured companies
 const featuredCompanies = [
   { name: 'Blinkit', image: blinkit },
-  { name: 'Zomato', image: blinkit },
-  { name: 'Swiggy', image: blinkit },
-  { name: 'Amazon', image: blinkit },
-  { name: 'Flipkart', image: blinkit },
+  { name: 'Urban Company', image: uc },
+  { name: 'BluSmart', image: blusmart },
+  { name: 'Zomato', image: zomato },
+  { name: 'Uber', image: uber },
 ];
 
 const FeaturedCompanyBanner = () => {
@@ -18,6 +22,7 @@ const FeaturedCompanyBanner = () => {
         <h2 className="font-semibold text-xl sm:text-2xl text-center">
           Featured companies hiring now
         </h2>
+        <Design/>
         <div className="flex justify-center gap-8 mt-12 flex-wrap">
           {featuredCompanies.map((company, index) => (
             <div

@@ -1,13 +1,18 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import mumbai from "../assets/mumbai.webp";
+import delhi from "../assets/delhi.webp";
+import bangalore from "../assets/bangalore.webp";
+import hyderabad from "../assets/hyderabad.webp";
+import chennai from "../assets/chennai.webp";
 import { Button } from "./ui/button";
+import Design from "./Design";
 
 const cityData = [
-  { name: "Delhi", image: mumbai },
   { name: "Mumbai", image: mumbai },
-  { name: "Bangalore", image: mumbai },
-  { name: "Hyderabad", image: mumbai },
-  { name: "Hyderabad", image: mumbai },
+  { name: "Delhi", image: delhi },
+  { name: "Bangalore", image: bangalore },
+  { name: "Hyderabad", image: hyderabad },
+  { name: "Chennai", image: chennai },
 ];
 
 const ExploreJob = () => {
@@ -17,6 +22,7 @@ const ExploreJob = () => {
         <h2 className="text-center font-semibold text-xl sm:text-2xl">
           Explore jobs in 100+ cities
         </h2>
+        <Design/>
         <div className="flex justify-center gap-6 mt-6 flex-wrap">
           {cityData.map((city, index) => (
             <div
