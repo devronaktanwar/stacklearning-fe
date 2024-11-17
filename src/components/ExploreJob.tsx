@@ -7,6 +7,7 @@ const cityData = [
   { name: "Mumbai", image: mumbai },
   { name: "Bangalore", image: mumbai },
   { name: "Hyderabad", image: mumbai },
+  { name: "Hyderabad", image: mumbai },
 ];
 
 const ExploreJob = () => {

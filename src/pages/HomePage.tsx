@@ -1,6 +1,6 @@
 import ExploreJob from "@/components/ExploreJob";
 import FeatureBanner from "@/components/FeatureBanner";
-// import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
+import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
 import Header from "@/components/Header";
 // import QualificationBanner from "@/components/QualificationBanner";
 // import Services from "@/components/Services";
@@ -14,7 +14,7 @@ const HomePage: FC<lHomePageProps> = () => {
         <Header />
         <ExploreJob/>
         <FeatureBanner/>
-        {/* <FeaturedCompanyBanner/> */}
+        <FeaturedCompanyBanner/>
         {/* <QualificationBanner/> */}
         {/* <Services/> */}
       </div>
