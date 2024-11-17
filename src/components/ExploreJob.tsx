@@ -20,7 +20,7 @@ const ExploreJob = () => {
           {cityData.map((city, index) => (
             <div
               key={index}
-              className="w-[200px] border flex flex-col items-center rounded-lg p-4 gap-4"
+              className="w-[250px] sm:w-[200px] border flex flex-col items-center rounded-lg p-4 gap-4"
             >
               <div className="w-full">
                 <img src={city.image} alt={city.name} className="w-full" />
