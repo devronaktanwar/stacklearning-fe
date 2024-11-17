@@ -5,7 +5,7 @@ import { Button } from './ui/button'
 const FeatureBanner = () => {
   return (
     <div className='sm:py-24 py-12'>
-        <div className="w-[95%] sm:w-[80%] m-auto p-8 flex justify-around bg-white items-center rounded flex-col sm:flex-row sm:gap-12 gap-6">
+        <div className="w-[95%] sm:w-[80%] m-auto p-8 flex justify-around bg-white items-center rounded flex-col sm:flex-row sm:gap-12 gap-6 border-[1px]">
             <div>
             <Button className="sm:p-6 border-1 rounded-full bg-transparent border border-primaryNew text-primaryNew text-sm sm:text-lg hover:bg-primaryNew hover:text-white flex items-center space-x-2 group">
               Register Now

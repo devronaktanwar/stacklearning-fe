@@ -13,8 +13,8 @@ const cityData = [
 const ExploreJob = () => {
   return (
     <div>
-      <div className="w-[95%] sm:w-[80%] m-auto bg-white px-6 py-8 rounded-lg">
-        <h2 className="text-center font-semibold text-2xl">
+      <div className="w-[95%] sm:w-[80%] m-auto bg-white px-6 py-8 rounded-lg border-[1px]">
+        <h2 className="text-center font-semibold text-xl sm:text-2xl">
           Explore jobs in 100+ cities
         </h2>
         <div className="flex justify-center gap-6 mt-6 flex-wrap">

@@ -14,7 +14,7 @@ const featuredCompanies = [
 const FeaturedCompanyBanner = () => {
   return (
     <div>
-      <div className="w-[95%] sm:w-[80%] m-auto py-8 px-12 bg-white rounded-lg">
+      <div className="w-[95%] sm:w-[80%] m-auto py-8 px-12 bg-white rounded-lg border-[1px]">
         <h2 className="font-semibold text-xl sm:text-2xl text-center">
           Featured companies hiring now
         </h2>
