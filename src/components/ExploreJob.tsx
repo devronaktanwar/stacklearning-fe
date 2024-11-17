@@ -3,7 +3,7 @@ import mumbai from "../assets/mumbai.webp";
 import delhi from "../assets/delhi.webp";
 import bangalore from "../assets/bangalore.webp";
 import hyderabad from "../assets/hyderabad.webp";
-import chennai from "../assets/chennai.webp";
+// import chennai from "../assets/chennai.webp";
 import { Button } from "./ui/button";
 import Design from "./Design";
 
@@ -12,7 +12,7 @@ const cityData = [
   { name: "Delhi", image: delhi },
   { name: "Bangalore", image: bangalore },
   { name: "Hyderabad", image: hyderabad },
-  { name: "Chennai", image: chennai },
+//   { name: "Chennai", image: chennai },
 ];
 
 const ExploreJob = () => {

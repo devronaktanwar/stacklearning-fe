@@ -3,7 +3,7 @@ import blinkit from '../assets/blinkit.svg';
 import uc from '../assets/urban-company.svg';
 import blusmart from '../assets/bluesmart.svg';
 import zomato from '../assets/zomato.svg';
-import uber from '../assets/uber.svg';
+// import uber from '../assets/uber.svg';
 import { Button } from './ui/button';
 import Design from './Design';
 
@@ -12,7 +12,7 @@ const featuredCompanies = [
   { name: 'Urban Company', image: uc },
   { name: 'BluSmart', image: blusmart },
   { name: 'Zomato', image: zomato },
-  { name: 'Uber', image: uber },
+//   { name: 'Uber', image: uber },
 ];
 
 const FeaturedCompanyBanner = () => {
