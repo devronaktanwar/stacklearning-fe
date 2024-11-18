@@ -66,7 +66,7 @@ const FilterDrawer = () => {
                 </h2>
                 <div className="flex flex-col gap-3 text-xs">
                   <div className="flex justify-between items-center">
-                    <p>Any time</p>
+                    <p>All</p>
                     <Checkbox
                       checked={selectedPeriod === "any"}
                       onCheckedChange={() => handlePeriodChange("any")}
@@ -130,7 +130,7 @@ const FilterDrawer = () => {
                     value="Any"
                     className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
                   >
-                    Any
+                    All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Data Science"
@@ -168,7 +168,7 @@ const FilterDrawer = () => {
                     value="Any"
                     className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
                   >
-                    Any
+                    All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Onsite"
@@ -207,7 +207,7 @@ const FilterDrawer = () => {
                     value="Any"
                     className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
                   >
-                    Any
+                    All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Full Time"

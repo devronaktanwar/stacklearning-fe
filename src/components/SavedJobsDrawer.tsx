@@ -42,7 +42,7 @@ const SavedJobsDrawer = () => {
               </div>
             </SheetTitle>
             <SheetDescription>
-              <div className="h-[90vh] overflow-y-scroll gap-3 flex flex-col scrollbar-hidden">
+              <div className="h-[90dvh] overflow-y-scroll gap-3 flex flex-col scrollbar-hidden">
                 {savedJobsData.map((job) => {
                   return (
                     <JobCard

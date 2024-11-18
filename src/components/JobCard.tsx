@@ -147,7 +147,7 @@ const JobCard: FC<JobCardProps> = ({
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">
               {jobTitle}
             </h2>
-            <div className="flex gap-2 items-center text-gray-500">
+            <div className="flex gap-1 items-center text-gray-500">
               <PiBagSimpleBold size={16} />
               <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
                 {companyName}
@@ -155,14 +155,14 @@ const JobCard: FC<JobCardProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-2 items-end">
+        <div className="flex flex-col gap-1 items-end">
           <div className="flex items-center gap-2 text-gray-500">
             <SlCalender size={14} />
             <p className="text-[10px] sm:text-sm  text-end text-nowrap">
               {formattedDate}
             </p>
           </div>
-          <div className="flex gap-2 items-center text-gray-500 ">
+          <div className="flex gap-1 items-center text-gray-500 ">
             <SlLocationPin size={14} />
             <p className="text-[10px] sm:text-sm text-end text-nowrap">
               {location}
@@ -221,7 +221,7 @@ const JobCard: FC<JobCardProps> = ({
                       <h2 className="text-sm sm:text-base font-semibold text-start">
                         {jobTitle}
                       </h2>
-                      <div className="flex gap-2 items-center text-gray-500">
+                      <div className="flex gap-1 items-center text-gray-500">
                         <PiBagSimpleBold size={16} />
                         <p className="text-xs sm:text-sm font-medium">
                           {companyName}

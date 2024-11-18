@@ -69,7 +69,7 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               value="Any"
               className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
             >
-              Any
+              All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Onsite"
@@ -103,7 +103,7 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               value="Any"
               className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
             >
-              Any
+              All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Data Science"
@@ -139,7 +139,7 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               value="Any"
               className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
             >
-              Any
+              All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Full Time"
