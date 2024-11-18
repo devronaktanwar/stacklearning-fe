@@ -2,6 +2,12 @@ import { FC, useEffect, useState } from "react";
 import { IoBookOutline } from "react-icons/io5";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { HiOutlineBookmark } from "react-icons/hi2";
+import { PiBagSimpleBold } from "react-icons/pi";
+import { SlLocationPin } from "react-icons/sl";
+import { SlCalender } from "react-icons/sl";
+import { FaRegUser } from "react-icons/fa";
+import { PiSuitcaseSimple } from "react-icons/pi";
+
 import toast, { Toaster } from "react-hot-toast";
 import {
   Dialog,
@@ -44,10 +50,13 @@ const JobCard: FC<JobCardProps> = ({
   jobId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [savedJobsData, setSavedJobsData] = useState<
-    { jobId: string }[]
-  >([]);
-
+  const [savedJobsData, setSavedJobsData] = useState<{ jobId: string }[]>([]);
+  const newDate = new Date(date);
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(newDate);
   const fullDescription =
     jobDescriptionText.length > 350
       ? jobDescriptionText.substring(0, 350) + "....."
@@ -59,7 +68,7 @@ const JobCard: FC<JobCardProps> = ({
         "https://stacklearning-be.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
       );
       setSavedJobsData(response.data.savedJobs);
-      console.log("-----",savedJobsData)
+      console.log("-----", savedJobsData);
     } catch (err) {
       console.log("Error fetching saved jobs:", err);
     }
@@ -84,10 +93,13 @@ const JobCard: FC<JobCardProps> = ({
         return;
       }
 
-      const response = await axios.post("https://stacklearning-be.onrender.com/api/jobs/save", {
-        userId: "6a27d6240a148d3e960d91d3", 
-        jobId,
-      });
+      const response = await axios.post(
+        "https://stacklearning-be.onrender.com/api/jobs/save",
+        {
+          userId: "6a27d6240a148d3e960d91d3",
+          jobId,
+        }
+      );
 
       if (response.status === 200) {
         setSavedJobsData((prev) => [...prev, { jobId }]);
@@ -135,18 +147,27 @@ const JobCard: FC<JobCardProps> = ({
             <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">
               {jobTitle}
             </h2>
-            <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
-              {companyName}
-            </p>
+            <div className="flex gap-2 items-center text-gray-500">
+              <PiBagSimpleBold size={16} />
+              <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
+                {companyName}
+              </p>
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-2 items-end">
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">
-            {date}
-          </p>
-          <p className="text-[10px] sm:text-sm text-gray-500 text-end text-nowrap">
-            {location}
-          </p>
+          <div className="flex items-center gap-2 text-gray-500">
+            <SlCalender size={14} />
+            <p className="text-[10px] sm:text-sm  text-end text-nowrap">
+              {formattedDate}
+            </p>
+          </div>
+          <div className="flex gap-2 items-center text-gray-500 ">
+            <SlLocationPin size={14} />
+            <p className="text-[10px] sm:text-sm text-end text-nowrap">
+              {location}
+            </p>
+          </div>
         </div>
       </div>
       <div>
@@ -200,24 +221,36 @@ const JobCard: FC<JobCardProps> = ({
                       <h2 className="text-sm sm:text-base font-semibold text-start">
                         {jobTitle}
                       </h2>
-                      <p className="text-xs sm:text-sm text-gray-500 font-medium">
-                        {companyName}
-                      </p>
+                      <div className="flex gap-2 items-center text-gray-500">
+                        <PiBagSimpleBold size={16} />
+                        <p className="text-xs sm:text-sm font-medium">
+                          {companyName}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </DialogTitle>
                 <DialogDescription>
-                  <div className="flex flex-col gap-1">
+                  <div className="flex flex-col gap-1 mt-2">
                     <div className="flex gap-1 items-center text-xs">
-                      <h2 className="font-medium">Job Type - </h2>
+                      <div className="flex items-center gap-1">
+                        <PiSuitcaseSimple size={14}/>
+                        <h2 className="font-medium">Job Type - </h2>
+                      </div>
                       <p>{jobType}</p>
                     </div>
                     <div className="flex gap-1 items-center text-xs">
-                      <h2 className="font-medium">Experience Required - </h2>
+                      <div className="flex items-center gap-1">
+                        <FaRegUser size={14}/>
+                        <h2 className="font-medium">Experience Required - </h2>
+                      </div>
                       <p>{experienceRequired}</p>
                     </div>
                     <div className="flex gap-1 items-center text-xs">
-                      <h2 className="font-medium">Location - </h2>
+                      <div className="flex items-center gap-1">
+                        <SlLocationPin size={14} />
+                        <h2 className="font-medium">Location - </h2>
+                      </div>
                       <p>{location}</p>
                     </div>
                     <div className="mt-2">
