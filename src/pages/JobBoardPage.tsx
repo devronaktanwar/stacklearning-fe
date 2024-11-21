@@ -102,7 +102,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <div className="flex-1">
               <Input
                 type="text"
-                placeholder="Search for Company, Roles"
+                placeholder="Search for company, roles"    
                 className="w-full py-5 pl-10 rounded-xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
