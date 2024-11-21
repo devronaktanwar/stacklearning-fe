@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "./ui/button";
 import { RiFilter3Fill } from "react-icons/ri";
-import { Checkbox } from "./ui/checkbox";
 import { MdOutlineCancel } from "react-icons/md";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
