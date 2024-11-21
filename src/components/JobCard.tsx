@@ -65,10 +65,9 @@ const JobCard: FC<JobCardProps> = ({
   const fetchSavedJobs = async () => {
     try {
       const response = await axios.get(
-        "https://stacklearning-be.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
+        "https://stacklearning-be-h0pq.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
       );
       setSavedJobsData(response.data.savedJobs);
-      console.log("-----", savedJobsData);
     } catch (err) {
       console.log("Error fetching saved jobs:", err);
     }
@@ -94,7 +93,7 @@ const JobCard: FC<JobCardProps> = ({
       }
 
       const response = await axios.post(
-        "https://stacklearning-be.onrender.com/api/jobs/save",
+        "https://stacklearning-be-h0pq.onrender.com/api/jobs/save",
         {
           userId: "6a27d6240a148d3e960d91d3",
           jobId,

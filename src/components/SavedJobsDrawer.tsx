@@ -16,7 +16,7 @@ const SavedJobsDrawer = () => {
   const fetchSavedJobs = async () => {
     try {
       const response = await axios.get(
-        "https://stacklearning-be.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
+        "https://stacklearning-be-h0pq.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
       );
       setSavedJobsData(response.data.savedJobs);
     } catch (err) {
