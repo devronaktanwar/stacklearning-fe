@@ -67,30 +67,46 @@ const FilterDrawer = () => {
                 <div className="flex flex-col gap-3 text-xs">
                   <div className="flex justify-between items-center">
                     <p>All</p>
-                    <Checkbox
+                    <input
+                      type="radio"
+                      name="period"
+                      value="any"
+                      className="custom-radio"
                       checked={selectedPeriod === "any"}
-                      onCheckedChange={() => handlePeriodChange("any")}
+                      onChange={() => handlePeriodChange("any")}
                     />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Today</p>
-                    <Checkbox
+                    <input
+                      type="radio"
+                      name="period"
+                      value="today"
+                      className="custom-radio"
                       checked={selectedPeriod === "today"}
-                      onCheckedChange={() => handlePeriodChange("today")}
+                      onChange={() => handlePeriodChange("today")}
                     />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Last week</p>
-                    <Checkbox
+                    <input
+                      type="radio"
+                      name="period"
+                      value="lastWeek"
+                      className="custom-radio"
                       checked={selectedPeriod === "lastWeek"}
-                      onCheckedChange={() => handlePeriodChange("lastWeek")}
+                      onChange={() => handlePeriodChange("lastWeek")}
                     />
                   </div>
                   <div className="flex justify-between items-center">
                     <p>Last month</p>
-                    <Checkbox
+                    <input
+                      type="radio"
+                      name="period"
+                      value="lastMonth"
+                      className="custom-radio"
                       checked={selectedPeriod === "lastMonth"}
-                      onCheckedChange={() => handlePeriodChange("lastMonth")}
+                      onChange={() => handlePeriodChange("lastMonth")}
                     />
                   </div>
                 </div>
@@ -128,25 +144,25 @@ const FilterDrawer = () => {
                 >
                   <ToggleGroupItem
                     value="Any"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Data Science"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Data Science
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Android"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Android
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Web"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Web
                   </ToggleGroupItem>
@@ -166,25 +182,25 @@ const FilterDrawer = () => {
                 >
                   <ToggleGroupItem
                     value="Any"
-                    className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Onsite"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Onsite
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Remote"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Remote
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Hybrid"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Hybrid
                   </ToggleGroupItem>
@@ -205,25 +221,25 @@ const FilterDrawer = () => {
                 >
                   <ToggleGroupItem
                     value="Any"
-                    className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     All
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Full Time"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Full Time
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Part Time"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Part Time
                   </ToggleGroupItem>
                   <ToggleGroupItem
                     value="Contract"
-                    className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Contract
                   </ToggleGroupItem>

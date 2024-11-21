@@ -11,6 +11,8 @@ import {
 } from "./ui/select";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
+import { CiFilter } from "react-icons/ci";
+
 
 interface lFilterAndSortProps {}
 const FilterAndSort: FC<lFilterAndSortProps> = () => {
@@ -34,7 +36,7 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
   ];
   return (
     <div>
-      <h2 className="text-base font-semibold pb-2">Filter</h2>
+      <h2 className="text-base font-semibold pb-2 flex items-center gap-1 text-primaryNew"><CiFilter size={20}/>Filter</h2>
       <div className="flex flex-col gap-3">
         <div className="w-full flex flex-col gap-2">
           <Label htmlFor="location">Location</Label>
@@ -67,25 +69,25 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
           >
             <ToggleGroupItem
               value="Any"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Onsite"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Onsite
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Remote"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Remote
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Hybrid"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Hybrid
             </ToggleGroupItem>
@@ -101,25 +103,25 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
           >
             <ToggleGroupItem
               value="Any"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Data Science"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Data Science
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Android"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Android
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Web"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Web
             </ToggleGroupItem>
@@ -137,25 +139,25 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
           >
             <ToggleGroupItem
               value="Any"
-              className="!py-0 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               All
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Full Time"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Full Time
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Part Time"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Part Time
             </ToggleGroupItem>
             <ToggleGroupItem
               value="Contract"
-              className="px-3 data-[state=on]:bg-primaryNew data-[state=on]:text-white text-xs"
+              className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-black text-xs rounded-full"
             >
               Contract
             </ToggleGroupItem>
