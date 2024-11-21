@@ -17,7 +17,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     selectedPeriod,
     selectedDomain,
     selectedJobType,
-    selectedLocation,
+    selectedCities
   } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -78,7 +78,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       isDateWithinRange(job.date, selectedPeriod) &&
       (selectedDomain === "Any" || job?.domain === selectedDomain) &&
       (selectedJobType === "Any" || job?.jobType === selectedJobType) &&
-      (selectedLocation === "Any" || job?.location === selectedLocation)
+      (selectedCities.length === 0 || selectedCities.includes(job?.location))
   );
   if (loading)
     return (

@@ -33,7 +33,7 @@ const SavedJobsDrawer = () => {
           <HiOutlineBookmark />
           Saved
         </SheetTrigger>
-        <SheetContent className="">
+        <SheetContent className="rounded-tl-xl rounded-bl-xl">
           <SheetHeader>
             <SheetTitle>
               <div className="flex items-center gap-2 text-lg">

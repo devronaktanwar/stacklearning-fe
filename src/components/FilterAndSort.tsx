@@ -12,7 +12,9 @@ import {
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
 import { CiFilter } from "react-icons/ci";
-
+import cities from "../data/cities.json";
+import { IoClose } from "react-icons/io5";
+import { twMerge } from "tailwind-merge";
 
 interface lFilterAndSortProps {}
 const FilterAndSort: FC<lFilterAndSortProps> = () => {
@@ -23,34 +25,45 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
     setSelectedDomain,
     selectedJobType,
     setselectedJobType,
-    selectedLocation,
-    setSelectedLocation,
+    selectedCities,
+    handleRemoveCity,
+    handleCitySelect
   } = useJobFilter();
-  const locations = [
-    { value: "any", label: "Any" },
-    { value: "jaipur,rajasthan", label: "Jaipur, Rajasthan" },
-    { value: "mumbai,maharashtra", label: "Mumbai, Maharashtra" },
-    { value: "delhi,delhi", label: "Delhi, Delhi" },
-    { value: "bengaluru,karnataka", label: "Bengaluru, Karnataka" },
-    { value: "chennai,tamilnadu", label: "Chennai, Tamil Nadu" },
-  ];
+
+
   return (
     <div>
-      <h2 className="text-base font-semibold pb-2 flex items-center gap-1 text-primaryNew"><CiFilter size={20}/>Filter</h2>
+      <h2 className="text-base font-semibold pb-2 flex items-center gap-1 text-primaryNew">
+        <CiFilter size={20} />
+        Filter
+      </h2>
       <div className="flex flex-col gap-3">
         <div className="w-full flex flex-col gap-2">
           <Label htmlFor="location">Location</Label>
-          <Select
-            value={selectedLocation}
-            onValueChange={(value) => setSelectedLocation(value)}
-          >
+          <div className={twMerge("flex-wrap gap-2 mb-2",selectedCities.length>0 ?"flex":"hidden")}>
+            {selectedCities.map((city) => (
+              <div
+                key={city}
+                className="flex items-center gap-2 bg-green-50 border border-green-200 text-[10px] px-2 py-1 rounded-full"
+              >
+                <span>{city}</span>
+                <button
+                  onClick={() => handleRemoveCity(city)}
+                  className="text-gray-500 hover:text-red-500"
+                >
+                  <IoClose />
+                </button>
+              </div>
+            ))}
+          </div>
+          <Select onValueChange={(value) => handleCitySelect(value)} value="">
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Location" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Location</SelectLabel>
-                {locations.map((location) => (
+                {cities.map((location) => (
                   <SelectItem key={location.value} value={location.label}>
                     {location.label}
                   </SelectItem>

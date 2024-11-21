@@ -13,6 +13,7 @@ import { RiFilter3Fill } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
+import cities from "../data/cities.json";
 import {
   Select,
   SelectContent,
@@ -22,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { twMerge } from "tailwind-merge";
+import { IoClose } from "react-icons/io5";
 
 const FilterDrawer = () => {
   const {
@@ -33,21 +36,14 @@ const FilterDrawer = () => {
     setSelectedDomain,
     selectedJobType,
     setselectedJobType,
-    selectedLocation,
-    setSelectedLocation,
+    handleCitySelect,
+    selectedCities,
+    handleRemoveCity
   } = useJobFilter();
 
   const handlePeriodChange = (period: string) => {
     setSelectedPeriod(period);
   };
-  const locations = [
-    { value: "any", label: "Any" },
-    { value: "jaipur,rajasthan", label: "Jaipur, Rajasthan" },
-    { value: "mumbai,maharashtra", label: "Mumbai, Maharashtra" },
-    { value: "delhi,delhi", label: "Delhi, Delhi" },
-    { value: "bengaluru,karnataka", label: "Bengaluru, Karnataka" },
-    { value: "chennai,tamilnadu", label: "Chennai, Tamil Nadu" },
-  ];
 
   return (
     <div>
@@ -114,17 +110,37 @@ const FilterDrawer = () => {
                 <h2 className="text-left text-sm font-semibold mb-3">
                   Location
                 </h2>
-                <Select
-                  value={selectedLocation}
-                  onValueChange={(value) => setSelectedLocation(value)}
+                <div
+                  className={twMerge(
+                    "flex-wrap gap-2 mb-2",
+                    selectedCities.length > 0 ? "flex" : "hidden"
+                  )}
                 >
+                  {selectedCities.map((city) => (
+                    <div
+                      key={city}
+                      className="flex items-center gap-2 bg-green-50 border border-green-200 text-[10px] px-2 py-1 rounded-full text-black"
+                    >
+                      <span>{city}</span>
+                      <button
+                        onClick={() => handleRemoveCity(city)}
+                        className="text-gray-500 hover:text-red-500"
+                      >
+                        <IoClose />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <Select
+                  value=""
+                  onValueChange={(value) => handleCitySelect(value)}                 >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select Location" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Location</SelectLabel>
-                      {locations.map((location) => (
+                      {cities.map((location) => (
                         <SelectItem key={location.value} value={location.label}>
                           {location.label}
                         </SelectItem>

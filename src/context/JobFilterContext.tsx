@@ -11,10 +11,15 @@ interface JobFilterContextType {
   setSelectedPeriod: (period: string) => void;
   selectedJobType: string;
   setselectedJobType: (jobtype: string) => void;
+  selectedCities: string[];
+  setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
+  handleCitySelect: any;
+  handleRemoveCity: any;
 }
 
-
-const JobFilterContext = createContext<JobFilterContextType | undefined>(undefined);
+const JobFilterContext = createContext<JobFilterContextType | undefined>(
+  undefined
+);
 
 export const useJobFilter = () => {
   const context = useContext(JobFilterContext);
@@ -30,12 +35,41 @@ interface JobFilterProviderProps {
 
 export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedJobLocation, setSelectedJobLocation] = useState("Any");
-  const [selectedLocation, setSelectedLocation] = useState("Any");
+  const [selectedLocation, setSelectedLocation] = useState("All");
   const [selectedDomain, setSelectedDomain] = useState("Any");
   const [selectedPeriod, setSelectedPeriod] = useState("any");
   const [selectedJobType, setselectedJobType] = useState("Any");
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+
+  const handleCitySelect = (city: string) => {
+    if (!selectedCities.includes(city)) {
+      setSelectedCities((prev) => [...prev, city]);
+    }
+  };
+
+  const handleRemoveCity = (city: string) => {
+    setSelectedCities((prev) => prev.filter((item) => item !== city));
+  };
+  
   return (
-    <JobFilterContext.Provider value={{ selectedJobLocation, setSelectedJobLocation, selectedDomain, setSelectedDomain,selectedPeriod,setSelectedPeriod ,selectedJobType,setselectedJobType,selectedLocation,setSelectedLocation}}>
+    <JobFilterContext.Provider
+      value={{
+        selectedCities,
+        setSelectedCities,
+        selectedJobLocation,
+        setSelectedJobLocation,
+        selectedDomain,
+        setSelectedDomain,
+        selectedPeriod,
+        setSelectedPeriod,
+        selectedJobType,
+        setselectedJobType,
+        selectedLocation,
+        setSelectedLocation,
+        handleCitySelect,
+        handleRemoveCity,
+      }}
+    >
       {children}
     </JobFilterContext.Provider>
   );
