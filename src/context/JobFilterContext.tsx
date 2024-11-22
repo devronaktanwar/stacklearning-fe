@@ -15,6 +15,8 @@ interface JobFilterContextType {
   setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
   handleCitySelect: any;
   handleRemoveCity: any;
+  selectedExperience:string;
+  setSelectedExperience:(experience:string)=>void;
 }
 
 const JobFilterContext = createContext<JobFilterContextType | undefined>(
@@ -39,8 +41,11 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedDomain, setSelectedDomain] = useState("Any");
   const [selectedPeriod, setSelectedPeriod] = useState("any");
   const [selectedJobType, setselectedJobType] = useState("Any");
+  const [selectedExperience, setSelectedExperience] = useState("all");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
 
+
+  console.log(selectedExperience)
   const handleCitySelect = (city: string) => {
     if (!selectedCities.includes(city)) {
       setSelectedCities((prev) => [...prev, city]);
@@ -68,6 +73,8 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
         setSelectedLocation,
         handleCitySelect,
         handleRemoveCity,
+        setSelectedExperience,
+        selectedExperience
       }}
     >
       {children}

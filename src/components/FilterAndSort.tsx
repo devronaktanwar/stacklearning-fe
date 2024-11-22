@@ -27,7 +27,9 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
     setselectedJobType,
     selectedCities,
     handleRemoveCity,
-    handleCitySelect
+    handleCitySelect,
+    selectedExperience,
+    setSelectedExperience
   } = useJobFilter();
 
 
@@ -71,6 +73,55 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+        <div className="flex flex-col justify-start items-start gap-3">
+          <Label>Experience Required</Label>
+          <div className="flex gap-4 text-xs font-medium">
+                  <div className="flex justify-between items-center gap-2">
+                    <p>All</p>
+                    <input
+                      type="radio"
+                      name="period"
+                      value="all"
+                      className="custom-radio"
+                      checked={selectedExperience === "all"}
+                      onChange={() => setSelectedExperience("all")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center  gap-2">
+                    <p>0-1 year</p>
+                    <input
+                      type="radio"
+                      name="period"
+                      value="0-1 year"
+                      className="custom-radio"
+                      checked={selectedExperience === "0-1 year"}
+                      onChange={() => setSelectedExperience("0-1 year")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center  gap-2">
+                    <p>1-3 year</p>
+                    <input
+                      type="radio"
+                      name="period"
+                      value="1-3 year"
+                      className="custom-radio"
+                      checked={selectedExperience === "1-3 year"}
+                      onChange={() => setSelectedExperience("1-3 year")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center  gap-2">
+                    <p>3+ year</p>
+                    <input
+                      type="radio"
+                      name="period"
+                      value="3+ year"
+                      className="custom-radio"
+                      checked={selectedExperience === "3+ year"}
+                      onChange={() => setSelectedExperience("3+ year")}
+                    />
+                  </div>
+                </div>
         </div>
         <div className="flex flex-col justify-start items-start gap-3">
           <Label>Job Location</Label>

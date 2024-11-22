@@ -38,7 +38,9 @@ const FilterDrawer = () => {
     setselectedJobType,
     handleCitySelect,
     selectedCities,
-    handleRemoveCity
+    handleRemoveCity,
+    selectedExperience,
+    setSelectedExperience,
   } = useJobFilter();
 
   const handlePeriodChange = (period: string) => {
@@ -59,8 +61,8 @@ const FilterDrawer = () => {
                 <h2 className="text-left text-sm font-semibold mb-3">
                   Date Posted
                 </h2>
-                <div className="flex flex-col gap-3 text-xs">
-                  <div className="flex justify-between items-center">
+                <div className="flex gap-4 text-xs">
+                  <div className="flex justify-between items-center gap-2">
                     <p>All</p>
                     <input
                       type="radio"
@@ -71,7 +73,7 @@ const FilterDrawer = () => {
                       onChange={() => handlePeriodChange("any")}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center gap-2">
                     <p>Today</p>
                     <input
                       type="radio"
@@ -82,7 +84,7 @@ const FilterDrawer = () => {
                       onChange={() => handlePeriodChange("today")}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center gap-2">
                     <p>Last week</p>
                     <input
                       type="radio"
@@ -93,7 +95,7 @@ const FilterDrawer = () => {
                       onChange={() => handlePeriodChange("lastWeek")}
                     />
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center gap-2">
                     <p>Last month</p>
                     <input
                       type="radio"
@@ -106,6 +108,59 @@ const FilterDrawer = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="mt-3">
+                <h2 className="text-left text-sm font-semibold mb-3">
+                  Experience
+                </h2>
+                <div className="flex gap-4 text-xs">
+                  <div className="flex justify-between items-center gap-2">
+                    <p>All</p>
+                    <input
+                      type="radio"
+                      name="experience"
+                      value="all"
+                      className="custom-radio"
+                      checked={selectedExperience === "all"}
+                      onChange={() => setSelectedExperience("all")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <p>0-1 year</p>
+                    <input
+                      type="radio"
+                      name="experience"
+                      value="0-1 year"
+                      className="custom-radio"
+                      checked={selectedExperience === "0-1 year"}
+                      onChange={() => setSelectedExperience("0-1 year")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <p>1-3 years</p>
+                    <input
+                      type="radio"
+                      name="experience"
+                      value="1-3 years"
+                      className="custom-radio"
+                      checked={selectedExperience === "1-3 years"}
+                      onChange={() => setSelectedExperience("1-3 years")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <p>2-5 years</p>
+                    <input
+                      type="radio"
+                      name="experience"
+                      value="2-5 years"
+                      className="custom-radio"
+                      checked={selectedExperience === "2-5 years"}
+                      onChange={() => setSelectedExperience("2-5 years")}
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-3">
                 <h2 className="text-left text-sm font-semibold mb-3">
                   Location
@@ -133,7 +188,8 @@ const FilterDrawer = () => {
                 </div>
                 <Select
                   value=""
-                  onValueChange={(value) => handleCitySelect(value)}                 >
+                  onValueChange={(value) => handleCitySelect(value)}
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select Location" />
                   </SelectTrigger>
