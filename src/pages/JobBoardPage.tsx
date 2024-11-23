@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { useJobFilter } from "@/context/JobFilterContext";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import FilterDrawer from "@/components/FilterDrawer";
 import SavedJobsDrawer from "@/components/SavedJobsDrawer";
 import Loader from "@/components/Loader";
