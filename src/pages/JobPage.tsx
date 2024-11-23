@@ -9,6 +9,7 @@ import hiring from "../assets/hiring.svg";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { FaLink } from "react-icons/fa";
 import Newsletter from "@/components/Newsletter";
+import Loader from "@/components/Loader";
 const JobPage = () => {
   const { jobId, domain } = useParams<{ jobId: string; domain: string }>();
   const [jobData, setJobData] = useState<JobCardProps | null>(null);
@@ -44,7 +45,7 @@ const JobPage = () => {
   }, [jobId, domain]);
   console.log("similar", similarJob);
   if (!jobData) {
-    return <div className="text-center mt-12">Loading...</div>;
+    return <div className="flex justify-center items-center h-[40vh] w-full"><Loader/></div>;
   }
 
   const newDate = new Date(jobData.date);

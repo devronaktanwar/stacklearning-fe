@@ -7,6 +7,7 @@ import { useJobFilter } from "@/context/JobFilterContext";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import FilterDrawer from "@/components/FilterDrawer";
 import SavedJobsDrawer from "@/components/SavedJobsDrawer";
+import Loader from "@/components/Loader";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
@@ -17,7 +18,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     selectedPeriod,
     selectedDomain,
     selectedJobType,
-    selectedCities
+    selectedCities,
   } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -83,10 +84,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center w-full h-[40vh]">
-        <AiOutlineLoading3Quarters
-          size={28}
-          className="animate-spin text-primaryNew"
-        />
+        <Loader />
       </div>
     );
 
@@ -102,7 +100,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <div className="flex-1">
               <Input
                 type="text"
-                placeholder="Search for company, roles"    
+                placeholder="Search for company, roles"
                 className="w-full py-5 pl-10 rounded-xl"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
