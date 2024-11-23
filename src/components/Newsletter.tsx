@@ -6,12 +6,12 @@ import { RiLoader5Line } from "react-icons/ri";
 
 const Newsletter = () => {
   const [email, setEmail] = useState<string>("");
-  const [emailError, setEmailError] = useState<string|null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const handleSubscribe = async () => {
-    if(!email){
-      setEmailError("Please enter valid email")
-      return
+    if (!email) {
+      setEmailError("Please enter valid email");
+      return;
     }
     setLoading(true);
     try {
@@ -27,7 +27,7 @@ const Newsletter = () => {
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize:"12px"
+          fontSize: "12px",
         },
       });
     } catch (err) {
@@ -38,7 +38,7 @@ const Newsletter = () => {
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize:"12px"
+          fontSize: "12px",
         },
       });
     } finally {
@@ -68,10 +68,17 @@ const Newsletter = () => {
             className="w-[280px] rounded-lg border px-3 py-2 outline-none text-xs"
             placeholder="Enter email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setEmailError(null);
+            }}
             type="email"
           />
-          {emailError && <p className="text-[8px] text-red-500 leading-[0.25] ml-2">{emailError}</p>}
+          {emailError && (
+            <p className="text-[8px] text-red-500 leading-[0.25] ml-2">
+              {emailError}
+            </p>
+          )}
           <div>
             <button
               className="bg-primaryNew text-white text-xs px-4 py-2 rounded-full"
