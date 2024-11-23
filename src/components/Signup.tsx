@@ -60,7 +60,7 @@ const Signup = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/send-otp",
+        "https://stacklearning-be-h0pq.onrender.com/api/send-otp",
         {
           emailAddress: emailId,
         },
@@ -253,11 +253,12 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
 
   const handleVerifyOtp = async () => {
     setLoading(true);
-    const userInputOtp = otp.join("");
+    let userInputOtp = otp.join("");
+    let newuserInputOtp = Number(userInputOtp);
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/verify-otp",
-        { userInputOtp },
+        "https://stacklearning-be-h0pq.onrender.com/api/verify-otp",
+        { userInputOtp:newuserInputOtp, email },
         { withCredentials: true }
       );
 
@@ -270,10 +271,10 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
             color: "#fff",
             padding: "6px 10px",
           },
-        })
+        });
         try {
           const response = await axios.post(
-            "http://localhost:3000/api/signup",
+            "https://stacklearning-be-h0pq.onrender.com/api/signup",
             { emailAddress: email, fullName: name, passWord: password },
             {
               headers: {
@@ -290,23 +291,25 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
                 color: "#fff",
                 padding: "6px 10px",
               },
-            })
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("name", data.user.fullName);
+            });
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("name", response.data.user.fullName);
             setTimeout(() => {
               navigate("/");
               window.location.reload();
             }, 1000);
           }
-        } catch {
+        } catch (err){
           alert("Signup failed.");
+          console.log("Error:",err)
         }
         setTimeout(() => navigate("/"), 3000);
       } else {
-        toast.error("Invalid OTP")
+        toast.error("Invalid OTP");
       }
-    } catch {
+    } catch (err) {
       alert("Something went wrong");
+      console.log(err);
     } finally {
       setLoading(false);
     }
