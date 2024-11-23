@@ -75,12 +75,35 @@ const Signup = () => {
             background: "#333",
             color: "#fff",
             padding: "6px 10px",
+            fontSize: "12px",
           },
         });
         setCurrentStep(2);
       }
-    } catch (error) {
-      console.log(error)
+      else{
+        toast.error("Email already exists, please login", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize: "12px",
+          },
+        });
+      }
+    } catch (error: any) {
+      console.log(error);
+      toast.success(error.response.data.message, {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+          fontSize: "12px",
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -168,7 +191,6 @@ const Signup = () => {
       {currentStep === 2 && (
         <OtpModal email={emailId} name={name} password={password} />
       )}
-      {/* {showToast && <Toast isSuccess={isSuccess} message={message} />} */}
     </div>
   );
 };
@@ -219,7 +241,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
     try {
       const { data } = await axios.post(
         "https://stacklearning-be-h0pq.onrender.com/api/verify-otp",
-        { userInputOtp:newuserInputOtp, email },
+        { userInputOtp: newuserInputOtp, email },
         { withCredentials: true }
       );
 
@@ -231,6 +253,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
             background: "#333",
             color: "#fff",
             padding: "6px 10px",
+            fontSize: "12px",
           },
         });
         try {
@@ -251,6 +274,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
                 background: "#333",
                 color: "#fff",
                 padding: "6px 10px",
+                fontSize: "12px",
               },
             });
             localStorage.setItem("token", response.data.token);
@@ -260,9 +284,18 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
               window.location.reload();
             }, 1000);
           }
-        } catch (err){
-          alert("Signup failed.");
-          console.log("Error:",err)
+        } catch (err: any) {
+          toast.error(err.response.data.message, {
+            duration: 2000,
+            style: {
+              borderRadius: "8px",
+              background: "#333",
+              color: "#fff",
+              padding: "6px 10px",
+              fontSize: "12px",
+            },
+          });
+          console.log("Error:", err);
         }
         setTimeout(() => navigate("/"), 3000);
       } else {
