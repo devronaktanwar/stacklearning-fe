@@ -136,6 +136,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 jobDescriptionHtml={job.jobDescriptionHtml}
                 link={job.link}
                 jobId={job.jobId}
+                domain={job.domain}
               />
             ))
           ) : (

@@ -7,7 +7,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
 import { FaRegUser } from "react-icons/fa";
 import { PiSuitcaseSimple } from "react-icons/pi";
-
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import {
   Dialog,
@@ -33,6 +33,7 @@ export interface JobCardProps {
   jobDescriptionHtml: string;
   link: string;
   jobId: string;
+  domain:string;
 }
 
 const JobCard: FC<JobCardProps> = ({
@@ -48,7 +49,9 @@ const JobCard: FC<JobCardProps> = ({
   jobDescriptionHtml,
   link,
   jobId,
+  domain
 }) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [savedJobsData, setSavedJobsData] = useState<{ jobId: string }[]>([]);
   const newDate = new Date(date);
@@ -131,7 +134,7 @@ const JobCard: FC<JobCardProps> = ({
   const isSaved = savedJobsData.some((savedJob) => savedJob.jobId === jobId);
 
   return (
-    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
+    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white" onClick={() => navigate(`/jobs/${domain}/${jobId}`)}>
       <Toaster position="bottom-center" />
       <div className="flex justify-between">
         <div className="flex items-start gap-3">
