@@ -13,10 +13,8 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
-// import Toast from "./Toast";
 
 const Signup = () => {
-  // const [showToast, setShowToast] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [name, setName] = useState("");
   const [emailId, setEmail] = useState("");
@@ -25,9 +23,6 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const [message, setMessage] = useState("");
-  // const [isSuccess, setIsSucces] = useState(false);
-  // const navigate = useNavigate();
   const validateForm = () => {
     let isValid = true;
 
@@ -84,45 +79,11 @@ const Signup = () => {
         });
         setCurrentStep(2);
       }
-      console.log("data", data);
     } catch (error) {
+      console.log(error)
     } finally {
       setLoading(false);
     }
-    // try {
-    //   const { data } = await axios.post(
-    //     "https://stacklearning-be.onrender.com/api/signup",
-    //     { emailAddress: emailId, fullName: name, passWord: password },
-    //     {
-    //       headers: {
-    //         authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
-    //       },
-    //     }
-    //   );
-
-    //   if (data.isSuccess) {
-    //     localStorage.setItem("token", data.token);
-    //     localStorage.setItem("name", data.user.fullName);
-    //     setShowToast(true);
-    //     setMessage("Signed up successfully");
-    //     setIsSucces(true);
-    //     setTimeout(() => {
-    //       setShowToast(false);
-    //       navigate("/");
-    //       window.location.reload();
-    //     }, 1000);
-    //   }
-    // } catch (error: any) {
-    //   console.error("An error occurred during sign-up:", error);
-    //   setShowToast(true);
-    //   setMessage(error.response.data.message);
-    //   setIsSucces(false);
-    //   setTimeout(() => {
-    //     setShowToast(false);
-    //   }, 3000);
-    // } finally {
-    //   setLoading(false);
-    // }
   };
 
   return (

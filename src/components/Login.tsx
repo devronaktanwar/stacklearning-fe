@@ -1,4 +1,3 @@
-
 import {
   Card,
   CardContent,
@@ -11,23 +10,19 @@ import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineLoading3Quarters } from "react-icons/ai"; 
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button } from "./ui/button";
-import Toast from "./Toast";
+import toast, { Toaster } from "react-hot-toast";
 
-const url='https://stacklearning-be.onrender.com/api/login';
-// const url="http://localhost:3000/api/login"
+const url = "https://stacklearning-be-h0pq.onrender.com/api/login";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(""); 
+  const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [showToast, setShowToast] = useState(false);
-  const [message, setMessage] = useState("");
-  const [isSuccess, setIsSucces] = useState(false);
 
   const validateForm = () => {
     let isValid = true;
@@ -58,34 +53,53 @@ const Login = () => {
 
     try {
       const response = await axios.post(url, {
-        emailAddress:email,
-        passWord:password,
+        emailAddress: email,
+        passWord: password,
       });
 
-      if(response.status===400){
-        console.log("status is 400")
+      if (response.status === 400) {
+        console.log("status is 400");
       }
       if (response.data.isSuccess) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("name", response.data.user.fullName);
-        setShowToast(true);
-        setMessage("Logged in successfully");
-        setIsSucces(true);
+        toast.success("Logged in successfully", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize:"12px"
+          },
+        });
         setTimeout(() => {
-          setShowToast(false);
           navigate("/");
-          window.location.reload()
+          window.location.reload();
         }, 1000);
       } else {
+        toast.error("Invalid email, please sign up", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+          },
+        });
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("An error occurred during sign-up:", error);
-      setShowToast(true);
-      setMessage(error.response.data.message);
-      setIsSucces(false);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
+      toast.error(error.response.data.message, {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+          fontSize:"12px"
+        },
+      });
     } finally {
       setLoading(false);
     }
@@ -93,6 +107,7 @@ const Login = () => {
 
   return (
     <div className="pt-16">
+      <Toaster position="bottom-center" />
       <Card className="w-[90%] sm:w-[400px] m-auto">
         <CardHeader>
           <CardTitle className="text-center text-2xl">Login</CardTitle>
@@ -108,7 +123,9 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
               {emailError && (
-                <p className="text-red-500 text-[10px] mt-1 ml-2">{emailError}</p>
+                <p className="text-red-500 text-[10px] mt-1 ml-2">
+                  {emailError}
+                </p>
               )}
             </div>
             <div>
@@ -121,7 +138,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {passwordError && (
-                <p className="text-red-500 text-[10px] mt-1 ml-2">{passwordError}</p>
+                <p className="text-red-500 text-[10px] mt-1 ml-2">
+                  {passwordError}
+                </p>
               )}
             </div>
           </form>
@@ -149,7 +168,6 @@ const Login = () => {
           </div>
         </CardFooter>
       </Card>
-      {showToast && <Toast isSuccess={isSuccess} message={message} />}
     </div>
   );
 };

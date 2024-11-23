@@ -30,8 +30,8 @@ const Newsletter = () => {
           fontSize: "12px",
         },
       });
-    } catch (err) {
-      toast.error("something went wrong", {
+    } catch (err: any) {
+      toast.error(err.response.data.message, {
         duration: 2000,
         style: {
           borderRadius: "8px",
