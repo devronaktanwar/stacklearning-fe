@@ -134,7 +134,7 @@ const JobCard: FC<JobCardProps> = ({
   const isSaved = savedJobsData.some((savedJob) => savedJob.jobId === jobId);
 
   return (
-    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white" onClick={() => navigate(`/jobs/${domain}/${jobId}`)}>
+    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <Toaster position="bottom-center" />
       <div className="flex justify-between">
         <div className="flex items-start gap-3">
@@ -282,13 +282,12 @@ const JobCard: FC<JobCardProps> = ({
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <a
+          <button
             className="px-2 py-1 text-[10px] sm:px-3 sm:py-2 rounded sm:text-sm font-semibold flex items-center gap-1 bg-primaryNew text-white cursor-pointer"
-            href={link}
-          >
+            onClick={() => navigate(`/jobs/${domain}/${jobId}`)}          >
             Apply
             <CiLocationArrow1 />
-          </a>
+          </button>
         </div>
       </div>
     </div>

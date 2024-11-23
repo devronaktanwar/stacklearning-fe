@@ -58,6 +58,7 @@ const SavedJobsDrawer = () => {
                       jobDescriptionHtml={job.jobDescriptionHtml}
                       link={job.link}
                       jobId={job.jobId}
+                      domain={job.domain}
                     />
                   );
                 })}
