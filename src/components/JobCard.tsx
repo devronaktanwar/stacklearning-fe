@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
-import { HiOutlineBookmark } from "react-icons/hi2";
+// import { HiOutlineBookmark } from "react-icons/hi2";
 import { PiBagSimpleBold } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { FaLink } from "react-icons/fa";
-import axios from "axios";
+// import axios from "axios";
 
 export interface JobCardProps {
   jobTitle: string;
