@@ -57,7 +57,7 @@ const JobCard: FC<JobCardProps> = ({
   ) => {
     const shareData = {
       title: `${title} at ${company}`,
-      text: `📍 Location: ${location}\n🚀 Apply for the role of ${title} at ${company}. Click the link below to learn more!`,
+      text: `${company} is Hiring!\nRole: ${title}\nLocation: ${location}\n📩 Apply Here: ${url}`,
       url,
     };
     try {
