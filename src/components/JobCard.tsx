@@ -49,15 +49,20 @@ const JobCard: FC<JobCardProps> = ({
       ? jobDescriptionText.substring(0, 350) + "....."
       : jobDescriptionText;
 
-  const handleShare = async (link:string) => {
-    const data = {
-      title: "My App",
-      text: "Check out this cool app!",
-      url: link,
+  const handleShare = async (
+    url: string,
+    title: string,
+    company: string,
+    location: string
+  ) => {
+    const shareData = {
+      title: `${title} at ${company}`,
+      text: `📍 Location: ${location}\n🚀 Apply for the role of ${title} at ${company}. Click the link below to learn more!`,
+      url,
     };
     try {
       if (navigator.share) {
-        await navigator.share(data);
+        await navigator.share(shareData);
         console.log("Content shared successfully");
       } else {
         alert("Share API not supported on this browser.");
@@ -206,7 +211,14 @@ const JobCard: FC<JobCardProps> = ({
         <div className="flex gap-4">
           <button
             className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-semibold text-primary border border-primary flex gap-1 items-center sm:text-sm"
-            onClick={()=>handleShare("https://stacklearning.in")}
+            onClick={() =>
+              handleShare(
+                `https://stacklearning.in/jobs/${domain}/${jobId}`,
+                jobTitle,
+                companyName,
+                location
+              )
+            }
           >
             Share link <FaLink />
           </button>
