@@ -1,13 +1,13 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
+// import { HiOutlineBookmark } from "react-icons/hi2";
 import { PiBagSimpleBold } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
+import  { Toaster } from "react-hot-toast";
 import { FaLink } from "react-icons/fa";
-import { HiOutlineBookmark } from "react-icons/hi";
+// import axios from "axios";
 
 export interface JobCardProps {
   jobTitle: string;
@@ -37,7 +37,6 @@ const JobCard: FC<JobCardProps> = ({
   domain,
 }) => {
   const navigate = useNavigate();
-  const [savedJobsData, setSavedJobsData] = useState<{ jobId: string }[]>([]);
   const newDate = new Date(date);
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
@@ -70,75 +69,43 @@ const JobCard: FC<JobCardProps> = ({
       console.error("Error sharing:", error);
     }
   };
-
-  const fetchSavedJobs = async () => {
-    try {
-      const response = await axios.get(
-        "https://stacklearning-be-h0pq.onrender.com/api/jobs/saved/6a27d6240a148d3e960d91d3"
-      );
-      setSavedJobsData(response.data.savedJobs);
-    } catch (err) {
-      console.log("Error fetching saved jobs:", err);
-    }
-  };
-
-  useEffect(() => {
-    fetchSavedJobs();
-  }, []);
-
-  const handleJobSave = async (jobId: string) => {
-    try {
-      if (savedJobsData.some((savedJob) => savedJob.jobId === jobId)) {
-        toast.error("Job is already saved.", {
-          duration: 2000,
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-            padding: "6px 10px",
-          },
-        });
-        return;
-      }
-
-      const response = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/jobs/save",
-        {
-          userId: "6a27d6240a148d3e960d91d3",
-          jobId,
-        }
-      );
-
-      if (response.status === 200) {
-        setSavedJobsData((prev) => [...prev, { jobId }]);
-        toast.success("Job saved successfully!", {
-          duration: 2000,
-          style: {
-            borderRadius: "8px",
-            background: "#333",
-            color: "#fff",
-            padding: "6px 10px",
-          },
-        });
-      } else {
-        throw new Error("Failed to save the job.");
-      }
-    } catch (err) {
-      console.error("Error saving job:", err);
-      toast.error("An error occurred while saving the job.", {
-        duration: 2000,
-        style: {
-          borderRadius: "8px",
-          background: "#333",
-          color: "#fff",
-          padding: "6px 10px",
-        },
-      });
-    }
-  };
-
-  const isSaved = savedJobsData.some((savedJob) => savedJob.jobId === jobId);
-
+  // const handleSaveJob = async (jobId: string) => {
+  //   const userId = localStorage.getItem("userId");
+  //   try {
+  //     const response = await axios.post(
+  //       "https://stacklearning-be-h0pq.onrender.com/api/jobs/save",
+  //       {
+  //         jobId: jobId,
+  //         userId: userId,
+  //       }
+  //     );
+  //     if (response.data.isSuccess) {
+  //       toast.success("Job saved successfullly", {
+  //         duration: 2000,
+  //         style: {
+  //           borderRadius: "8px",
+  //           background: "#333",
+  //           color: "#fff",
+  //           padding: "6px 10px",
+  //           fontSize: "12px",
+  //         },
+  //       });
+  //     } else {
+  //       toast.error("Job is already saved", {
+  //         duration: 2000,
+  //         style: {
+  //           borderRadius: "8px",
+  //           background: "#333",
+  //           color: "#fff",
+  //           padding: "6px 10px",
+  //           fontSize: "12px",
+  //         },
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.log("Error:", err);
+  //   }
+  // };
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <Toaster position="bottom-center" />
@@ -148,7 +115,7 @@ const JobCard: FC<JobCardProps> = ({
             <img
               src={image}
               alt="Company logo"
-              className="h-full w-full object-cover md:h-14 md:w-14 "
+              className="h-full w-full object-cover md:h-14 md:w-14"
             />
           </div>
           <div className="flex flex-col flex-1 justify-start items-start">
@@ -200,13 +167,10 @@ const JobCard: FC<JobCardProps> = ({
           />
         </p>
       </div>
-      <div className="flex justify-between items-center">
-        <div className="cursor-pointer" onClick={() => handleJobSave(jobId)}>
-          <HiOutlineBookmark
-            size={24}
-            className={isSaved ? "text-green-500" : "text-black"}
-          />
-        </div>
+      <div className="flex justify-end items-center">
+        {/* <div className="cursor-pointer" onClick={() => handleSaveJob(jobId)}>
+          <HiOutlineBookmark size={24} />
+        </div> */}
         <div className="flex gap-4">
           <button
             className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-semibold text-primary border border-primary flex gap-1 items-center sm:text-sm"

@@ -22,7 +22,7 @@ const Navbar: FC<NavbarProps> = () => {
   }, []);
   return (
     <div className="border-b sticky top-0 bg-white z-50">
-      <nav className="w-[85%] m-auto flex justify-between items-center py-4 z-50 relative">
+      <nav className="w-[80%] m-auto flex justify-between items-center py-4 z-50 relative">
         <div className="w-16 sm:w-24">
           <img src={logo} alt="logo" className="w-full" />
         </div>
@@ -88,7 +88,8 @@ const MobileNav: FC<lMobileNavProps> = ({
 }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("name");
+    localStorage.removeItem("userId");
     setIsMobileMenuOpen(!isMobileMenuOpen);
     window.location.reload();
   };
