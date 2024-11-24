@@ -58,7 +58,6 @@ const JobCard: FC<JobCardProps> = ({
     const shareData = {
       title: `${title} at ${company}`,
       text: `${company} is Hiring!\nRole: ${title}\nLocation: ${location}\n📩 Apply Here: ${url}`,
-      url,
     };
     try {
       if (navigator.share) {
