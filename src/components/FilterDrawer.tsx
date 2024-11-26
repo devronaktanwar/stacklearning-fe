@@ -28,8 +28,8 @@ import { IoClose } from "react-icons/io5";
 
 const FilterDrawer = () => {
   const {
-    selectedJobLocation,
-    setSelectedJobLocation,
+    selectedJobLocationType,
+    setSelectedJobLocationType,
     selectedPeriod,
     setSelectedPeriod,
     selectedDomain,
@@ -66,7 +66,7 @@ const FilterDrawer = () => {
                     <p>All</p>
                     <input
                       type="radio"
-                      name="period"
+                      name="datePosted"
                       value="any"
                       className="custom-radio"
                       checked={selectedPeriod === "any"}
@@ -77,7 +77,7 @@ const FilterDrawer = () => {
                     <p>Today</p>
                     <input
                       type="radio"
-                      name="period"
+                      name="datePosted"
                       value="today"
                       className="custom-radio"
                       checked={selectedPeriod === "today"}
@@ -88,7 +88,7 @@ const FilterDrawer = () => {
                     <p>Last week</p>
                     <input
                       type="radio"
-                      name="period"
+                      name="datePosted"
                       value="lastWeek"
                       className="custom-radio"
                       checked={selectedPeriod === "lastWeek"}
@@ -99,7 +99,7 @@ const FilterDrawer = () => {
                     <p>Last month</p>
                     <input
                       type="radio"
-                      name="period"
+                      name="datePosted"
                       value="lastMonth"
                       className="custom-radio"
                       checked={selectedPeriod === "lastMonth"}
@@ -126,14 +126,25 @@ const FilterDrawer = () => {
                     />
                   </div>
                   <div className="flex justify-between items-center gap-2">
-                    <p>0-1 year</p>
+                    <p>Fresher</p>
                     <input
                       type="radio"
                       name="experience"
-                      value="0-1 year"
+                      value="fresher"
                       className="custom-radio"
-                      checked={selectedExperience === "0-1 year"}
-                      onChange={() => setSelectedExperience("0-1 year")}
+                      checked={selectedExperience === "fresher"}
+                      onChange={() => setSelectedExperience("fresher")}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <p>0-1 years</p>
+                    <input
+                      type="radio"
+                      name="experience"
+                      value="0-1 years"
+                      className="custom-radio"
+                      checked={selectedExperience === "0-1 years"}
+                      onChange={() => setSelectedExperience("0-1 years")}
                     />
                   </div>
                   <div className="flex justify-between items-center gap-2">
@@ -148,14 +159,14 @@ const FilterDrawer = () => {
                     />
                   </div>
                   <div className="flex justify-between items-center gap-2">
-                    <p>2-5 years</p>
+                    <p>3+ years</p>
                     <input
                       type="radio"
                       name="experience"
-                      value="2-5 years"
+                      value="3+ years"
                       className="custom-radio"
-                      checked={selectedExperience === "2-5 years"}
-                      onChange={() => setSelectedExperience("2-5 years")}
+                      checked={selectedExperience === "3+ years"}
+                      onChange={() => setSelectedExperience("3+ years")}
                     />
                   </div>
                 </div>
@@ -211,7 +222,7 @@ const FilterDrawer = () => {
                   type="single"
                   value={selectedDomain}
                   onValueChange={setSelectedDomain}
-                  className="flex justify-start"
+                  className="flex justify-start flex-wrap"
                 >
                   <ToggleGroupItem
                     value="Any"
@@ -220,22 +231,34 @@ const FilterDrawer = () => {
                     All
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Data Science"
+                    value="data-science"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Data Science
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Android"
+                    value="web-development"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
-                    Android
+                    Web development
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Web"
+                    value="app-development"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
-                    Web
+                    App development
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="ai-ml"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
+                  >
+                    AI & ML
+                  </ToggleGroupItem>
+                  <ToggleGroupItem
+                    value="sales-marketing"
+                    className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
+                  >
+                    Sales & Marketing
                   </ToggleGroupItem>
                 </ToggleGroup>
               </div>
@@ -246,9 +269,9 @@ const FilterDrawer = () => {
                 <ToggleGroup
                   type="single"
                   className="flex justify-start"
-                  value={selectedJobLocation}
+                  value={selectedJobLocationType}
                   onValueChange={(value) => {
-                    if (value) setSelectedJobLocation(value);
+                    if (value) setSelectedJobLocationType(value);
                   }}
                 >
                   <ToggleGroupItem
@@ -258,19 +281,19 @@ const FilterDrawer = () => {
                     All
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Onsite"
+                    value="onsite"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Onsite
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Remote"
+                    value="remote"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Remote
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="Hybrid"
+                    value="hybrid"
                     className="px-5 data-[state=on]:bg-green-50 data-[state=on]:border data-[state=on]:border-green-200 data-[state=on]:text-primaryNew text-xs rounded-full"
                   >
                     Hybrid

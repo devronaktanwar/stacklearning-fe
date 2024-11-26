@@ -25,7 +25,7 @@ const SimilarJobCard: FC<lSimilarJobCardProps> = ({
   return (
     <div className="w-full bg-white border rounded-md cursor-pointer" onClick={() => navigate(`/jobs/${domain}/${jobId}`)}>
       <div className="p-3">
-        <div className="flex items-start gap-3">
+        <div className="flex items-start gap-1">
           <div className="border h-10 w-10 rounded-full overflow-hidden aspect-square">
             <img
               src={image}
@@ -38,8 +38,8 @@ const SimilarJobCard: FC<lSimilarJobCardProps> = ({
               {jobTitle}
             </h2>
             <div className="flex gap-1 items-center text-gray-500">
-              <PiBagSimpleBold size={12} />
-              <p className="text-[10px] text-gray-500 font-medium">
+              <PiBagSimpleBold size={14} />
+              <p className="text-[10px] text-gray-500 font-medium flex-1 text-nowrap">
                 {companyName}
               </p>
             </div>

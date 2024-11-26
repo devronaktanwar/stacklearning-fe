@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, FC, ReactNode } from "react";
 
 interface JobFilterContextType {
-  selectedJobLocation: string;
-  setSelectedJobLocation: (location: string) => void;
+  selectedJobLocationType: string;
+  setSelectedJobLocationType: (location: string) => void;
   selectedLocation: string;
   setSelectedLocation: (location: string) => void;
   selectedDomain: string;
@@ -36,7 +36,7 @@ interface JobFilterProviderProps {
 }
 
 export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
-  const [selectedJobLocation, setSelectedJobLocation] = useState("Any");
+  const [selectedJobLocationType, setSelectedJobLocationType] = useState("Any");
   const [selectedLocation, setSelectedLocation] = useState("All");
   const [selectedDomain, setSelectedDomain] = useState("Any");
   const [selectedPeriod, setSelectedPeriod] = useState("any");
@@ -61,8 +61,8 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
       value={{
         selectedCities,
         setSelectedCities,
-        selectedJobLocation,
-        setSelectedJobLocation,
+        selectedJobLocationType,
+        setSelectedJobLocationType,
         selectedDomain,
         setSelectedDomain,
         selectedPeriod,

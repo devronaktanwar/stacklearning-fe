@@ -12,11 +12,12 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const {
-    selectedJobLocation,
+    selectedJobLocationType,
     selectedPeriod,
     selectedDomain,
     selectedJobType,
     selectedCities,
+    selectedExperience
   } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -72,12 +73,13 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       [job.jobTitle, job.companyName].some((field) =>
         field.toLowerCase().includes(searchQuery.toLowerCase())
       ) &&
-      (selectedJobLocation === "Any" ||
-        job?.jobLocation === selectedJobLocation) &&
+      (selectedJobLocationType === "Any" ||
+        job?.jobLocationType === selectedJobLocationType) &&
       isDateWithinRange(job.date, selectedPeriod) &&
       (selectedDomain === "Any" || job?.domain === selectedDomain) &&
       (selectedJobType === "Any" || job?.jobType === selectedJobType) &&
-      (selectedCities.length === 0 || selectedCities.includes(job?.location))
+      (selectedCities.length === 0 || selectedCities.includes(job?.location))&&
+      (selectedExperience === "all" || job.experienceRequired === selectedExperience)
   );
   if (loading)
     return (
@@ -105,13 +107,13 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
               />
             </div>
           </div>
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <FilterDrawer />
           </div>
           <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
         </div>
       </div>
-      <div className="md:w-[80%] m-auto flex gap-4 flex-col md:flex-row w-[95%]">
+      <div className="md:w-[80%] m-auto flex gap-4 flex-col lg:flex-row w-[95%]">
         <div className="flex flex-1 flex-col gap-y-4">
           {filteredJobs.length > 0 ? (
             filteredJobs.map((job, index) => (
@@ -136,7 +138,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <div className="text-center text-gray-500 py-10">No jobs found</div>
           )}
         </div>
-        <div className="hidden md:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
+        <div className="hidden mlg:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
           <FilterAndSort />
         </div>
       </div>

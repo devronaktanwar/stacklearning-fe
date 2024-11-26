@@ -79,12 +79,12 @@ const JobCard: FC<JobCardProps> = ({
             />
           </div>
           <div className="flex flex-col flex-1 justify-start items-start">
-            <h2 className="text-sm font-semibold sm:text-base text-wrap text-start">
+            <h2 className="flex-1 text-sm font-semibold sm:text-base text-wrap text-start">
               {jobTitle}
             </h2>
             <div className="flex gap-1 items-center text-gray-500">
               <PiBagSimpleBold size={16} />
-              <p className="text-[10px] text-gray-500 font-medium sm:text-sm">
+              <p className="text-[9px] text-gray-500 font-medium sm:text-sm flex-1">
                 {companyName}
               </p>
             </div>
