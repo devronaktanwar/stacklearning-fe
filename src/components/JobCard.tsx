@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
-import { HiOutlineBookmark } from "react-icons/hi2";
 import { PiBagSimpleBold } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
