@@ -5,7 +5,6 @@ import { FiSearch } from "react-icons/fi";
 import FilterAndSort from "@/components/FilterAndSort";
 import { useJobFilter } from "@/context/JobFilterContext";
 import FilterDrawer from "@/components/FilterDrawer";
-import SavedJobsDrawer from "@/components/SavedJobsDrawer";
 import Loader from "@/components/Loader";
 
 interface JobBoardPageProps {}
@@ -104,9 +103,6 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-            </div>
-            <div>
-              <SavedJobsDrawer />
             </div>
           </div>
           <div className="md:hidden">
