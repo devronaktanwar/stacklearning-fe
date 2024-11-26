@@ -138,7 +138,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <div className="text-center text-gray-500 py-10">No jobs found</div>
           )}
         </div>
-        <div className="hidden mlg:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
+        <div className="hidden lg:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
           <FilterAndSort />
         </div>
       </div>
