@@ -52,13 +52,13 @@ const FilterDrawer = () => {
         <DrawerTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2">
           Filter <RiFilter3Fill />
         </DrawerTrigger>
-        <DrawerContent className="max-h-[80dvh] overflow-y-auto">
+        <DrawerContent className="">
           <DrawerHeader>
             <DrawerTitle>Filter by</DrawerTitle>
           </DrawerHeader>
-          <div className="p-3">
+          <div className="p-3 max-h-[80dvh] overflow-y-auto">
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">
+              <h2 className="text-left text-xs font-medium  mb-3">
                 Date Posted
               </h2>
               <div className="flex gap-4 text-xs">
@@ -110,10 +110,10 @@ const FilterDrawer = () => {
             </div>
 
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">
+              <h2 className="text-left text-xs font-medium mb-3">
                 Experience
               </h2>
-              <div className="flex gap-4 text-xs">
+              <div className="flex gap-4 text-xs flex-wrap">
                 <div className="flex justify-between items-center gap-2">
                   <p>All</p>
                   <input
@@ -173,7 +173,7 @@ const FilterDrawer = () => {
             </div>
 
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">Location</h2>
+              <h2 className="text-left text-xs font-medium mb-3">Location</h2>
               <div
                 className={twMerge(
                   "flex-wrap gap-2 mb-2",
@@ -215,7 +215,7 @@ const FilterDrawer = () => {
               </Select>
             </div>
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">Domain</h2>
+              <h2 className="text-left text-xs font-medium mb-3">Domain</h2>
               <ToggleGroup
                 type="single"
                 value={selectedDomain}
@@ -261,7 +261,7 @@ const FilterDrawer = () => {
               </ToggleGroup>
             </div>
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">
+              <h2 className="text-left text-xs font-medium mb-3">
                 Job Location
               </h2>
               <ToggleGroup
@@ -299,14 +299,13 @@ const FilterDrawer = () => {
               </ToggleGroup>
             </div>
             <div className="mt-3">
-              <h2 className="text-left text-sm font-semibold mb-3">Job Type</h2>
+              <h2 className="text-left text-xs font-medium mb-3">Job Type</h2>
               <ToggleGroup
                 type="single"
-                className="flex justify-start"
+                className="flex justify-center flex-wrap"
                 value={selectedJobType}
                 onValueChange={(value) => {
                   if (value) setselectedJobType(value);
-                  console.log("inside --", value);
                 }}
               >
                 <ToggleGroupItem
