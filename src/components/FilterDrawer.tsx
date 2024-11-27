@@ -52,7 +52,7 @@ const FilterDrawer = () => {
         <DrawerTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2">
           Filter <RiFilter3Fill />
         </DrawerTrigger>
-        <DrawerContent>
+        <DrawerContent className="max-h-[80dvh] overflow-y-auto">
           <DrawerHeader>
             <DrawerTitle>Filter by</DrawerTitle>
           </DrawerHeader>
