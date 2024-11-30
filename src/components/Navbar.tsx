@@ -82,7 +82,7 @@ const MobileNav: FC<lMobileNavProps> = ({
 }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
     setIsMobileMenuOpen(!isMobileMenuOpen);
     window.location.reload();
   };

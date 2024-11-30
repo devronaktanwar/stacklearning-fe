@@ -30,7 +30,6 @@ const MyAccountPage = () => {
         }
       );
       if (response.data.isSuccess) {
-        localStorage.setItem("name",name)
         toast.success("Updated successfully", {
             duration: 2000,
             style: {
