@@ -62,6 +62,7 @@ const FilterDrawer = () => {
     setSelectedCompanies([]);
     setSelectedLocation("All");
     setselectedJobType("Any");
+    setSelectedPeriod("any")
     setFilterApplied(false);
   };
 
