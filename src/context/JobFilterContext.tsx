@@ -13,10 +13,16 @@ interface JobFilterContextType {
   setselectedJobType: (jobtype: string) => void;
   selectedCities: string[];
   setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedCompanies: string[];
+  setSelectedCompanies: React.Dispatch<React.SetStateAction<string[]>>;
   handleCitySelect: any;
   handleRemoveCity: any;
-  selectedExperience:string;
-  setSelectedExperience:(experience:string)=>void;
+  selectedExperience: string;
+  setSelectedExperience: (experience: string) => void;
+  handleCompanySelect: any;
+  handleRemoveCompany: any;
+  filterApplied:boolean
+  setFilterApplied:(val:boolean)=>void
 }
 
 const JobFilterContext = createContext<JobFilterContextType | undefined>(
@@ -43,9 +49,9 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedJobType, setselectedJobType] = useState("Any");
   const [selectedExperience, setSelectedExperience] = useState("all");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
+  const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
+  const [filterApplied, setFilterApplied] = useState<boolean>(false);
 
-
-  console.log(selectedExperience)
   const handleCitySelect = (city: string) => {
     if (!selectedCities.includes(city)) {
       setSelectedCities((prev) => [...prev, city]);
@@ -55,7 +61,16 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const handleRemoveCity = (city: string) => {
     setSelectedCities((prev) => prev.filter((item) => item !== city));
   };
-  
+  const handleCompanySelect = (city: string) => {
+    if (!selectedCities.includes(city)) {
+      setSelectedCompanies((prev) => [...prev, city]);
+    }
+  };
+
+  const handleRemoveCompany = (city: string) => {
+    setSelectedCompanies((prev) => prev.filter((item) => item !== city));
+  };
+
   return (
     <JobFilterContext.Provider
       value={{
@@ -74,7 +89,13 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
         handleCitySelect,
         handleRemoveCity,
         setSelectedExperience,
-        selectedExperience
+        selectedExperience,
+        selectedCompanies,
+        setSelectedCompanies,
+        handleCompanySelect,
+        handleRemoveCompany,
+        filterApplied,
+        setFilterApplied
       }}
     >
       {children}

@@ -17,7 +17,8 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     selectedDomain,
     selectedJobType,
     selectedCities,
-    selectedExperience
+    selectedExperience,
+    selectedCompanies
   } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -79,6 +80,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       (selectedDomain === "Any" || job?.domain === selectedDomain) &&
       (selectedJobType === "Any" || job?.jobType === selectedJobType) &&
       (selectedCities.length === 0 || selectedCities.includes(job?.location))&&
+      (selectedCompanies.length === 0 || selectedCompanies.includes(job?.companyName))&&
       (selectedExperience === "all" || job.experienceRequired === selectedExperience)
   );
   if (loading)

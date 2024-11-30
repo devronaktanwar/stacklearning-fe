@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Label } from "./ui/label";
 import {
   Select,
@@ -13,8 +13,10 @@ import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 import { useJobFilter } from "@/context/JobFilterContext";
 import { CiFilter } from "react-icons/ci";
 import cities from "../data/cities.json";
+import companies from "../data/companies.json";
 import { IoClose } from "react-icons/io5";
 import { twMerge } from "tailwind-merge";
+import { RxCross1 } from "react-icons/rx";
 
 interface lFilterAndSortProps {}
 const FilterAndSort: FC<lFilterAndSortProps> = () => {
@@ -30,14 +32,74 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
     handleCitySelect,
     selectedExperience,
     setSelectedExperience,
+    selectedCompanies,
+    handleCompanySelect,
+    handleRemoveCompany,
+    setSelectedCities,
+    setSelectedCompanies,
+    setSelectedLocation,
+    setFilterApplied,
+    selectedLocation,
+    selectedPeriod,
+    filterApplied,
   } = useJobFilter();
+  useEffect(() => {
+    if (
+      selectedLocation !== "All" ||
+      selectedJobLocationType !== "Any" ||
+      selectedDomain !== "Any" ||
+      selectedPeriod !== "any" ||
+      selectedExperience !== "all" ||
+      selectedJobType !== "Any" ||
+      selectedCities.length > 0 ||
+      selectedCompanies.length > 0
+    ) {
+      setFilterApplied(true);
+    } else {
+      setFilterApplied(false);
+    }
+  }, [
+    selectedLocation,
+    selectedJobLocationType,
+    selectedDomain,
+    selectedPeriod,
+    selectedExperience,
+    selectedJobType,
+    selectedCities,
+    selectedCompanies,
+  ]);
 
+  const handleClearAll = () => {
+    setSelectedJobLocationType("Any");
+    setSelectedDomain("Any");
+    setSelectedExperience("all");
+    setSelectedCities([]);
+    setSelectedCompanies([]);
+    setSelectedLocation("All");
+    setselectedJobType("Any");
+    setFilterApplied(false);
+  };
   return (
     <div>
-      <h2 className="text-base font-semibold pb-2 flex items-center gap-1 text-primaryNew">
-        <CiFilter size={20} />
-        Filter
-      </h2>
+      <div className="flex justify-between">
+        <div>
+          <h2 className="text-base font-semibold pb-2 flex items-center gap-1 text-primaryNew">
+            <CiFilter size={20} />
+            Filter
+          </h2>
+        </div>
+        {filterApplied && (
+          <div>
+            <button
+              className="flex gap-1 border text-[10px] items-center px-2 py-1 rounded"
+              onClick={handleClearAll}
+            >
+              <RxCross1 />
+              Clear all
+            </button>
+          </div>
+        )}
+      </div>
       <div className="flex flex-col gap-3">
         <div className="w-full flex flex-col gap-2">
           <Label htmlFor="location">Location</Label>
@@ -62,18 +124,28 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               </div>
             ))}
           </div>
-          <Select onValueChange={(value) => handleCitySelect(value)} value="">
+          <Select
+            onValueChange={(value) => {
+              handleCitySelect(value);
+              setFilterApplied(true);
+            }}
+            value=""
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Location" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Location</SelectLabel>
-                {cities.map((location) => (
-                  <SelectItem key={location.value} value={location.label}>
-                    {location.label}
-                  </SelectItem>
-                ))}
+                {cities
+                  .filter(
+                    (location) => !selectedCities.includes(location.label)
+                  )
+                  .map((location) => (
+                    <SelectItem key={location.value} value={location.label}>
+                      {location.label}
+                    </SelectItem>
+                  ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -137,6 +209,55 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
               />
             </div>
           </div>
+        </div>
+        <div className="w-full flex flex-col gap-2">
+          <Label htmlFor="location">Company</Label>
+          <div
+            className={twMerge(
+              "flex-wrap gap-2 mb-2",
+              selectedCompanies.length > 0 ? "flex" : "hidden"
+            )}
+          >
+            {selectedCompanies.map((company) => (
+              <div
+                key={company}
+                className="flex items-center gap-2 bg-green-50 border border-green-200 text-[10px] px-2 py-1 rounded-full"
+              >
+                <span>{company}</span>
+                <button
+                  onClick={() => handleRemoveCompany(company)}
+                  className="text-gray-500 hover:text-red-500"
+                >
+                  <IoClose />
+                </button>
+              </div>
+            ))}
+          </div>
+          <Select
+            onValueChange={(value) => {
+              handleCompanySelect(value);
+              setFilterApplied(true);
+            }}
+            value=""
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select Company" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Companies</SelectLabel>
+                {companies
+                  .filter(
+                    (company) => !selectedCompanies.includes(company.label)
+                  )
+                  .map((company) => (
+                    <SelectItem key={company.value} value={company.label}>
+                      {company.label}
+                    </SelectItem>
+                  ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex flex-col justify-start items-start gap-3">
           <Label>Job Location</Label>
@@ -254,24 +375,6 @@ const FilterAndSort: FC<lFilterAndSortProps> = () => {
             </ToggleGroupItem>
           </ToggleGroup>
         </div>
-        {/* <div className="w-full flex flex-col gap-2">
-          <Label htmlFor="location">Companies</Label>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Company" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Company</SelectLabel>
-                <SelectItem value="Amazon">Amazon</SelectItem>
-                <SelectItem value="Google">Google</SelectItem>
-                <SelectItem value="Apple">Apple</SelectItem>
-                <SelectItem value="Microsoft">Microsoft</SelectItem>
-                <SelectItem value="Tesla">Tesla</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div> */}
       </div>
     </div>
   );

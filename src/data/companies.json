@@ -1,0 +1,23 @@
+[
+    { "label": "Google", "value": "google" },
+    { "label": "Apple", "value": "apple" },
+    { "label": "Microsoft", "value": "microsoft" },
+    { "label": "Amazon", "value": "amazon" },
+    { "label": "Facebook", "value": "facebook" },
+    { "label": "Netflix", "value": "netflix" },
+    { "label": "Tesla", "value": "tesla" },
+    { "label": "Adobe", "value": "adobe" },
+    { "label": "Salesforce", "value": "salesforce" },
+    { "label": "Oracle", "value": "oracle" },
+    { "label": "IBM", "value": "ibm" },
+    { "label": "Intel", "value": "intel" },
+    { "label": "Spotify", "value": "spotify" },
+    { "label": "Twitter", "value": "twitter" },
+    { "label": "Snapchat", "value": "snapchat" },
+    { "label": "Zoom", "value": "zoom" },
+    { "label": "Slack", "value": "slack" },
+    { "label": "Github", "value": "github" },
+    { "label": "Red Hat", "value": "redhat" },
+    { "label": "Shopify", "value": "shopify" }
+  ]
+  
