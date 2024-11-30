@@ -6,20 +6,14 @@ import { GrHomeRounded } from "react-icons/gr";
 import { PiBagSimpleBold } from "react-icons/pi";
 import { IoMdLogIn } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
+import { useUserContext } from "@/context/UserContext";
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<string>("");
+  const { user } = useUserContext();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("name");
-    if (userData && token) {
-      setUser(userData);
-    }
-  }, []);
   return (
     <div className="border-b sticky top-0 bg-white z-50">
       <nav className="w-[85%] m-auto flex justify-between items-center py-4 z-50 relative">
@@ -32,13 +26,13 @@ const Navbar: FC<NavbarProps> = () => {
           <Link to="/job-board" className="font-medium">Jobs</Link>
           {user && (
             <div className="flex gap-2 items-center">
-              <p className="text-sm">Hi, {user?.split(" ")[0]}</p>
+              <p className="text-sm">Hi, {user.fullName.split(" ")[0]}</p>
               <FaRegUserCircle size={22}/>
             </div>
           )}
         </div>
         <div className="md:hidden relative flex gap-2 items-center">
-          {user && <p className="text-sm">Hi, {user?.split(" ")[0]}</p>}
+          {user && <p className="text-sm">Hi, {user.fullName.split(" ")[0]}</p>}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-2xl"

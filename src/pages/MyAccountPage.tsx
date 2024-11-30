@@ -30,6 +30,7 @@ const MyAccountPage = () => {
         }
       );
       if (response.data.isSuccess) {
+        localStorage.setItem("name",name)
         toast.success("Updated successfully", {
             duration: 2000,
             style: {
@@ -77,9 +78,9 @@ const MyAccountPage = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div>
+          <div className="mt-3">
             <button
-              className="px-3 py-2 text-xs rounded bg-primaryNew text-white flex items-center justify-center w-24"
+              className="px-3 py-2 text-xs rounded bg-primaryNew text-white flex items-center justify-center w-20"
               onClick={handleSave}
             >
               {loading ? (
