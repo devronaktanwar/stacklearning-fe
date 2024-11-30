@@ -116,6 +116,16 @@ const MobileNav: FC<lMobileNavProps> = ({
           <PiBagSimpleBold />
           <p>Jobs</p>
         </div>
+        <div
+          className="flex items-center gap-4 pt-2 border-b pb-2"
+          onClick={() => {
+            navigate("/my-account");
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+          }}
+        >
+          <FaRegUserCircle />
+          <p className="text-nowrap">My account</p>
+        </div>
         {!user ? (
           <div
             className="flex items-center gap-4 pt-2"

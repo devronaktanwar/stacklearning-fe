@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import HomePage from "./pages/HomePage";
 import JobPage from "./pages/JobPage";
+import MyAccountPage from "./pages/MyAccountPage";
 const App = () => {
   return (
     <div>
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/jobs/:domain/:jobId" element={<JobPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/my-account" element={<MyAccountPage />} />
           </Routes>
       </JobFilterProvider>
     </div>
