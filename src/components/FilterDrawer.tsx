@@ -24,9 +24,12 @@ import {
 } from "./ui/select";
 import { twMerge } from "tailwind-merge";
 import { IoClose } from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
+import { useEffect } from "react";
 
 const FilterDrawer = () => {
   const {
+    filterApplied,
     selectedJobLocationType,
     setSelectedJobLocationType,
     selectedPeriod,
@@ -39,12 +42,54 @@ const FilterDrawer = () => {
     selectedCities,
     handleRemoveCity,
     selectedExperience,
+    setSelectedCities,
     setSelectedExperience,
+    setSelectedCompanies,
+    setSelectedLocation,
+    selectedCompanies,
+    setFilterApplied,
+    selectedLocation
   } = useJobFilter();
 
   const handlePeriodChange = (period: string) => {
     setSelectedPeriod(period);
   };
+  const handleClearAll = () => {
+    setSelectedJobLocationType("Any");
+    setSelectedDomain("Any");
+    setSelectedExperience("all");
+    setSelectedCities([]);
+    setSelectedCompanies([]);
+    setSelectedLocation("All");
+    setselectedJobType("Any");
+    setFilterApplied(false);
+  };
+
+  useEffect(() => {
+    if (
+      selectedLocation !== "All" ||
+      selectedJobLocationType !== "Any" ||
+      selectedDomain !== "Any" ||
+      selectedPeriod !== "any" ||
+      selectedExperience !== "all" ||
+      selectedJobType !== "Any" ||
+      selectedCities.length > 0 ||
+      selectedCompanies.length > 0
+    ) {
+      setFilterApplied(true);
+    } else {
+      setFilterApplied(false);
+    }
+  }, [
+    selectedLocation,
+    selectedJobLocationType,
+    selectedDomain,
+    selectedPeriod,
+    selectedExperience,
+    selectedJobType,
+    selectedCities,
+    selectedCompanies,
+  ]);
 
   return (
     <div>
@@ -54,7 +99,20 @@ const FilterDrawer = () => {
         </DrawerTrigger>
         <DrawerContent className="">
           <DrawerHeader>
-            <DrawerTitle>Filter by</DrawerTitle>
+            <DrawerTitle className="flex justify-between">
+              <h2>Filter by</h2>
+              {filterApplied && (
+                <div>
+                  <button
+                    className="flex gap-1 border text-[10px] items-center px-2 py-1 rounded"
+                    onClick={handleClearAll}
+                  >
+                    <RxCross1 />
+                    Clear all
+                  </button>
+                </div>
+              )}
+            </DrawerTitle>
           </DrawerHeader>
           <div className="p-3 max-h-[80dvh] overflow-y-auto">
             <div className="mt-3">
@@ -110,9 +168,7 @@ const FilterDrawer = () => {
             </div>
 
             <div className="mt-3">
-              <h2 className="text-left text-xs font-medium mb-3">
-                Experience
-              </h2>
+              <h2 className="text-left text-xs font-medium mb-3">Experience</h2>
               <div className="flex gap-4 text-xs flex-wrap">
                 <div className="flex justify-between items-center gap-2">
                   <p>All</p>
