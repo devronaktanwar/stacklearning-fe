@@ -60,9 +60,11 @@ const Login = () => {
       if (response.status === 400) {
         console.log("status is 400");
       }
+      console.log(response.data)
       if (response.data.isSuccess) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("name", response.data.user.fullName);
+        localStorage.setItem("userId", response.data.user.id);
         toast.success("Logged in successfully", {
           duration: 2000,
           style: {
