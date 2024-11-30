@@ -7,19 +7,21 @@ import Signup from "./components/Signup";
 import HomePage from "./pages/HomePage";
 import JobPage from "./pages/JobPage";
 import MyAccountPage from "./pages/MyAccountPage";
+import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <div>
+      <Toaster position="bottom-center" />
       <Navbar />
       <JobFilterProvider>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/job-board" element={<JobBoardPage />} />
-            <Route path="/jobs/:domain/:jobId" element={<JobPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/my-account" element={<MyAccountPage />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/job-board" element={<JobBoardPage />} />
+          <Route path="/jobs/:domain/:jobId" element={<JobPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/my-account" element={<MyAccountPage />} />
+        </Routes>
       </JobFilterProvider>
     </div>
   );
