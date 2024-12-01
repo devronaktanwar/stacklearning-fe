@@ -79,8 +79,7 @@ const Signup = () => {
           },
         });
         setCurrentStep(2);
-      }
-      else{
+      } else {
         toast.error("Email already exists, please login", {
           duration: 2000,
           style: {
@@ -207,7 +206,6 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
   const [loading, setLoading] = useState(false);
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -279,7 +277,6 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
             });
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("userId", response.data.user.id);
-
             setTimeout(() => {
               navigate("/");
               window.location.reload();

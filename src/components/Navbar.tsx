@@ -22,17 +22,23 @@ const Navbar: FC<NavbarProps> = () => {
         </div>
 
         <div className="hidden md:flex gap-8 text-base  items-center">
-          <Link to="/"className="font-medium">Home</Link>
-          <Link to="/job-board" className="font-medium">Jobs</Link>
-          {user && (
+          <Link to="/" className="font-medium">
+            Home
+          </Link>
+          <Link to="/job-board" className="font-medium">
+            Jobs
+          </Link>
+          {user.isLoggedIn && (
             <div className="flex gap-2 items-center">
-              <p className="text-sm">Hi, {user.fullName.split(" ")[0]}</p>
-              <FaRegUserCircle size={22}/>
+              <p className="text-sm">Hi, {user?.fullName.split(" ")[0]}</p>
+              <FaRegUserCircle size={22} />
             </div>
           )}
         </div>
         <div className="md:hidden relative flex gap-2 items-center">
-          {user && <p className="text-sm">Hi, {user.fullName.split(" ")[0]}</p>}
+          {user.isLoggedIn && (
+            <p className="text-sm">Hi, {user?.fullName.split(" ")[0]}</p>
+          )}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-2xl"
@@ -50,7 +56,7 @@ const Navbar: FC<NavbarProps> = () => {
           </div>
         </div>
 
-        {!user && (
+        {!user.isLoggedIn && (
           <div className="hidden md:flex gap-6 text-sm font-medium">
             <button
               className="border px-4 py-2 border-primaryNew rounded"
@@ -73,7 +79,7 @@ const Navbar: FC<NavbarProps> = () => {
 interface lMobileNavProps {
   setIsMobileMenuOpen: (val: boolean) => void;
   isMobileMenuOpen: boolean;
-  user: string;
+  user: any;
 }
 const MobileNav: FC<lMobileNavProps> = ({
   setIsMobileMenuOpen,
@@ -110,17 +116,19 @@ const MobileNav: FC<lMobileNavProps> = ({
           <PiBagSimpleBold />
           <p>Jobs</p>
         </div>
-        <div
-          className="flex items-center gap-4 pt-2 border-b pb-2"
-          onClick={() => {
-            navigate("/my-account");
-            setIsMobileMenuOpen(!isMobileMenuOpen);
-          }}
-        >
-          <FaRegUserCircle />
-          <p className="text-nowrap">My account</p>
-        </div>
-        {!user ? (
+        {user.isLoggedIn && (
+          <div
+            className="flex items-center gap-4 pt-2 border-b pb-2"
+            onClick={() => {
+              navigate("/my-account");
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }}
+          >
+            <FaRegUserCircle />
+            <p className="text-nowrap">My account</p>
+          </div>
+        )}
+        {!user.isLoggedIn ? (
           <div
             className="flex items-center gap-4 pt-2"
             onClick={() => {
