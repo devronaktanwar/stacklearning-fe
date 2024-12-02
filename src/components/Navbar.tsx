@@ -30,14 +30,18 @@ const Navbar: FC<NavbarProps> = () => {
           </Link>
           {user.isLoggedIn && (
             <div className="flex gap-2 items-center">
-              <p className="text-sm">Hi, {user?.fullName.split(" ")[0]}</p>
+              <p className="text-sm">
+                Hi, {user?.fullName && user?.fullName.split(" ")[0]}
+              </p>
               <FaRegUserCircle size={22} />
             </div>
           )}
         </div>
         <div className="md:hidden relative flex gap-2 items-center">
           {user.isLoggedIn && (
-            <p className="text-sm">Hi, {user?.fullName.split(" ")[0]}</p>
+            <p className="text-sm">
+              Hi, {user?.fullName && user?.fullName.split(" ")[0]}
+            </p>
           )}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

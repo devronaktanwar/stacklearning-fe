@@ -276,7 +276,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
               },
             });
             localStorage.setItem("token", response.data.token);
-            localStorage.setItem("userId", response.data.user.id);
+            localStorage.setItem("userId", response.data.user._id);
             setTimeout(() => {
               navigate("/");
               window.location.reload();
