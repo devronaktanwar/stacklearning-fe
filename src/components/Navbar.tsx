@@ -7,6 +7,7 @@ import { PiBagSimpleBold } from "react-icons/pi";
 import { IoMdLogIn } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useUserContext } from "@/context/UserContext";
+import { twMerge } from "tailwind-merge";
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => {
@@ -33,7 +34,7 @@ const Navbar: FC<NavbarProps> = () => {
               <p className="text-sm">
                 Hi, {user?.fullName && user?.fullName.split(" ")[0]}
               </p>
-              <FaRegUserCircle size={22} />
+              <FaRegUserCircle size={22} className="text-gray-500"/>
             </div>
           )}
         </div>
@@ -49,14 +50,15 @@ const Navbar: FC<NavbarProps> = () => {
           >
             <HiOutlineMenuAlt1 />
           </button>
-          <div className="absolute right-6 top-6">
-            {isMobileMenuOpen && (
+          <div className="absolute right-6 top-8">
+            <div className={twMerge(isMobileMenuOpen?" translate-0 scale-100"
+              : "-translate-y-20  translate-x-20 scale-0","transition-transform duration-300")}>
               <MobileNav
                 isMobileMenuOpen={isMobileMenuOpen}
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
                 user={user}
               />
-            )}
+            </div>
           </div>
         </div>
 
