@@ -14,7 +14,7 @@ const JobPage = () => {
   const { jobId, domain } = useParams<{ jobId: string; domain: string }>();
   const [jobData, setJobData] = useState<JobCardProps | null>(null);
   const [similarJob, setSimilarJob] = useState<JobCardProps[] | null>(null);
-
+  const { jobId: currentJobId } = useParams();
   const fetchJobData = async () => {
     try {
       const response = await axios.get(
@@ -43,9 +43,12 @@ const JobPage = () => {
       fetchSimilarJobs();
     }
   }, [jobId, domain]);
-  console.log("similar", similarJob);
   if (!jobData) {
-    return <div className="flex justify-center items-center h-[40vh] w-full"><Loader/></div>;
+    return (
+      <div className="flex justify-center items-center h-[40vh] w-full">
+        <Loader />
+      </div>
+    );
   }
 
   const newDate = new Date(jobData.date);
@@ -54,6 +57,28 @@ const JobPage = () => {
     month: "short",
     year: "numeric",
   }).format(newDate);
+
+  const handleShare = async (
+    url: string,
+    title: string,
+    company: string,
+    location: string
+  ) => {
+    const shareData = {
+      title: `${title} at ${company}`,
+      text: `${company} is Hiring!\nRole: ${title}\nLocation: ${location}\n📩 Apply Here: ${url}`,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        console.log("Content shared successfully");
+      } else {
+        alert("Share API not supported on this browser.");
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+    }
+  };
 
   return (
     <div className="py-4 sm:py-8">
@@ -109,7 +134,17 @@ const JobPage = () => {
               </div>
             </div>
             <div className="flex gap-3 justify-end">
-              <button className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-medium text-primary border border-primary flex gap-1 items-center sm:text-sm">
+              <button
+                className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-medium text-primary border border-primary flex gap-1 items-center sm:text-sm"
+                onClick={() =>
+                  handleShare(
+                    `https://stacklearning.in/jobs/${domain}/${jobId}`,
+                    jobData.jobTitle,
+                    jobData.companyName,
+                    jobData.location
+                  )
+                }
+              >
                 Copy Link <FaLink />
               </button>
               <a
@@ -136,19 +171,22 @@ const JobPage = () => {
                 <h2 className="font-semibold text-base">Similar Jobs</h2>
               </div>
               <div className="flex flex-col gap-3">
-                {similarJob?.map((job, index) => {
-                  return (
-                    <SimilarJobCard
-                      key={index}
-                      jobTitle={job.jobTitle}
-                      companyName={job.companyName}
-                      image={job.image}
-                      location={job.location}
-                      jobId={job.jobId}
-                      domain={job.domain}
-                    />
-                  );
-                })}
+                {similarJob
+                  ?.filter((job) => job.jobId !== currentJobId)
+                  .slice(0, 4)
+                  .map((job, index) => {
+                    return (
+                      <SimilarJobCard
+                        key={index}
+                        jobTitle={job.jobTitle}
+                        companyName={job.companyName}
+                        image={job.image}
+                        location={job.location}
+                        jobId={job.jobId}
+                        domain={job.domain}
+                      />
+                    );
+                  })}
               </div>
             </div>
             <Newsletter />
