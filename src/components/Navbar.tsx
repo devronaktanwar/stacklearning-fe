@@ -13,7 +13,7 @@ interface NavbarProps {}
 const Navbar: FC<NavbarProps> = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(true);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const { user } = useUserContext();
 
   return (
