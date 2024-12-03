@@ -111,7 +111,7 @@ const MyAccountPage = () => {
             </div>
           </div>
           <div
-            className={`overflow-hidden transition-all duration-300 ${
+            className={`overflow-hidden transition-all duration-200 ${
               showPasswordFields ? "max-h-screen" : "max-h-0"
             }`}
           >

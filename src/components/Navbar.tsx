@@ -13,6 +13,7 @@ interface NavbarProps {}
 const Navbar: FC<NavbarProps> = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(true);
   const { user } = useUserContext();
 
   return (
@@ -30,11 +31,32 @@ const Navbar: FC<NavbarProps> = () => {
             Jobs
           </Link>
           {user.isLoggedIn && (
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center cursor-pointer">
               <p className="text-sm">
                 Hi, {user?.fullName && user?.fullName.split(" ")[0]}
               </p>
-              <FaRegUserCircle size={22} className="text-gray-500"/>
+              <div>
+                <FaRegUserCircle
+                  size={22}
+                  onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+                />
+                <div className="absolute right-4 top-[84px]">
+                  <div
+                    className={twMerge(
+                      isDesktopMenuOpen
+                        ? " translate-0 scale-100"
+                        : "-translate-y-10  translate-x-20 scale-0",
+                      "transition-transform duration-300"
+                    )}
+                  >
+                    <DesktopNav
+                      isDesktopMenuOpen={isDesktopMenuOpen}
+                      setIsDesktopMenuOpen={setIsDesktopMenuOpen}
+                      user={user}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -51,8 +73,14 @@ const Navbar: FC<NavbarProps> = () => {
             <HiOutlineMenuAlt1 />
           </button>
           <div className="absolute right-6 top-8">
-            <div className={twMerge(isMobileMenuOpen?" translate-0 scale-100"
-              : "-translate-y-20  translate-x-20 scale-0","transition-transform duration-300")}>
+            <div
+              className={twMerge(
+                isMobileMenuOpen
+                  ? " translate-0 scale-100"
+                  : "-translate-y-20  translate-x-20 scale-0",
+                "transition-transform duration-300"
+              )}
+            >
               <MobileNav
                 isMobileMenuOpen={isMobileMenuOpen}
                 setIsMobileMenuOpen={setIsMobileMenuOpen}
@@ -151,6 +179,47 @@ const MobileNav: FC<lMobileNavProps> = ({
             <p>Logout</p>
           </div>
         )}
+      </div>
+    </div>
+  );
+};
+
+interface lDesktopNavProps {
+  setIsDesktopMenuOpen: (val: boolean) => void;
+  isDesktopMenuOpen: boolean;
+  user: any;
+}
+const DesktopNav: FC<lDesktopNavProps> = ({
+  setIsDesktopMenuOpen,
+  isDesktopMenuOpen,
+  user,
+}) => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setIsDesktopMenuOpen(!isDesktopMenuOpen);
+    window.location.reload();
+  };
+  return (
+    <div className="border px-5 py-2 text-sm bg-white rounded-xl">
+      <div className="flex flex-col">
+        {user.isLoggedIn && (
+          <div
+            className="flex items-center gap-4 pt-1 border-b pb-1"
+            onClick={() => {
+              navigate("/my-account");
+              setIsDesktopMenuOpen(!isDesktopMenuOpen);
+            }}
+          >
+            <FaRegUserCircle />
+            <p className="text-nowrap hover:underline">My account</p>
+          </div>
+        )}
+        <div className="flex items-center gap-4 py-1" onClick={handleLogout}>
+          <IoMdLogIn />
+          <p className="hover:underline">Logout</p>
+        </div>
       </div>
     </div>
   );

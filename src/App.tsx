@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import JobPage from "./pages/JobPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./components/ProtectedRoute";
 const App = () => {
   return (
     <div>
@@ -20,7 +21,14 @@ const App = () => {
           <Route path="/jobs/:domain/:jobId" element={<JobPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/my-account" element={<MyAccountPage />} />
+          <Route
+            path="/my-account"
+            element={
+              <ProtectedRoute>
+                <MyAccountPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </JobFilterProvider>
     </div>
