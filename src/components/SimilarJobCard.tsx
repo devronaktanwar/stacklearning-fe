@@ -23,7 +23,16 @@ const SimilarJobCard: FC<lSimilarJobCardProps> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="w-full bg-white border rounded-md cursor-pointer" onClick={() => navigate(`/jobs/${domain}/${jobId}`)}>
+    <div
+      className="w-full bg-white border rounded-md cursor-pointer"
+      onClick={() => {
+        navigate(`/jobs/${domain}/${jobId}`);
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }}
+    >
       <div className="p-3">
         <div className="flex items-start gap-1">
           <div className="border h-10 w-10 rounded-full overflow-hidden aspect-square">
