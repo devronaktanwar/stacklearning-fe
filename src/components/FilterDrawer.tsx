@@ -95,7 +95,7 @@ const FilterDrawer = () => {
   return (
     <div>
       <Drawer>
-        <DrawerTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2">
+        <DrawerTrigger className="p-2 bg-primaryNew text-white rounded flex items-center text-xs gap-2 border border-primaryNew">
           Filter <RiFilter3Fill />
         </DrawerTrigger>
         <DrawerContent className="">

@@ -13,11 +13,11 @@ const HomePage: FC<lHomePageProps> = () => {
     <div>
       <div>
         <Header />
-        <ExploreJob/>
-        <FeatureBanner/>
-        <FeaturedCompanyBanner/>
-        <QualificationBanner/>
-        <JobRoleBanner/>
+        <ExploreJob />
+        <FeatureBanner />
+        <FeaturedCompanyBanner />
+        <QualificationBanner />
+        <JobRoleBanner />
         {/* <Services/> */}
       </div>
     </div>

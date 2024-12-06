@@ -99,64 +99,78 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     return <div className="text-[400px]">No Jobs Found</div>;
   }
   return (
-    <div className="relative">
-      <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
-        <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
-          <div className="sm:max-w-md w-[90%] flex items-center gap-6">
-            <div className="flex-1">
-              <Input
-                type="text"
-                placeholder="Search for company, roles"
-                className="w-full py-5 pl-10 rounded-xl"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+    <>
+      <div className="md:hidden"onClick={()=>navigate('/saved-jobs')}>
+        <SavedJobsButton />
+      </div>
+      <div className="relative">
+        <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
+          <div className="relative w-[95%] sm:w-[80%] m-auto mb-4 flex items-center gap-2">
+            <div className="sm:max-w-md w-[90%] flex items-center gap-6">
+              <div className="flex-1">
+                <Input
+                  type="text"
+                  placeholder="Search for company, roles"
+                  className="w-full py-5 pl-10 rounded-xl"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+              <div
+                className="items-center gap-1 border px-2 py-2 rounded cursor-pointer border-primaryNew text-primaryNew hidden md:flex"
+                onClick={() => navigate("/saved-jobs")}
+              >
+                <LuBookmark size={16} />
+                <p className="text-xs">Saved</p>
+              </div>
             </div>
-            <div
-              className="items-center gap-1 border px-2 py-1 rounded cursor-pointer border-primaryNew text-primaryNew hidden md:flex"
-              onClick={() => navigate("/saved-jobs")}
-            >
-              <LuBookmark size={16} />
-              <p className="text-sm">Saved</p>
+            <div className="lg:hidden">
+              <FilterDrawer />
             </div>
+            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
-          <div className="lg:hidden">
-            <FilterDrawer />
+        </div>
+        <div className="md:w-[80%] m-auto flex gap-4 flex-col lg:flex-row w-[95%]">
+          <div className="flex flex-1 flex-col gap-y-4">
+            {filteredJobs.length > 0 ? (
+              filteredJobs.map((job, index) => (
+                <JobCard
+                  key={index}
+                  jobTitle={job.jobTitle}
+                  companyName={job.companyName}
+                  jobDescriptionText={job.jobDescriptionText}
+                  image={job.image}
+                  tagsArray={job.tagsArray}
+                  date={job.date}
+                  location={job.location}
+                  jobType={job.jobType}
+                  experienceRequired={job.experienceRequired}
+                  jobDescriptionHtml={job.jobDescriptionHtml}
+                  link={job.link}
+                  jobId={job.jobId}
+                  domain={job.domain}
+                />
+              ))
+            ) : (
+              <div className="text-center text-gray-500 py-10">
+                No jobs found
+              </div>
+            )}
           </div>
-          <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+          <div className="hidden lg:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
+            <FilterAndSort />
+          </div>
         </div>
       </div>
-      <div className="md:w-[80%] m-auto flex gap-4 flex-col lg:flex-row w-[95%]">
-        <div className="flex flex-1 flex-col gap-y-4">
-          {filteredJobs.length > 0 ? (
-            filteredJobs.map((job, index) => (
-              <JobCard
-                key={index}
-                jobTitle={job.jobTitle}
-                companyName={job.companyName}
-                jobDescriptionText={job.jobDescriptionText}
-                image={job.image}
-                tagsArray={job.tagsArray}
-                date={job.date}
-                location={job.location}
-                jobType={job.jobType}
-                experienceRequired={job.experienceRequired}
-                jobDescriptionHtml={job.jobDescriptionHtml}
-                link={job.link}
-                jobId={job.jobId}
-                domain={job.domain}
-              />
-            ))
-          ) : (
-            <div className="text-center text-gray-500 py-10">No jobs found</div>
-          )}
-        </div>
-        <div className="hidden lg:flex basis-1/3 border rounded-lg p-4 h-fit sticky top-44 bg-white">
-          <FilterAndSort />
-        </div>
-      </div>
+    </>
+  );
+};
+const SavedJobsButton = () => {
+  return (
+    <div className="fixed -right-11 bg-white top-[32%] -rotate-90 z-50 flex items-center px-3 py-1 text-xs rounded-t gap-1 border text-primaryNew border-primaryNew">
+      <LuBookmark />
+      Saved Jobs
     </div>
   );
 };
-
 export default JobBoardPage;
