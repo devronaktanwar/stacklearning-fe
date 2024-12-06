@@ -9,6 +9,7 @@ import JobPage from "./pages/JobPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
+import SavedJobPage from "./pages/SavedJobPage";
 const App = () => {
   return (
     <div>
@@ -26,6 +27,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <MyAccountPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/saved-jobs"
+            element={
+              <ProtectedRoute>
+                <SavedJobPage />
               </ProtectedRoute>
             }
           />

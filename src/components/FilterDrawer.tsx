@@ -359,7 +359,7 @@ const FilterDrawer = () => {
               <h2 className="text-left text-xs font-medium mb-3">Job Type</h2>
               <ToggleGroup
                 type="single"
-                className="flex justify-center flex-wrap"
+                className="flex justify-start flex-wrap"
                 value={selectedJobType}
                 onValueChange={(value) => {
                   if (value) setselectedJobType(value);

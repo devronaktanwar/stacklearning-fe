@@ -1,10 +1,15 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { CiLocationArrow1 } from "react-icons/ci";
 import { PiBagSimpleBold } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { SlCalender } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
 import { FaLink } from "react-icons/fa";
+import { LuBookmark, LuCheckCircle } from "react-icons/lu";
+import axios from "axios";
+import { useUserContext } from "@/context/UserContext";
+import toast from "react-hot-toast";
+import CircularLoader from "./CircularLoader";
 
 export interface JobCardProps {
   jobTitle: string;
@@ -34,7 +39,10 @@ const JobCard: FC<JobCardProps> = ({
   domain,
 }) => {
   const navigate = useNavigate();
+  const { user, updateSavedJobs } = useUserContext();
   const newDate = new Date(date);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "short",
@@ -66,7 +74,68 @@ const JobCard: FC<JobCardProps> = ({
       console.error("Error sharing:", error);
     }
   };
+  useEffect(() => {
+    if (user?.savedJobs.some((job: any) => job.jobId === jobId)) {
+      setIsSaved(true);
+    }
+  }, [user, jobId]);
+  const handleJobSave = async (jobId: string) => {
+    setLoading(true);
+    try {
+      const data = await axios.get(
+        `https://stacklearning-be-h0pq.onrender.com/api/get-job-detail/${jobId}`
+      );
+      const response = await axios.post(
+        "https://stacklearning-be-h0pq.onrender.com/api/jobs/save",
+        {
+          jobId: jobId,
+          userId: user._id,
+        }
+      );
+      if (response.data.isSuccess) {
+        toast.success("Job saved successfully", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize: "12px",
+          },
+        });
+        updateSavedJobs([...user.savedJobs, data.data]);
+        setIsSaved(true);
+      } else {
+        toast.error("Job is already saved", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize: "12px",
+          },
+        });
+      }
+    } catch (err) {
+      toast.error("something went wrong", {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+          fontSize: "12px",
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  if (loading) {
+    return <CircularLoader />;
+  }
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
@@ -84,7 +153,7 @@ const JobCard: FC<JobCardProps> = ({
             </h2>
             <div className="flex gap-1 items-center text-gray-500">
               <PiBagSimpleBold size={16} />
-              <p className="text-[9px] text-gray-500 font-medium sm:text-sm flex-1">
+              <p className="text-[9px] text-gray-500 font-medium sm:text-sm flex-1 text-nowrap">
                 {companyName}
               </p>
             </div>
@@ -127,7 +196,10 @@ const JobCard: FC<JobCardProps> = ({
           />
         </p>
       </div>
-      <div className="flex justify-end items-center">
+      <div className="flex justify-between items-center">
+        <div className="cursor-pointer" onClick={() => !isSaved && handleJobSave(jobId)}>
+        {isSaved ? <div className="text-gray-500 flex items-center gap-1 text-sm"><LuCheckCircle size={18}/>Saved</div> : <LuBookmark size={20} className="text-gray-500"/>}
+        </div>
         <div className="flex gap-4">
           <button
             className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-semibold text-primary border border-primary flex gap-1 items-center sm:text-sm"

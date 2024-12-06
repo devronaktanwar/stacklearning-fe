@@ -6,10 +6,13 @@ import FilterAndSort from "@/components/FilterAndSort";
 import { useJobFilter } from "@/context/JobFilterContext";
 import FilterDrawer from "@/components/FilterDrawer";
 import Loader from "@/components/Loader";
+import { LuBookmark } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
   const [jobs, setJobs] = useState<any[]>([]);
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const {
     selectedJobLocationType,
@@ -18,7 +21,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     selectedJobType,
     selectedCities,
     selectedExperience,
-    selectedCompanies
+    selectedCompanies,
   } = useJobFilter();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -79,9 +82,11 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       isDateWithinRange(job.date, selectedPeriod) &&
       (selectedDomain === "Any" || job?.domain === selectedDomain) &&
       (selectedJobType === "Any" || job?.jobType === selectedJobType) &&
-      (selectedCities.length === 0 || selectedCities.includes(job?.location))&&
-      (selectedCompanies.length === 0 || selectedCompanies.includes(job?.companyName))&&
-      (selectedExperience === "all" || job.experienceRequired === selectedExperience)
+      (selectedCities.length === 0 || selectedCities.includes(job?.location)) &&
+      (selectedCompanies.length === 0 ||
+        selectedCompanies.includes(job?.companyName)) &&
+      (selectedExperience === "all" ||
+        job.experienceRequired === selectedExperience)
   );
   if (loading)
     return (
@@ -93,7 +98,6 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   if (!filteredJobs) {
     return <div className="text-[400px]">No Jobs Found</div>;
   }
-
   return (
     <div className="relative">
       <div className="sticky top-0 pt-4 pb-2 bg-[#fbfbfb]">
@@ -107,6 +111,13 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
+            </div>
+            <div
+              className="items-center gap-1 border px-2 py-1 rounded cursor-pointer border-primaryNew text-primaryNew hidden md:flex"
+              onClick={() => navigate("/saved-jobs")}
+            >
+              <LuBookmark size={16} />
+              <p className="text-sm">Saved</p>
             </div>
           </div>
           <div className="lg:hidden">
