@@ -80,6 +80,10 @@ const JobCard: FC<JobCardProps> = ({
     }
   }, [user, jobId]);
   const handleJobSave = async (jobId: string) => {
+    if(!user.isLoggedIn){
+      navigate('/login')
+      return
+    }
     setLoading(true);
     try {
       const data = await axios.get(
