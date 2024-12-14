@@ -13,9 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button } from "./ui/button";
 import toast, { Toaster } from "react-hot-toast";
-import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
-const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const url = "https://stacklearning-be-h0pq.onrender.com/api/login";
 
 const Login = () => {
@@ -72,7 +70,7 @@ const Login = () => {
             background: "#333",
             color: "#fff",
             padding: "6px 10px",
-            fontSize: "12px",
+            fontSize:"12px"
           },
         });
         setTimeout(() => {
@@ -99,17 +97,14 @@ const Login = () => {
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize: "12px",
+          fontSize:"12px"
         },
       });
     } finally {
       setLoading(false);
     }
   };
-  const prevUrl = window.location.href;
-  const handleGoogleLogin = async () => {
-    window.location.href = `${BACKEND_BASE_URL}/api/google?prevUrl=${prevUrl}`;
-  };
+
   return (
     <div className="pt-16">
       <Toaster position="bottom-center" />
@@ -162,10 +157,6 @@ const Login = () => {
               "Login"
             )}
           </Button>
-          <div className="flex justify-center gap-4 py-2 text-xl cursor-pointer">
-            <FcGoogle onClick={handleGoogleLogin} />
-            <FaGithub />
-          </div>
           <div className="flex gap-1">
             <p className="text-xs">Not a user?</p>
             <Link

@@ -204,9 +204,7 @@ const DesktopNav: FC<lDesktopNavProps> = ({
   return (
     <div className="border px-5 py-3 text-sm bg-white rounded-xl shadow-lg">
       <div className="flex gap-3 pb-2 items-center">
-        <div className=" bg-[#deffd9] h-9 w-9 flex justify-center items-center rounded-full shadow">
-          {user.fullName.slice(0, 1)}
-        </div>
+        <div className=" bg-[#deffd9] h-9 w-9 flex justify-center items-center rounded-full shadow">{user.fullName.slice(0,1)}</div>
         <div className="flex flex-col">
           <h2 className="text-sm">{user.fullName}</h2>
           <p className="text-xs text-gray-500">{user.emailAddress}</p>
