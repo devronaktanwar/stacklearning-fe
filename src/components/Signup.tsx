@@ -13,6 +13,8 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -175,6 +177,11 @@ const Signup = () => {
                 "Sign Up"
               )}
             </Button>
+            <div className="flex justify-center gap-4 py-2 text-xl cursor-pointer">
+              <FcGoogle />
+              <FaGithub />
+            </div>
+
             <div className="flex gap-1">
               <p className="text-xs">Already a user?</p>
               <Link

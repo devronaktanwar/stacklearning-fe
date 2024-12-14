@@ -121,7 +121,7 @@ const JobCard: FC<JobCardProps> = ({
           },
         });
       }
-    } catch (err) {
+    } catch (err:string) {
       toast.error("something went wrong", {
         duration: 2000,
         style: {
@@ -224,7 +224,7 @@ const JobCard: FC<JobCardProps> = ({
             onClick={() => navigate(`/jobs/${domain}/${jobId}`)}
           >
             Apply
-            <CiLocationArrow1 />
+            <CiLocationArrow1/>
           </button>
         </div>
       </div>
