@@ -15,7 +15,6 @@ import { Button } from "./ui/button";
 import toast, { Toaster } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
-const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 const url = "https://stacklearning-be-h0pq.onrender.com/api/login";
 
 const Login = () => {
@@ -108,7 +107,7 @@ const Login = () => {
   };
   const prevUrl = window.location.href;
   const handleGoogleLogin = async () => {
-    window.location.href = `${BACKEND_BASE_URL}/api/google?prevUrl=${prevUrl}`;
+    window.location.href = `https://stacklearning-be-h0pq.onrender.com/api/google?prevUrl=${prevUrl}`;
   };
   return (
     <div className="pt-16">
