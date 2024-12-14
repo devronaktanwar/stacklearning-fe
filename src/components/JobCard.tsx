@@ -121,7 +121,7 @@ const JobCard: FC<JobCardProps> = ({
           },
         });
       }
-    } catch (err:any) {
+    } catch (err:string) {
       toast.error("something went wrong", {
         duration: 2000,
         style: {
