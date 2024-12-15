@@ -70,13 +70,24 @@ const Login = () => {
             background: "#333",
             color: "#fff",
             padding: "6px 10px",
-            fontSize:"12px"
+            fontSize: "12px",
           },
         });
         setTimeout(() => {
           navigate("/");
           window.location.reload();
         }, 1000);
+      } else if (response.data.message == "Invalid password") {
+        toast.error("Invalid password!", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize: "12px",
+          },
+        });
       } else {
         toast.error("Invalid email, please sign up", {
           duration: 2000,
@@ -85,6 +96,7 @@ const Login = () => {
             background: "#333",
             color: "#fff",
             padding: "6px 10px",
+            fontSize: "12px",
           },
         });
       }
@@ -97,7 +109,7 @@ const Login = () => {
           background: "#333",
           color: "#fff",
           padding: "6px 10px",
-          fontSize:"12px"
+          fontSize: "12px",
         },
       });
     } finally {

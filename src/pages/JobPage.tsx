@@ -45,7 +45,7 @@ const JobPage = () => {
   }, [jobId, domain]);
   if (!jobData) {
     return (
-      <div className="flex justify-center items-center h-[40vh] w-full">
+      <div className="flex justify-center items-center h-[60vh] w-full">
         <Loader />
       </div>
     );

@@ -109,7 +109,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="pt-16">
+    <div className="pt-16 bg-[#0596680f]">
       <Toaster position="bottom-center" />
       {currentStep === 1 && (
         <Card className="w-[90%] sm:w-[400px] m-auto">

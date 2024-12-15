@@ -68,6 +68,10 @@
     background: #fbfbfb;
   }
 }
+
+input{
+  outline: none;
+}
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }

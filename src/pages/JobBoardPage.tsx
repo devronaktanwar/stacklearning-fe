@@ -90,7 +90,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   );
   if (loading)
     return (
-      <div className="flex justify-center items-center w-full h-[40vh]">
+      <div className="flex justify-center items-center w-full h-[60vh]">
         <Loader />
       </div>
     );
@@ -100,7 +100,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
   }
   return (
     <>
-      <div className="md:hidden"onClick={()=>navigate('/saved-jobs')}>
+      <div className="md:hidden" onClick={() => navigate("/saved-jobs")}>
         <SavedJobsButton />
       </div>
       <div className="relative">
@@ -111,7 +111,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
                 <Input
                   type="text"
                   placeholder="Search for company, roles"
-                  className="w-full py-5 pl-10 rounded-xl"
+                  className="w-full py-5 pl-12 rounded-xl"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -127,7 +127,9 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
             <div className="lg:hidden">
               <FilterDrawer />
             </div>
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-primaryNew p-2 text-white rounded-full">
+              <FiSearch size={12} />
+            </div>
           </div>
         </div>
         <div className="md:w-[80%] m-auto flex gap-4 flex-col lg:flex-row w-[95%]">
