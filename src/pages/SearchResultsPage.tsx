@@ -15,7 +15,7 @@ const SearchResultsPage = () => {
     if (keyword || location) {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:3000/api/search", {
+        const response = await axios.get("https://stacklearning-be-h0pq.onrender.com/api/search", {
           params: { keyword, location },
         });
         setResults(response.data.data);
