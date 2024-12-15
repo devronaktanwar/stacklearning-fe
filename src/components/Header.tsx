@@ -2,11 +2,11 @@ import HeaderSearchBar from "./HeaderSearchBar";
 
 const Header = () => {
   return (
-    <div className="lg:py-36 py-16 bg-[#0596680f] h-[89vh]">
+    <div className="lg:py-36 py-16 bg-[#0596680f] h-[75vh]">
       <div className="w-[95%] md:w-[80%] m-auto">
         <div className="flex flex-col items-center gap-4 justify-center">
           <h1 className="leading-tight text-2xl sm:text-[44px] font-semibold text-center text-[#161c2d]">
-            Unleash Your{" "}
+            Unleash your{" "}
             <span className="sm:text-[48px] text-primaryNew">talent,</span>
             <br />
             <span className="sm:text-[48px] text-primaryNew">seize</span> the

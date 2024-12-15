@@ -17,8 +17,8 @@ const cityData = [
 
 const ExploreJob = () => {
   return (
-    <div>
-      <div className="w-[95%] sm:w-[80%] m-auto bg-white sm:px-6 py-8 rounded-lg border-[1px] px-2">
+    <div className="text-[#161c2d] pt-16">
+      <div className="w-[95%] sm:w-[80%] m-auto sm:px-6 py-6 rounded-lg px-2">
         <h2 className="text-center font-semibold text-xl sm:text-2xl">
           Explore jobs in 100+ cities
         </h2>
@@ -27,7 +27,7 @@ const ExploreJob = () => {
           {cityData.map((city, index) => (
             <div
               key={index}
-              className="w-[150px] sm:w-[200px] border flex flex-col items-center rounded-lg p-4 gap-4 cursor-pointer"
+              className="w-[150px] sm:w-[200px] border flex flex-col items-center rounded-lg p-4 gap-4 cursor-pointer hover:bg-[#0596680f] transition-all"
             >
               <div className="w-full">
                 <img

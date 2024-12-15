@@ -17,7 +17,7 @@ const Navbar: FC<NavbarProps> = () => {
   const { user } = useUserContext();
 
   return (
-    <div className="sticky top-0 bg-[#0596680f] z-50">
+    <div className="sticky top-0 bg-white border-b z-50">
       <nav className="w-[85%] m-auto flex justify-between items-center  z-50 relative">
         <div className="w-16 sm:w-24">
           <img src={logo} alt="logo" className="w-full" />

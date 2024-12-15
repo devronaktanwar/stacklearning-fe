@@ -14,7 +14,7 @@ const qualifications = [
 const QualificationBanner = () => {
   return (
     <div className="sm:py-24 py-12">
-      <div className="w-[95%] sm:w-[80%] m-auto p-8 bg-white border-[1px] rounded-lg">
+      <div className="w-[95%] sm:w-[80%] m-auto p-8  rounded-lg">
         <h2 className="font-semibold text-center text-xl sm:text-2xl">
           What is your Qualification?
         </h2>
