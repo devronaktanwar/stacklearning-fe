@@ -3,6 +3,7 @@ import FeatureBanner from "@/components/FeatureBanner";
 import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
 import Header from "@/components/Header";
 import JobRoleBanner from "@/components/JobRoleBanner";
+import PopularJobs from "@/components/PopularJobs";
 import QualificationBanner from "@/components/QualificationBanner";
 // import Services from "@/components/Services";
 import { FC } from "react";
@@ -13,11 +14,12 @@ const HomePage: FC<lHomePageProps> = () => {
     <div>
       <div>
         <Header />
-        <ExploreJob />
+        <PopularJobs/>
+        {/* <ExploreJob />
         <FeatureBanner />
         <FeaturedCompanyBanner />
         <QualificationBanner />
-        <JobRoleBanner />
+        <JobRoleBanner /> */}
         {/* <Services/> */}
       </div>
     </div>
