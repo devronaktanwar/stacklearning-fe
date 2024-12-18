@@ -1,10 +1,10 @@
-import ExploreJob from "@/components/ExploreJob";
-import FeatureBanner from "@/components/FeatureBanner";
-import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
+// import ExploreJob from "@/components/ExploreJob";
+// import FeatureBanner from "@/components/FeatureBanner";
+// import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
 import Header from "@/components/Header";
-import JobRoleBanner from "@/components/JobRoleBanner";
+// import JobRoleBanner from "@/components/JobRoleBanner";
 import PopularJobs from "@/components/PopularJobs";
-import QualificationBanner from "@/components/QualificationBanner";
+// import QualificationBanner from "@/components/QualificationBanner";
 // import Services from "@/components/Services";
 import { FC } from "react";
 
