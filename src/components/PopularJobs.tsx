@@ -79,7 +79,7 @@ const PopularJobComponent: FC<lPopularJobComponentProps> = ({
       className="md:p-6 md:py-8 p-4 shadow-sm border-[0.5px] rounded hover:bg-[#25a98420] flex flex-col items-center gap-4 text-[#080808] group transition-all cursor-pointer"
       onClick={() => handleSearch({ title })}
     >
-      <div className="p-2 rounded flex justify-center items-center w-fit group-hover:bg-primaryNew group-hover:text-white">
+      <div className="p-2 rounded flex justify-center items-center w-fit group-hover:bg-primaryNew group-hover:text-white text-primaryNew bg-green-50">
         {icon}
       </div>
       <h1 className="font-semibold text-sm">{title}</h1>

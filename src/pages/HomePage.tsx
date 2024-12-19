@@ -1,7 +1,9 @@
 // import ExploreJob from "@/components/ExploreJob";
 // import FeatureBanner from "@/components/FeatureBanner";
 // import FeaturedCompanyBanner from "@/components/FeaturedCompanyBanner";
+import FeaturedCompany from "@/components/FeaturedCompany";
 import Header from "@/components/Header";
+import HowItWorks from "@/components/HowItWorks";
 // import JobRoleBanner from "@/components/JobRoleBanner";
 import PopularJobs from "@/components/PopularJobs";
 // import QualificationBanner from "@/components/QualificationBanner";
@@ -15,6 +17,8 @@ const HomePage: FC<lHomePageProps> = () => {
       <div>
         <Header />
         <PopularJobs/>
+        <HowItWorks/>
+        <FeaturedCompany/>
         {/* <ExploreJob />
         <FeatureBanner />
         <FeaturedCompanyBanner />

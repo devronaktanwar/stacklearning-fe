@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SavedJobPage from "./pages/SavedJobPage";
 import ScrollToTop from "./components/ScrollToTop";
 import SearchResultsPage from "./pages/SearchResultsPage";
+import CompanyResultPage from "./pages/CompanyResultPage";
 const App = () => {
   return (
     <div>
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/job-board" element={<JobBoardPage />} />
           <Route path="/jobs/:domain/:jobId" element={<JobPage />} />
           <Route path="/jobs/results" element={<SearchResultsPage />} />
+          <Route path="/jobs/company" element={<CompanyResultPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
