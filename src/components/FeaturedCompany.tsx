@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 const featuredCompaniesData = [
   {
     url: "https://i.ibb.co/HgnYzsD/download-1.png",
@@ -53,8 +54,12 @@ interface lFeaturedBoxProps {
   title: string;
 }
 const FeaturedBox: FC<lFeaturedBoxProps> = ({ url, title }) => {
+    const navigate = useNavigate();
+    const handleSearch = ({ company }: { company: string }) => {
+      navigate(`jobs/company?company=${company}`);
+    };
   return (
-    <div className="md:p-6 p-4 shadow-sm border-[0.5px] rounded cursor-pointer">
+    <div className="md:p-6 p-4 shadow-sm border-[0.5px] rounded cursor-pointer"onClick={()=>handleSearch({company:title.toLocaleLowerCase()})}>
       <div className="flex flex-col gap-2">
         <div className="w-32 overflow-hidden">
           <img

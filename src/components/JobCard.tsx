@@ -9,7 +9,7 @@ import { LuBookmark, LuCheckCircle } from "react-icons/lu";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import toast from "react-hot-toast";
-import CircularLoader from "./CircularLoader";
+import { useJobFilter } from "@/context/JobFilterContext";
 
 export interface JobCardProps {
   jobTitle: string;
@@ -40,8 +40,8 @@ const JobCard: FC<JobCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const { user, updateSavedJobs } = useUserContext();
+  const { setLoading } = useJobFilter();
   const newDate = new Date(date);
-  const [loading, setLoading] = useState<boolean>(false);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
@@ -137,9 +137,7 @@ const JobCard: FC<JobCardProps> = ({
     }
   };
 
-  if (loading) {
-    return <CircularLoader />;
-  }
+
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
       <div className="flex justify-between">
