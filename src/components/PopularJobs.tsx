@@ -1,5 +1,8 @@
 import { FC, ReactNode } from "react";
 import { CgWebsite } from "react-icons/cg";
+import { GrCloudSoftware } from "react-icons/gr";
+import { FaNodeJs } from "react-icons/fa6";
+import { MdOutlineDesignServices } from "react-icons/md";
 import { IoLogoAndroid } from "react-icons/io";
 import { FaReact } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -7,27 +10,27 @@ import { useNavigate } from "react-router-dom";
 const popularJobsData = [
   {
     icon: <CgWebsite size={38} />,
-    title: "Front End Developer",
+    title: "Frontend Developer",
   },
   {
     icon: <IoLogoAndroid size={38} />,
-    title: "Fronted Developer",
+    title: "Android Developer",
   },
   {
     icon: <FaReact size={38} />,
-    title: "Fronted Developer",
+    title: "React Developer",
   },
   {
-    icon: <CgWebsite size={38} />,
-    title: "Fronted Developer",
+    icon: <FaNodeJs size={38} />,
+    title: "Backend Developer",
   },
   {
-    icon: <CgWebsite size={38} />,
-    title: "Fronted Developer",
+    icon: <MdOutlineDesignServices size={38} />,
+    title: "UI/UX Designer",
   },
   {
-    icon: <CgWebsite size={38} />,
-    title: "Fronted Developer",
+    icon: <GrCloudSoftware size={38} />,
+    title: "Software Developer",
   },
 ];
 const PopularJobs = () => {

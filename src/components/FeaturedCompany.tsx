@@ -2,24 +2,24 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 const featuredCompaniesData = [
   {
-    url: "https://i.ibb.co/HgnYzsD/download-1.png",
+    url: "https://i.ibb.co/WVky7qP/Untitled-design-2.png",
     title: "Amazon",
   },
   {
-    url: "https://i.ibb.co/HgnYzsD/download-1.png",
+    url: "https://i.ibb.co/wYf6qb6/Untitled-design-3.png",
+    title: "Uber",
+  },
+  {
+    url: "https://i.ibb.co/y4zRHYD/Untitled-design-4.png",
     title: "Google",
   },
   {
-    url: "https://i.ibb.co/HgnYzsD/download-1.png",
-    title: "Microsoft",
+    url: "https://i.ibb.co/N1cC8XC/Untitled-design-5.png",
+    title: "Walmart",
   },
   {
-    url: "https://i.ibb.co/HgnYzsD/download-1.png",
-    title: "Blinkit",
-  },
-  {
-    url: "https://i.ibb.co/HgnYzsD/download-1.png",
-    title: "Blinkit",
+    url: "https://i.ibb.co/5rWW9bg/Untitled-design-6.png",
+    title: "Zomato",
   },
 ];
 const FeaturedCompany = () => {
@@ -65,7 +65,7 @@ const FeaturedBox: FC<lFeaturedBoxProps> = ({ url, title }) => {
           <img
             src={url}
             alt="img"
-            className="w-full rounded hover:scale-95 transition-all"
+            className="w-full rounded hover:scale-95 transition-all border"
           />
         </div>
         <div>
