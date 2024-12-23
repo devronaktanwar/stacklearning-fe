@@ -3,6 +3,7 @@ import newsletter from "../assets/newsletter.svg";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { RiLoader5Line } from "react-icons/ri";
+import BASE_URL from '../../config'
 
 const Newsletter = () => {
   const [email, setEmail] = useState<string>("");
@@ -16,7 +17,7 @@ const Newsletter = () => {
     setLoading(true);
     try {
       await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/subscribe-newsletter",
+        `${BASE_URL}/api/subscribe-newsletter`,
         { email }
       );
       setEmail("");

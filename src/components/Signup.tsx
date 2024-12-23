@@ -13,6 +13,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import toast, { Toaster } from "react-hot-toast";
+import BASE_URL from "../../config";
 
 const Signup = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -55,7 +56,7 @@ const Signup = () => {
 
     try {
       const { data } = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/send-otp",
+        `${BASE_URL}/api/send-otp`,
         {
           emailAddress: emailId,
         },
@@ -238,7 +239,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
     let newuserInputOtp = Number(userInputOtp);
     try {
       const { data } = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/verify-otp",
+        `${BASE_URL}/api/verify-otp`,
         { userInputOtp: newuserInputOtp, email },
         { withCredentials: true }
       );
@@ -256,7 +257,7 @@ const OtpModal: FC<OtpModalProps> = ({ email, name, password }) => {
         });
         try {
           const response = await axios.post(
-            "https://stacklearning-be-h0pq.onrender.com/api/signup",
+            `${BASE_URL}/api/signup`,
             { emailAddress: email, fullName: name, passWord: password },
             {
               headers: {

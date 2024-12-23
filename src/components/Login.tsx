@@ -13,8 +13,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button } from "./ui/button";
 import toast, { Toaster } from "react-hot-toast";
+import BASE_URL from '../../config'
 
-const url = "https://stacklearning-be-h0pq.onrender.com/api/login";
+const url = `${BASE_URL}/api/login`;
 
 const Login = () => {
   const [email, setEmail] = useState("");
