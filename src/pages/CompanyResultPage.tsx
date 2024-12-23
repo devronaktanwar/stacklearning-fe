@@ -4,6 +4,7 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { IoIosStar } from "react-icons/io";
+import BASE_URL from "../../config";
 
 const CompanyResultPage = () => {
   const [searchParams] = useSearchParams();
@@ -13,10 +14,9 @@ const CompanyResultPage = () => {
   const [companyDetail, setCompanyDetail] = useState<any>([]);
   const fetchCompanyDetails = async () => {
     try {
-      const response = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/get-company-by-name",
-        { company }
-      );
+      const response = await axios.post(`${BASE_URL}/api/get-company-by-name`, {
+        company,
+      });
       setCompanyDetail(response.data.data[0]);
     } catch (err) {
       console.log("Error:", err);
@@ -26,12 +26,9 @@ const CompanyResultPage = () => {
     if (company) {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://stacklearning-be-h0pq.onrender.com/api/search",
-          {
-            params: { company },
-          }
-        );
+        const response = await axios.get(`${BASE_URL}/api/search`, {
+          params: { company },
+        });
         setResults(response.data.data);
       } catch (err) {
         console.error(err);
