@@ -72,9 +72,12 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
 
   const filteredJobs = jobs.filter(
     (job) =>
-      [job.jobTitle, job.companyName].some((field) =>
-        field.toLowerCase().includes(searchQuery.toLowerCase())
-      ) &&
+      job && 
+      [job.jobTitle, job.companyName]
+        .filter(Boolean)
+        .some((field) =>
+          field.toLowerCase().includes(searchQuery.toLowerCase())
+        ) &&
       (selectedJobLocationType === "Any" ||
         job?.jobLocationType === selectedJobLocationType) &&
       isDateWithinRange(job.date, selectedPeriod) &&
@@ -86,6 +89,7 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
       (selectedExperience === "all" ||
         job.experienceRequired === selectedExperience)
   );
+  
   if (loading)
     return (
       <div className="flex justify-center items-center w-full h-[60vh]">

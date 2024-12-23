@@ -10,7 +10,7 @@ import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import toast from "react-hot-toast";
 import { useJobFilter } from "@/context/JobFilterContext";
-import BASE_URL from '../../config'
+import BASE_URL from "../../config";
 
 export interface JobCardProps {
   jobTitle: string;
@@ -76,27 +76,25 @@ const JobCard: FC<JobCardProps> = ({
     }
   };
   useEffect(() => {
-    if (user?.savedJobs.some((job: any) => job.jobId === jobId)) {
+    if (
+      user?.savedJobs.length > 0 &&
+      user?.savedJobs.some((job: any) => job.jobId === jobId)
+    ) {
       setIsSaved(true);
     }
   }, [user, jobId]);
   const handleJobSave = async (jobId: string) => {
-    if(!user.isLoggedIn){
-      navigate('/login')
-      return
+    if (!user.isLoggedIn) {
+      navigate("/login");
+      return;
     }
     setLoading(true);
     try {
-      const data = await axios.get(
-        `${BASE_URL}/api/get-job-detail/${jobId}`
-      );
-      const response = await axios.post(
-        `${BASE_URL}/api/jobs/save`,
-        {
-          jobId: jobId,
-          userId: user._id,
-        }
-      );
+      const data = await axios.get(`${BASE_URL}/api/get-job-detail/${jobId}`);
+      const response = await axios.post(`${BASE_URL}/api/jobs/save`, {
+        jobId: jobId,
+        userId: user._id,
+      });
       if (response.data.isSuccess) {
         toast.success("Job saved successfully", {
           duration: 2000,
@@ -137,7 +135,6 @@ const JobCard: FC<JobCardProps> = ({
       setLoading(false);
     }
   };
-
 
   return (
     <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
@@ -200,8 +197,18 @@ const JobCard: FC<JobCardProps> = ({
         </p>
       </div>
       <div className="flex justify-between items-center">
-        <div className="cursor-pointer" onClick={() => !isSaved && handleJobSave(jobId)}>
-        {isSaved ? <div className="text-gray-500 flex items-center gap-1 text-sm"><LuCheckCircle size={18}/>Saved</div> : <LuBookmark size={20} className="text-gray-500"/>}
+        <div
+          className="cursor-pointer"
+          onClick={() => !isSaved && handleJobSave(jobId)}
+        >
+          {isSaved ? (
+            <div className="text-gray-500 flex items-center gap-1 text-sm">
+              <LuCheckCircle size={18} />
+              Saved
+            </div>
+          ) : (
+            <LuBookmark size={20} className="text-gray-500" />
+          )}
         </div>
         <div className="flex gap-4">
           <button
