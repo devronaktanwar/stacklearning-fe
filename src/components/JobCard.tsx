@@ -10,6 +10,7 @@ import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import toast from "react-hot-toast";
 import { useJobFilter } from "@/context/JobFilterContext";
+import BASE_URL from '../../config'
 
 export interface JobCardProps {
   jobTitle: string;
@@ -87,10 +88,10 @@ const JobCard: FC<JobCardProps> = ({
     setLoading(true);
     try {
       const data = await axios.get(
-        `https://stacklearning-be-h0pq.onrender.com/api/get-job-detail/${jobId}`
+        `${BASE_URL}/api/get-job-detail/${jobId}`
       );
       const response = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/jobs/save",
+        `${BASE_URL}/api/jobs/save`,
         {
           jobId: jobId,
           userId: user._id,

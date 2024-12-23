@@ -8,6 +8,7 @@ import FilterDrawer from "@/components/FilterDrawer";
 import Loader from "@/components/Loader";
 import { LuBookmark } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../../config";
 
 interface JobBoardPageProps {}
 const JobBoardPage: FC<JobBoardPageProps> = () => {
@@ -28,14 +29,11 @@ const JobBoardPage: FC<JobBoardPageProps> = () => {
     setLoading(true);
     const fetchJobs = async () => {
       try {
-        const response = await fetch(
-          "https://stacklearning-be-h0pq.onrender.com/api/all-jobs",
-          {
-            headers: {
-              authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
-            },
-          }
-        );
+        const response = await fetch(`${BASE_URL}/api/all-jobs`, {
+          headers: {
+            authkey: "8e92ab9c92b24b5fb5b6afaf92b7ef12",
+          },
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

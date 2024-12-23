@@ -3,6 +3,7 @@ import Loader from "@/components/Loader";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import BASE_URL from "../../config";
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -15,7 +16,7 @@ const SearchResultsPage = () => {
     if (keyword || location) {
       setLoading(true);
       try {
-        const response = await axios.get("https://stacklearning-be-h0pq.onrender.com/api/search", {
+        const response = await axios.get(`${BASE_URL}/api/search`, {
           params: { keyword, location },
         });
         setResults(response.data.data);
@@ -42,7 +43,12 @@ const SearchResultsPage = () => {
   return (
     <div className="w-[95%] md:w-[80%] m-auto">
       <div className="py-4">
-        <p className="text-sm text-primaryNew"><i className="font-semibold text-secondaryNew">Showing results for </i>{keyword} {location}</p>
+        <p className="text-sm text-primaryNew">
+          <i className="font-semibold text-secondaryNew">
+            Showing results for{" "}
+          </i>
+          {keyword} {location}
+        </p>
       </div>
       <div className="grid xl:grid-cols-2 gap-4">
         {results.map((job: JobCardProps, index: number) => {

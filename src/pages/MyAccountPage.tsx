@@ -7,6 +7,7 @@ import { RiLoader5Line } from "react-icons/ri";
 import toast from "react-hot-toast";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuKeyRound } from "react-icons/lu";
+import BASE_URL from '../../config'
 
 const MyAccountPage = () => {
   const { user } = useUserContext();
@@ -27,7 +28,7 @@ const MyAccountPage = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://stacklearning-be-h0pq.onrender.com/api/update-user-details",
+        `${BASE_URL}/api/update-user-details`,
         {
           userId: user._id,
           fullName: name,

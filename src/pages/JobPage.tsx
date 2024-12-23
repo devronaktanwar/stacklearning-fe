@@ -10,6 +10,8 @@ import { CiLocationArrow1 } from "react-icons/ci";
 import { FaLink } from "react-icons/fa";
 import Newsletter from "@/components/Newsletter";
 import Loader from "@/components/Loader";
+import BASE_URL from "../../config";
+
 const JobPage = () => {
   const { jobId, domain } = useParams<{ jobId: string; domain: string }>();
   const [jobData, setJobData] = useState<JobCardProps | null>(null);
@@ -18,7 +20,7 @@ const JobPage = () => {
   const fetchJobData = async () => {
     try {
       const response = await axios.get(
-        `https://stacklearning-be-h0pq.onrender.com/api/get-job-detail/${jobId}`
+        `${BASE_URL}/api/get-job-detail/${jobId}`
       );
       setJobData(response.data);
     } catch (error) {
@@ -29,7 +31,7 @@ const JobPage = () => {
   const fetchSimilarJobs = async () => {
     try {
       const response = await axios.get(
-        `https://stacklearning-be-h0pq.onrender.com/api/get-jobs-by-domain/${domain}`
+        `${BASE_URL}/api/get-jobs-by-domain/${domain}`
       );
       setSimilarJob(response.data);
     } catch (error) {
