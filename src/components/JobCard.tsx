@@ -77,7 +77,7 @@ const JobCard: FC<JobCardProps> = ({
   };
   useEffect(() => {
     if (
-      user?.savedJobs.length > 0 &&
+      user?.savedJobs &&
       user?.savedJobs.some((job: any) => job.jobId === jobId)
     ) {
       setIsSaved(true);
