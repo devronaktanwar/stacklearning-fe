@@ -15,7 +15,6 @@ import { Button } from "./ui/button";
 import toast, { Toaster } from "react-hot-toast";
 import BASE_URL from "../../config";
 import ForgotPassword from "./ForgotPassword";
-// import { useUserContext } from "@/context/UserContext";
 
 const url = `${BASE_URL}/api/login`;
 
