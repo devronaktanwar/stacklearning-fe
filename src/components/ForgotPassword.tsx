@@ -14,7 +14,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import axios from "axios";
 import BACKEND_BASE_URL from "../../config";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // const navigate = useNavigate();
 const ForgotPassword = ({
   handleBackToLogin,
