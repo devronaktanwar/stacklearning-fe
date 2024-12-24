@@ -15,7 +15,7 @@ import axios from "axios";
 import BACKEND_BASE_URL from "../../config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
+// const navigate = useNavigate();
 const ForgotPassword = ({
   handleBackToLogin,
 }: {
@@ -142,7 +142,7 @@ const ForgotPassword = ({
             fontSize: "12px",
           },
         });
-        navigate("/login");
+        // navigate("/login");
       } else {
         toast.error("something went wrong", {
           duration: 2000,
