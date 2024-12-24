@@ -18,7 +18,7 @@ const App = () => {
     <div>
       <Toaster position="bottom-center" />
       <Navbar />
-      <ScrollToTop/>
+      <ScrollToTop />
       <JobFilterProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />

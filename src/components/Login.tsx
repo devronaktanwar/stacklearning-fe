@@ -13,7 +13,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { Button } from "./ui/button";
 import toast, { Toaster } from "react-hot-toast";
-import BASE_URL from '../../config'
+import BASE_URL from "../../config";
+import ForgotPassword from "./ForgotPassword";
+// import { useUserContext } from "@/context/UserContext";
 
 const url = `${BASE_URL}/api/login`;
 
@@ -23,8 +25,9 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();
-
+  // const { user } = useUserContext();
   const validateForm = () => {
     let isValid = true;
 
@@ -117,7 +120,15 @@ const Login = () => {
       setLoading(false);
     }
   };
-
+  const handleForgotPasswordClick = () => {
+    setCurrentStep(2);
+  };
+  const handleBackToLogin = () => {
+    setCurrentStep(1);
+  };
+  if (currentStep === 2) {
+    return <ForgotPassword handleBackToLogin={handleBackToLogin} />;
+  }
   return (
     <div className="pt-16">
       <Toaster position="bottom-center" />
@@ -170,14 +181,24 @@ const Login = () => {
               "Login"
             )}
           </Button>
-          <div className="flex gap-1">
-            <p className="text-xs">Not a user?</p>
-            <Link
-              to={"/signup"}
-              className="text-orange text-xs font-medium underline"
-            >
-              Sign Up
-            </Link>
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex gap-1">
+              <p className="text-xs">Not a user?</p>
+              <Link
+                to={"/signup"}
+                className="text-orange text-xs font-medium underline"
+              >
+                Sign Up
+              </Link>
+            </div>
+            <div>
+              <p
+                className="text-[10px] text-primaryNew hover:underline cursor-pointer"
+                onClick={handleForgotPasswordClick}
+              >
+                Forget password ?
+              </p>
+            </div>
           </div>
         </CardFooter>
       </Card>
