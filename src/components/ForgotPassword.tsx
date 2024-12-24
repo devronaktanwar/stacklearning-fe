@@ -49,6 +49,7 @@ const ForgotPassword = ({
     try {
       const response = await axios.post(`${BACKEND_BASE_URL}/api/send-otp`, {
         emailAddress: email,
+        isForgetFlow: true,
       });
       if (response.data.isSuccess) {
         setForgetStep(2);
