@@ -14,6 +14,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import axios from "axios";
 import BACKEND_BASE_URL from "../../config";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // const navigate = useNavigate();
 const ForgotPassword = ({
@@ -26,6 +27,8 @@ const ForgotPassword = ({
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const navigate = useNavigate();
   const handleChange = (value: string, index: number) => {
     if (!/^\d*$/.test(value)) return;
 
@@ -44,8 +47,12 @@ const ForgotPassword = ({
       inputs.current[index - 1]?.focus();
     }
   };
-
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const handleSendVerificationCode = async ({ email }: { email: string }) => {
+    if (!email || !emailRegex.test(email)) {
+      setEmailError("Please enter a valid email");
+      return;
+    }
     try {
       const userAlreadyExists = await axios.post(
         `${BACKEND_BASE_URL}/api/check-if-email-exists`,
@@ -64,7 +71,7 @@ const ForgotPassword = ({
             fontSize: "12px",
           },
         });
-
+        navigate("/signup");
         return;
       }
       const response = await axios.post(`${BACKEND_BASE_URL}/api/send-otp`, {
@@ -163,7 +170,7 @@ const ForgotPassword = ({
             fontSize: "12px",
           },
         });
-        // navigate("/login");
+        navigate("/login");
       } else {
         toast.error("something went wrong", {
           duration: 2000,
@@ -214,8 +221,12 @@ const ForgotPassword = ({
                     </Label>
                     <Input
                       type="email"
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setEmailError(null);
+                      }}
                     />
+                    {emailError && <p className="text-[10px] pl-1 text-red-500">{emailError}</p>}
                   </div>
                 </div>
               </form>
