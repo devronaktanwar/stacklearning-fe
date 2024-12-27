@@ -19,7 +19,10 @@ const Navbar: FC<NavbarProps> = () => {
   return (
     <div className="sticky top-0 bg-white border-b z-50">
       <nav className="w-[85%] m-auto flex justify-between items-center  z-50 relative">
-        <div className="w-16 sm:w-24">
+        <div
+          className="w-16 sm:w-24 cursor-pointer"
+          onClick={() => navigate("/")}
+        >
           <img src={logo} alt="logo" className="w-full" />
         </div>
 
@@ -204,7 +207,9 @@ const DesktopNav: FC<lDesktopNavProps> = ({
   return (
     <div className="border px-5 py-3 text-sm bg-white rounded-xl shadow-lg">
       <div className="flex gap-3 pb-2 items-center">
-        <div className=" bg-[#deffd9] h-9 w-9 flex justify-center items-center rounded-full shadow">{user.fullName && user.fullName.slice(0,1) || "C"}</div>
+        <div className=" bg-[#deffd9] h-9 w-9 flex justify-center items-center rounded-full shadow">
+          {(user.fullName && user.fullName.slice(0, 1)) || "C"}
+        </div>
         <div className="flex flex-col">
           <h2 className="text-sm">{user.fullName}</h2>
           <p className="text-xs text-gray-500">{user.emailAddress}</p>
