@@ -9,8 +9,8 @@ import { LuBookmark, LuCheckCircle } from "react-icons/lu";
 import axios from "axios";
 import { useUserContext } from "@/context/UserContext";
 import toast from "react-hot-toast";
-import { useJobFilter } from "@/context/JobFilterContext";
 import BASE_URL from "../../config";
+import CircularLoader from "./CircularLoader";
 
 export interface JobCardProps {
   jobTitle: string;
@@ -41,7 +41,7 @@ const JobCard: FC<JobCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const { user, updateSavedJobs } = useUserContext();
-  const { setLoading } = useJobFilter();
+  const [loading, setLoading] = useState<boolean>(false);
   const newDate = new Date(date);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
@@ -137,104 +137,107 @@ const JobCard: FC<JobCardProps> = ({
   };
 
   return (
-    <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
-      <div className="flex justify-between">
-        <div className="flex items-start gap-3">
-          <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
-            <img
-              src={image}
-              alt="Company logo"
-              className="h-full w-full object-cover md:h-14 md:w-14 "
-            />
+    <>
+      {loading && <CircularLoader />}
+      <div className="p-3 sm:p-6 border rounded-lg w-full flex flex-col gap-4 bg-white">
+        <div className="flex justify-between">
+          <div className="flex items-start gap-3">
+            <div className="border h-12 w-12 rounded-full overflow-hidden md:h-14 md:w-14 aspect-square">
+              <img
+                src={image}
+                alt="Company logo"
+                className="h-full w-full object-cover md:h-14 md:w-14 "
+              />
+            </div>
+            <div className="flex flex-col flex-1 justify-start items-start">
+              <h2 className="flex-1 text-sm font-semibold sm:text-base text-wrap text-start">
+                {jobTitle}
+              </h2>
+              <div className="flex gap-1 items-center text-gray-500">
+                <PiBagSimpleBold size={16} />
+                <p className="text-[9px] text-gray-500 font-medium sm:text-sm flex-1 text-nowrap">
+                  {companyName}
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col flex-1 justify-start items-start">
-            <h2 className="flex-1 text-sm font-semibold sm:text-base text-wrap text-start">
-              {jobTitle}
-            </h2>
-            <div className="flex gap-1 items-center text-gray-500">
-              <PiBagSimpleBold size={16} />
-              <p className="text-[9px] text-gray-500 font-medium sm:text-sm flex-1 text-nowrap">
-                {companyName}
+          <div className="flex flex-col gap-1 items-end">
+            <div className="flex items-center gap-2 text-gray-500">
+              <SlCalender size={14} />
+              <p className="text-[10px] sm:text-sm  text-end text-nowrap">
+                {formattedDate}
+              </p>
+            </div>
+            <div className="flex gap-1 items-center text-gray-500 ">
+              <SlLocationPin size={14} />
+              <p className="text-[10px] sm:text-sm text-end text-nowrap">
+                {location}
               </p>
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-1 items-end">
-          <div className="flex items-center gap-2 text-gray-500">
-            <SlCalender size={14} />
-            <p className="text-[10px] sm:text-sm  text-end text-nowrap">
-              {formattedDate}
-            </p>
-          </div>
-          <div className="flex gap-1 items-center text-gray-500 ">
-            <SlLocationPin size={14} />
-            <p className="text-[10px] sm:text-sm text-end text-nowrap">
-              {location}
-            </p>
+        <div>
+          <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
+            {tagsArray.map((tag, index) => (
+              <p
+                key={index}
+                className="border py-1 px-2 rounded-full text-[8px] sm:text-xs"
+              >
+                {tag}
+              </p>
+            ))}
           </div>
         </div>
-      </div>
-      <div>
-        <div className="flex gap-2 text-[10px] mt-1 flex-wrap">
-          {tagsArray.map((tag, index) => (
+        <div>
+          <p className="text-[10px] sm:text-sm text-gray-400">
             <p
-              key={index}
-              className="border py-1 px-2 rounded-full text-[8px] sm:text-xs"
+              className=""
+              dangerouslySetInnerHTML={{
+                __html: fullDescription,
+              }}
+            />
+          </p>
+        </div>
+        <div className="flex justify-between items-center">
+          <div
+            className="cursor-pointer"
+            onClick={() => !isSaved && handleJobSave(jobId)}
+          >
+            {isSaved ? (
+              <div className="text-gray-500 flex items-center gap-1 text-sm">
+                <LuCheckCircle size={18} />
+                Saved
+              </div>
+            ) : (
+              <LuBookmark size={20} className="text-gray-500" />
+            )}
+          </div>
+          <div className="flex gap-4">
+            <button
+              className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-semibold text-primary border border-primary flex gap-1 items-center sm:text-sm"
+              onClick={() =>
+                handleShare(
+                  `https://stacklearning.in/jobs/${domain}/${jobId}`,
+                  jobTitle,
+                  companyName,
+                  location
+                )
+              }
             >
-              {tag}
-            </p>
-          ))}
-        </div>
-      </div>
-      <div>
-        <p className="text-[10px] sm:text-sm text-gray-400">
-          <p
-            className=""
-            dangerouslySetInnerHTML={{
-              __html: fullDescription,
-            }}
-          />
-        </p>
-      </div>
-      <div className="flex justify-between items-center">
-        <div
-          className="cursor-pointer"
-          onClick={() => !isSaved && handleJobSave(jobId)}
-        >
-          {isSaved ? (
-            <div className="text-gray-500 flex items-center gap-1 text-sm">
-              <LuCheckCircle size={18} />
-              Saved
-            </div>
-          ) : (
-            <LuBookmark size={20} className="text-gray-500" />
-          )}
-        </div>
-        <div className="flex gap-4">
-          <button
-            className="px-2 py-1 sm:px-3 sm:py-2 rounded text-[10px] font-semibold text-primary border border-primary flex gap-1 items-center sm:text-sm"
-            onClick={() =>
-              handleShare(
-                `https://stacklearning.in/jobs/${domain}/${jobId}`,
-                jobTitle,
-                companyName,
-                location
-              )
-            }
-          >
-            Share link <FaLink />
-          </button>
+              Share link <FaLink />
+            </button>
 
-          <button
-            className="px-2 py-1 text-[10px] sm:px-3 sm:py-2 rounded sm:text-sm font-semibold flex items-center gap-1 bg-primaryNew text-white cursor-pointer border border-primaryNew"
-            onClick={() => navigate(`/jobs/${domain}/${jobId}`)}
-          >
-            Apply
-            <CiLocationArrow1 />
-          </button>
+            <button
+              className="px-2 py-1 text-[10px] sm:px-3 sm:py-2 rounded sm:text-sm font-semibold flex items-center gap-1 bg-primaryNew text-white cursor-pointer border border-primaryNew"
+              onClick={() => navigate(`/jobs/${domain}/${jobId}`)}
+            >
+              Apply
+              <CiLocationArrow1 />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

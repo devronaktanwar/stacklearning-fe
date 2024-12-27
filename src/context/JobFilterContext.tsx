@@ -1,4 +1,3 @@
-import CircularLoader from "@/components/CircularLoader";
 import { createContext, useContext, useState, FC, ReactNode } from "react";
 
 interface JobFilterContextType {
@@ -24,7 +23,6 @@ interface JobFilterContextType {
   handleRemoveCompany: any;
   filterApplied: boolean;
   setFilterApplied: (val: boolean) => void;
-  setLoading: (val: boolean) => void;
 }
 
 const JobFilterContext = createContext<JobFilterContextType | undefined>(
@@ -53,27 +51,8 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
   const [filterApplied, setFilterApplied] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const overlayStyle = {
-    position: "fixed" as "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 1000,
-  };
-  if (loading) {
-    return (
-      <div style={overlayStyle}>
-        <CircularLoader />
-      </div>
-    );
-  }
+
   const handleCitySelect = (city: string) => {
     if (!selectedCities.includes(city)) {
       setSelectedCities((prev) => [...prev, city]);
@@ -118,7 +97,6 @@ export const JobFilterProvider: FC<JobFilterProviderProps> = ({ children }) => {
         handleRemoveCompany,
         filterApplied,
         setFilterApplied,
-        setLoading,
       }}
     >
       {children}
