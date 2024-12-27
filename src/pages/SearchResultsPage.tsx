@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import BASE_URL from "../../config";
-
+import notFound from "../assets/not-found.png";
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("keyword") || "";
@@ -50,6 +50,12 @@ const SearchResultsPage = () => {
           {keyword} {location}
         </p>
       </div>
+      {results.length == 0 && (
+        <div className="w-full sm:h-[60vh] h-[40vh] flex justify-center items-center flex-col">
+          <img src={notFound} alt="not-fouund" className="w-44 sm:w-60"/>
+          <p className="sm:text-lg font-semibold font-sans">Opps !! No Jobs Found</p>
+        </div>
+      )}
       <div className="grid xl:grid-cols-2 gap-4">
         {results.map((job: JobCardProps, index: number) => {
           return (
