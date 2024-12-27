@@ -47,6 +47,26 @@ const ForgotPassword = ({
 
   const handleSendVerificationCode = async ({ email }: { email: string }) => {
     try {
+      const userAlreadyExists = axios.post(
+        `${BACKEND_BASE_URL}/api/check-if-email-exists`,
+        {
+          emailId: email,
+        }
+      );
+      if (!userAlreadyExists) {
+        toast.error("User not found, please sign up", {
+          duration: 2000,
+          style: {
+            borderRadius: "8px",
+            background: "#333",
+            color: "#fff",
+            padding: "6px 10px",
+            fontSize: "12px",
+          },
+        });
+
+        return;
+      }
       const response = await axios.post(`${BACKEND_BASE_URL}/api/send-otp`, {
         emailAddress: email,
         isForgetFlow: true,
