@@ -47,7 +47,7 @@ const ForgotPassword = ({
 
   const handleSendVerificationCode = async ({ email }: { email: string }) => {
     try {
-      const userAlreadyExists = axios.post(
+      const userAlreadyExists = await axios.post(
         `${BACKEND_BASE_URL}/api/check-if-email-exists`,
         {
           emailId: email,
