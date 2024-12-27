@@ -15,8 +15,8 @@ import axios from "axios";
 import BACKEND_BASE_URL from "../../config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-// const navigate = useNavigate();
+import { RiLoader5Fill } from "react-icons/ri";
+
 const ForgotPassword = ({
   handleBackToLogin,
 }: {
@@ -28,6 +28,7 @@ const ForgotPassword = ({
   const [password, setPassword] = useState<string>("");
   const inputs = useRef<(HTMLInputElement | null)[]>([]);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const handleChange = (value: string, index: number) => {
     if (!/^\d*$/.test(value)) return;
@@ -53,6 +54,7 @@ const ForgotPassword = ({
       setEmailError("Please enter a valid email");
       return;
     }
+    setLoading(true);
     try {
       const userAlreadyExists = await axios.post(
         `${BACKEND_BASE_URL}/api/check-if-email-exists`,
@@ -102,9 +104,24 @@ const ForgotPassword = ({
           },
         });
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log("Errro:", err);
+      toast.error("something went wrong", {
+        duration: 2000,
+        style: {
+          borderRadius: "8px",
+          background: "#333",
+          color: "#fff",
+          padding: "6px 10px",
+          fontSize: "12px",
+        },
+      });
+    } finally {
+      setLoading(false);
+    }
   };
   const handleVerifyOtp = async () => {
+    setLoading(true);
     let userInputOtp = otp.join("");
     let newuserInputOtp = Number(userInputOtp);
     try {
@@ -147,9 +164,12 @@ const ForgotPassword = ({
           fontSize: "12px",
         },
       });
+    } finally {
+      setLoading(false);
     }
   };
   const handleSave = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(
         `${BACKEND_BASE_URL}/api/reset-password`,
@@ -170,7 +190,7 @@ const ForgotPassword = ({
             fontSize: "12px",
           },
         });
-        navigate("/login");
+        window.location.reload();
       } else {
         toast.error("something went wrong", {
           duration: 2000,
@@ -195,6 +215,8 @@ const ForgotPassword = ({
           fontSize: "12px",
         },
       });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -226,7 +248,11 @@ const ForgotPassword = ({
                         setEmailError(null);
                       }}
                     />
-                    {emailError && <p className="text-[10px] pl-1 text-red-500">{emailError}</p>}
+                    {emailError && (
+                      <p className="text-[10px] pl-1 text-red-500">
+                        {emailError}
+                      </p>
+                    )}
                   </div>
                 </div>
               </form>
@@ -244,10 +270,14 @@ const ForgotPassword = ({
               </div>
               <div>
                 <Button
-                  className="bg-primaryNew hover:bg-primaryNew"
+                  className="bg-primaryNew hover:bg-primaryNew w-44"
                   onClick={() => handleSendVerificationCode({ email })}
                 >
-                  Send verification code
+                  {loading ? (
+                    <RiLoader5Fill className="animate-spin text-xl" size={44} />
+                  ) : (
+                    "Send verification code"
+                  )}
                 </Button>
               </div>
             </CardFooter>
@@ -287,10 +317,14 @@ const ForgotPassword = ({
                 Back to Login
               </Button>
               <Button
-                className="bg-primaryNew hover:bg-primaryNew"
+                className="bg-primaryNew hover:bg-primaryNew w-20"
                 onClick={handleVerifyOtp}
               >
-                Verify
+                {loading ? (
+                  <RiLoader5Fill className="animate-spin text-xl" size={44} />
+                ) : (
+                  "Verify"
+                )}
               </Button>
             </CardFooter>
           </>
@@ -328,10 +362,14 @@ const ForgotPassword = ({
                 Back to Login
               </Button>
               <Button
-                className="bg-primaryNew hover:bg-primaryNew"
+                className="bg-primaryNew hover:bg-primaryNew w-20"
                 onClick={handleSave}
               >
-                Save
+                {loading ? (
+                  <RiLoader5Fill className="animate-spin text-xl" size={44} />
+                ) : (
+                  "Save"
+                )}
               </Button>
             </CardFooter>
           </>
