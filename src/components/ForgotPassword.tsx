@@ -53,7 +53,7 @@ const ForgotPassword = ({
           emailId: email,
         }
       );
-      if (!userAlreadyExists) {
+      if (!userAlreadyExists.data) {
         toast.error("User not found, please sign up", {
           duration: 2000,
           style: {
