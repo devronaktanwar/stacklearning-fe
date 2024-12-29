@@ -13,6 +13,7 @@ import SavedJobPage from "./pages/SavedJobPage";
 import ScrollToTop from "./components/ScrollToTop";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import CompanyResultPage from "./pages/CompanyResultPage";
+import AppliedJobPage from "./pages/AppliedJobPage";
 const App = () => {
   return (
     <div>
@@ -41,6 +42,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <SavedJobPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/applied-jobs"
+            element={
+              <ProtectedRoute>
+                <AppliedJobPage />
               </ProtectedRoute>
             }
           />

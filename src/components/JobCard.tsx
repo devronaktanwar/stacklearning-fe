@@ -40,10 +40,11 @@ const JobCard: FC<JobCardProps> = ({
   domain,
 }) => {
   const navigate = useNavigate();
-  const { user, updateSavedJobs } = useUserContext();
+  const { user, updateSavedJobs, updateAppliedJobs } = useUserContext();
   const [loading, setLoading] = useState<boolean>(false);
   const newDate = new Date(date);
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isApplied, setIsApplied] = useState<boolean>(false);
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "short",
@@ -81,6 +82,9 @@ const JobCard: FC<JobCardProps> = ({
       user?.savedJobs.some((job: any) => job.jobId === jobId)
     ) {
       setIsSaved(true);
+    }
+    if (user?.appliedJobs?.some((job: any) => job.jobId === jobId)) {
+      setIsApplied(true);
     }
   }, [user, jobId]);
   const handleJobSave = async (jobId: string) => {
@@ -135,7 +139,31 @@ const JobCard: FC<JobCardProps> = ({
       setLoading(false);
     }
   };
-
+  const handleMarkAsApplied = async (jobId: string) => {
+    if (!user.isLoggedIn) {
+      navigate("/login");
+      return;
+    }
+    setLoading(true);
+    try {
+      const data = await axios.get(`${BASE_URL}/api/get-job-detail/${jobId}`);
+      const response = await axios.post(`${BASE_URL}/api/mark-as-applied`, {
+        jobId,
+        userId: user._id,
+      });
+      if (response.data.isSuccess) {
+        toast.success("Job marked as applied");
+        updateAppliedJobs([...user.appliedJobs, data.data]);
+        setIsApplied(true);
+      } else {
+        toast.error("Job is already marked as applied");
+      }
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       {loading && <CircularLoader />}
@@ -199,18 +227,32 @@ const JobCard: FC<JobCardProps> = ({
           </p>
         </div>
         <div className="flex justify-between items-center">
-          <div
-            className="cursor-pointer"
-            onClick={() => !isSaved && handleJobSave(jobId)}
-          >
-            {isSaved ? (
-              <div className="text-gray-500 flex items-center gap-1 text-sm">
-                <LuCheckCircle size={18} />
-                Saved
-              </div>
-            ) : (
-              <LuBookmark size={20} className="text-gray-500" />
-            )}
+          <div className="flex md:items-center gap-3 flex-col md:flex-row">
+            <div
+              className="cursor-pointer"
+              onClick={() => !isSaved && handleJobSave(jobId)}
+            >
+              {isSaved ? (
+                <div className="text-gray-500 flex items-center gap-1 text-sm">
+                  <LuCheckCircle size={18} />
+                  Saved
+                </div>
+              ) : (
+                <LuBookmark size={20} className="text-gray-500" />
+              )}
+            </div>
+            <div>
+              <button
+                className={`text-xs px-3 py-1 rounded-full ${
+                  isApplied
+                    ? "bg-gray-200 text-gray-700 border-gray-700 border-[0.5px]"
+                    : "bg-green-50 text-primaryNew border-primaryNew border-[0.5px]"
+                }`}
+                onClick={() => !isApplied && handleMarkAsApplied(jobId)}
+              >
+                {isApplied ? "Applied" : "Mark as applied"}
+              </button>
+            </div>
           </div>
           <div className="flex gap-4">
             <button

@@ -11,6 +11,7 @@ interface UserContextType {
   user: any;
   setUser: any;
   updateSavedJobs: (newJobs: any[]) => void;
+  updateAppliedJobs: (appliedJobs: any[]) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -42,13 +43,21 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
       savedJobs: newJobs,
     }));
   };
+  const updateAppliedJobs = (appliedJobs: any[]) => {
+    setUser((prev: any) => ({
+      ...prev,
+      appliedJobs: appliedJobs,
+    }));
+  };
 
   useEffect(() => {
     fetchUserDetails();
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, updateSavedJobs }}>
+    <UserContext.Provider
+      value={{ user, setUser, updateSavedJobs, updateAppliedJobs }}
+    >
       {children}
     </UserContext.Provider>
   );
