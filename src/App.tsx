@@ -10,7 +10,6 @@ import MyAccountPage from "./pages/MyAccountPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SavedJobPage from "./pages/SavedJobPage";
-import ScrollToTop from "./components/ScrollToTop";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import CompanyResultPage from "./pages/CompanyResultPage";
 import AppliedJobPage from "./pages/AppliedJobPage";
@@ -19,7 +18,6 @@ const App = () => {
     <div>
       <Toaster position="bottom-center" />
       <Navbar />
-      <ScrollToTop />
       <JobFilterProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />

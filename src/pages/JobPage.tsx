@@ -11,6 +11,7 @@ import { FaLink } from "react-icons/fa";
 import Newsletter from "@/components/Newsletter";
 import Loader from "@/components/Loader";
 import BASE_URL from "../../config";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const JobPage = () => {
   const { jobId, domain } = useParams<{ jobId: string; domain: string }>();
@@ -84,6 +85,7 @@ const JobPage = () => {
 
   return (
     <div className="py-4 sm:py-8">
+      <ScrollToTop />
       <div className="w-[98%] sm:w-[95%] m-auto">
         <div className="flex gap-6 flex-col lg:flex-row">
           <div className="flex-1 bg-white sm:p-6 sm:px-8 p-3 px-4 border rounded-lg flex flex-col gap-3">
