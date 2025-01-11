@@ -18,9 +18,9 @@ const Navbar: FC<NavbarProps> = () => {
 
   return (
     <div className="sticky top-0 bg-white border-b z-50">
-      <nav className="w-[85%] m-auto flex justify-between items-center  z-50 relative">
+      <nav className="w-[85%] m-auto flex justify-between items-center  z-50 relative py-3">
         <div
-          className="w-20 sm:w-24 cursor-pointer py-3"
+          className="w-24 sm:w-36 cursor-pointer"
           onClick={() => navigate("/")}
         >
           <img src={logo} alt="logo" className="w-full" />
