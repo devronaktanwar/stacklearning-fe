@@ -7,6 +7,7 @@ import React, {
   useEffect,
 } from "react";
 import BASE_URL from "../../config";
+import { useNavigate } from "react-router-dom";
 interface UserContextType {
   user: any;
   setUser: any;
@@ -23,7 +24,21 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     isLoggedIn: false,
     savedJobs: [],
   });
-
+  const navigate = useNavigate();
+  const [valid, setValid] = useState<boolean>(true);
+  const checkIfUserIdIsValid = async (userId: string) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/check-if-userId-valid`,
+        {
+          userId,
+        }
+      );
+      setValid(response.data);
+    } catch (err) {
+      console.log("Error:", err);
+    }
+  };
   const fetchUserDetails = async () => {
     try {
       const userId = localStorage.getItem("userId");
@@ -51,8 +66,22 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
-    fetchUserDetails();
+    const userId = localStorage.getItem("userId");
+    checkIfUserIdIsValid(userId || "");
+  });
+
+  useEffect(() => {
+    if (valid) {
+      fetchUserDetails();
+    }
   }, []);
+  useEffect(() => {
+    if (!valid && user.isLoggedIn) {
+      localStorage.removeItem("userId");
+      navigate("/login");
+      window.location.reload();
+    }
+  }, [valid]);
 
   return (
     <UserContext.Provider
